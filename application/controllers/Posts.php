@@ -17,6 +17,13 @@ class Posts extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}	
+	
+	####################################################################
+	public function view_list_comments()
+	{		
+		$list_order_posts = $this->model_posts->get_list_posts();
+		echo json_encode($list_order_posts);
+	}
 	####################################################################
 	public function save_project()
 	{
@@ -29,23 +36,31 @@ class Posts extends CI_Controller {
 			$this->model_posts->add_post($data);
 		}
 
+		
+
 		$this->load->view('posts/save_project');
-		print_r($this->model_posts->get_list_posts());		
+
+		print_r($this->model_posts->get_list_projects());		
 	}
 	####################################################################
-	public function save_discussion()
+	public function save_forum()
 	{
 		if(isset($_REQUEST['post_title']))
 		{
+			$data["parent_id"]= $_REQUEST["project_id"];
 			$data["post_title"]= $_REQUEST["post_title"];
 			$data["post_content"]= $_REQUEST["post_content"];
-			$data["post_type"]= "discussion";
+			$data["post_type"]= "forum";
 
 			$this->model_posts->add_post($data);
 		}
 
-		$this->load->view('posts/save_discussion');
-		print_r($this->model_posts->get_list_posts());		
+		$view_data['list_projects'] = $this->model_posts->get_list_projects();		
+		$view_data['list_forums'] = $this->model_posts->get_list_forums();		
+
+		$this->load->view('posts/save_forum', $view_data);
+
+		print_r($this->model_posts->get_list_forums());		
 	}
 	####################################################################
 	public function save_task()

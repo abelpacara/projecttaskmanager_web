@@ -11,7 +11,26 @@ class Services extends CI_Controller {
       $this->load->model('model_posts');
       $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
+	}	
+	####################################################################
+	public function view_list_projects()
+	{		
+		$list_order_projects = $this->model_posts->get_list_projects();
+		echo json_encode($list_order_projects);
 	}
+	####################################################################
+	public function view_list_comments()
+	{		
+		$list_comments = $this->model_posts->get_list_comments();
+		echo json_encode($list_comments);
+	}
+	####################################################################
+	public function view_list_forums()
+	{		
+		$list_order_forums = $this->model_posts->get_list_forums();
+		echo json_encode($list_order_forums);
+	}
+
 	####################################################################
 	public function index()
 	{
@@ -33,13 +52,14 @@ class Services extends CI_Controller {
 		echo json_encode($list_order_posts);
 	}
 	####################################################################
-	public function add_discussion()
+	public function add_forum()
 	{
-		if(isset($_REQUEST['post_title']))
+		if(isset($_REQUEST['post_content']))
 		{
-			$data["post_title"]= $_REQUEST["post_title"];
 			$data["post_content"]= $_REQUEST["post_content"];
-			$data["post_type"]= "discussion";
+			$data["parent_id"]= $_REQUEST["parent_id"];
+			$data["project_id"]= $_REQUEST["parent_id"];
+			$data["post_type"]= "forum";
 
 			$this->model_posts->add_post($data);
 		}
@@ -68,6 +88,7 @@ class Services extends CI_Controller {
 		if(isset($_REQUEST['post_content']))
 		{
 			$data["post_content"]= $_REQUEST["post_content"];
+			$data["parent_id"]= $_REQUEST["parent_id"];
 			$data["post_type"]= "comment";
 
 			$this->model_posts->add_post($data);
