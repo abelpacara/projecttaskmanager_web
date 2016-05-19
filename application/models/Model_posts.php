@@ -6,6 +6,7 @@ class Model_Posts extends Model_Template
        parent::__construct();       
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
+  
    function add_post($data){
    	$this->db->set("post_register_date","NOW()",FALSE);
    	
@@ -14,10 +15,26 @@ class Model_Posts extends Model_Template
    }
 
    function get_list_comments(){
-      $query = $this->db->query("SELECT posts.*, projects.post_title AS project_title FROM posts 
-      JOIN posts AS projects ON projects.id_post=posts.project_id   
-      WHERE posts.post_type='comment' OR  posts.post_type='forum'      
-      ORDER BY posts.post_date DESC, posts.post_register_date DESC;");         
+      $query = $this->db->query("SELECT * FROM
+            (
+            (SELECT posts.*, 
+                projects.post_content AS project_content,
+                forums.post_content AS forum_content  
+         FROM posts 
+               JOIN posts AS projects ON projects.id_post=posts.project_id
+               JOIN posts AS forums ON forums.id_post=posts.forum_id   
+               WHERE posts.post_type='comment' OR  posts.post_type='forum'      
+               ORDER BY posts.post_date DESC, posts.post_register_date DESC)
+         UNION
+         (
+             SELECT posts.*,                    
+                   projects.post_content AS project_content,
+                   NULL AS forum_content  
+                                 FROM posts 
+      JOIN posts AS projects ON projects.id_post=posts.project_id      
+      WHERE posts.post_type='forum'
+      ORDER BY posts.post_date DESC, posts.post_register_date DESC)) AS tablex
+      ORDER BY tablex.id_post DESC");         
       return $query->result_array();
    }
 

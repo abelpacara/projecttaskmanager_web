@@ -1,0 +1,1386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0078)https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>CodeIgniter 3.0 Tank Auth CAPTCHA code example</title>  
+  
+<meta name="description" content="CodeIgniter 3.0 Tank Authentication CAPTCHA example: Describes How to integrate BotDetect Captcha into Tank Auth Login and Add User forms.">
+<meta name="keywords" content="captcha, codeigniter, codeigniter captcha, tank, auth, authentication, tank auth captcha, login captcha, register captcha">
+<meta name="copyright" content="(C) Captcha, Inc.">
+<meta name="robots" content="index, follow, noodp">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    
+  <link href="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/ethereal.css" type="text/css" rel="stylesheet" media="screen">
+<link rel="apple-touch-icon" href="https://captcha.com/images/apple-touch-icon.png">
+<link href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html" rel="canonical">
+<link href="https://captcha.com/" rel="home">
+  
+    <script src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/cb=gapi.loaded_1" async=""></script><script src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/plusone.js" gapi_processed="true"></script><script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/ga.js" type="text/javascript"></script>
+<script async="" type="text/javascript" src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/scripts.js"></script>
+</head>
+
+<body id="top" style="margin-top: 0px;">
+<div class="container">
+<div class="content">
+  <div class="column" id="main">
+
+    <h1>CodeIgniter 3.0 Tank Auth CAPTCHA code example</h1>
+    <div id="breadcrumbs"><a href="https://captcha.com/documentation.html" title="BotDetect CAPTCHA Documentation Index">documentation</a> &gt; <a href="https://captcha.com/php-captcha.html" title="BotDetect PHP CAPTCHA Library">php captcha</a> &gt; <a href="https://captcha.com/doc/php/codeigniter-captcha-quickstart.html" title="BotDetect CAPTCHA CodeIgniter 3.0 Integration">codeigniter 3.0 captcha</a></div>
+<p>CodeIgniter Tank Auth CAPTCHA Example demonstrates how to integrate <a href="https://captcha.com/php-captcha.html" title="BotDetect PHP CAPTCHA product page">BotDetect PHP Captcha</a> into login, register and reset password forms in a scenario where <a href="https://konyukhov.com/soft/tank_auth/" target="_blank">Tank Auth</a> library is used to authenticate users to your application.</p>
+
+  <div class="bounded floater crash" style="margin-top: -15px; margin-bottom: 0;">
+  <h3>First Time Here?</h3>
+  <p>Check the BotDetect <a href="https://captcha.com/doc/php/codeigniter-captcha-quickstart.html" title="BotDetect CodeIgniter 3.0 CAPTCHA Integration Quickstart">CodeIgniter 3.0 Captcha Quickstart</a> for key integration steps.</p>
+  </div>
+
+  <p>Alongside the Captcha image, the user is provided with an input field to retype the displayed characters. Depending on if the Captcha code entered matches the displayed one or not, a message stating the validation result is shown on the form.</p>
+
+  <p>The simple code showing the message in this example would of course be replaced with useful form processing code in a real world scenario.</p>
+
+  <p>Files for this ('codeigniter_tank_auth_captcha_example') example are:</p>
+
+  <ul class="continued">
+    <li><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_routing"><code>/application/config/routes.php</code></a></li>
+    <li><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_captcha_config"><code>/application/config/captcha.php</code></a></li>
+		<li><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_login_form_view"><code>/application/views/auth/login_form.php</code></a></li>
+		<li><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_register_form_view"><code>/application/views/auth/register_form.php</code></a></li>
+		<li><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_forgot_password_form_view"><code>/application/views/auth/forgot_password_form.php</code></a></li>
+		<li><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_send_again_view"><code>/application/views/auth/send_again_form.php</code></a></li>
+    <li><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_controller"><code>/application/controllers/Auth.php</code></a></li>
+  </ul>
+
+  <p>The files are available for download as a part of the <a href="https://captcha.com/captcha-download.html?version=php&amp;integration=codeigniter">BotDetect Captcha CodeIgniter integration package</a>.</p>
+
+<h2 id="bit_auth_routing">Routing – <code>/application/config/routes.php</code></h2>
+  <pre><span class="hl kwc">$route</span><span class="hl opt">[</span><span class="hl str">'botdetect/captcha-handler'</span><span class="hl opt">] =</span> <span class="hl str">'botdetect/captcha_handler/index'</span><span class="hl opt">;</span>
+</pre>
+<p>In the code above we have registered default route of the Captcha library.</p>
+
+<h2 id="tank_auth_captcha_config">Config – <code>/application/config/captcha.php</code></h2>
+<pre class="hl"><span class="hl opt">&lt;</span>?php
+<span class="hl slc">// BotDetect PHP Captcha configuration options</span>
+
+<span class="hl kwc">$config</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl slc">// Captcha configuration for login page</span>
+  <span class="hl str">'LoginCaptcha'</span> <span class="hl opt">=&gt;</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+    <span class="hl str">'UserInputID'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+    <span class="hl str">'CodeLength'</span> <span class="hl opt">=&gt;</span> CaptchaRandomization<span class="hl opt">::</span><span class="hl kwd">GetRandomCodeLength</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">6</span><span class="hl opt">),</span>
+    <span class="hl str">'ImageStyle'</span> <span class="hl opt">=&gt;</span> CaptchaRandomization<span class="hl opt">::</span><span class="hl kwd">GetRandomImageStyle</span><span class="hl opt">(</span><span class="hl kwa">array</span><span class="hl opt">(</span>
+      ImageStyle<span class="hl opt">::</span>Radar<span class="hl opt">,</span>
+      ImageStyle<span class="hl opt">::</span>Collage<span class="hl opt">,</span>
+      ImageStyle<span class="hl opt">::</span>Fingerprints<span class="hl opt">,</span>
+    <span class="hl opt">)),</span>
+  <span class="hl opt">),</span>
+
+  <span class="hl slc">// Captcha configuration for register page</span>
+  <span class="hl str">'RegisterCaptcha'</span> <span class="hl opt">=&gt;</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+    <span class="hl str">'UserInputID'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+    <span class="hl str">'CodeLength'</span> <span class="hl opt">=&gt;</span> CaptchaRandomization<span class="hl opt">::</span><span class="hl kwd">GetRandomCodeLength</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">7</span><span class="hl opt">),</span>
+    <span class="hl str">'CodeStyle'</span> <span class="hl opt">=&gt;</span> CodeStyle<span class="hl opt">::</span>Alpha<span class="hl opt">,</span>
+  <span class="hl opt">),</span>
+
+  <span class="hl slc">// Captcha configuration for forgot password page</span>
+  <span class="hl str">'ForgotPasswordCaptcha'</span> <span class="hl opt">=&gt;</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+    <span class="hl str">'UserInputID'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+    <span class="hl str">'CodeLength'</span> <span class="hl opt">=&gt;</span> CaptchaRandomization<span class="hl opt">::</span><span class="hl kwd">GetRandomCodeLength</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">6</span><span class="hl opt">),</span>
+    <span class="hl str">'CustomLightColor'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'#9966FF'</span><span class="hl opt">,</span>
+  <span class="hl opt">),</span>
+
+  <span class="hl slc">// Captcha configuration for send again page</span>
+  <span class="hl str">'SendAgainCaptcha'</span> <span class="hl opt">=&gt;</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+    <span class="hl str">'UserInputID'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+    <span class="hl str">'CodeLength'</span> <span class="hl opt">=&gt;</span> CaptchaRandomization<span class="hl opt">::</span><span class="hl kwd">GetRandomCodeLength</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">6</span><span class="hl opt">),</span>
+  <span class="hl opt">),</span>
+
+<span class="hl opt">);</span>
+</pre>
+<p>In order to use the BotDetect CAPTCHA CodeIgniter Library, we have declared Captcha configuration which will be used when loading the library in <a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#tank_auth_controller">AuthController</a>. Detailed description of this approach is available in a <a href="https://captcha.com/doc/php/howto/codeigniter-captcha.html#howto_display_captcha_config">BotDetect CodeIgniter 3.0 integration guide</a>.</p>
+
+<h2 id="tank_auth_login_form_view">View – <code>/application/views/auth/login_form.php</code></h2>
+
+<pre class="hl"><strong><span class="hl com">&lt;!-- include the BotDetect layout stylesheet --&gt;</span>
+<span class="hl kwa">&lt;link</span> <span class="hl kwb">type</span>=<span class="hl str">"text/css"</span> <span class="hl kwb">rel</span>=<span class="hl str">"Stylesheet"</span> <span class="hl kwb">href</span>=<span class="hl str">"&lt;?php echo CaptchaUrls::LayoutStylesheetUrl() ?&gt;"</span> <span class="hl kwa">/&gt;</span></strong>
+
+<span class="hl kwa">&lt;?php</span>
+<span class="hl kwc">$login</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'login'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'login'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'login'</span><span class="hl opt">),</span>
+  <span class="hl str">'maxlength'</span> <span class="hl opt">=&gt;</span> <span class="hl num">80</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+<span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$login_by_username</span> <span class="hl kwa">AND</span> <span class="hl kwc">$login_by_email</span><span class="hl opt">) {</span>
+  <span class="hl kwc">$login_label</span> <span class="hl opt">=</span> <span class="hl str">'Email or login'</span><span class="hl opt">;</span>
+<span class="hl opt">}</span> <span class="hl kwa">else if</span> <span class="hl opt">(</span><span class="hl kwc">$login_by_username</span><span class="hl opt">) {</span>
+  <span class="hl kwc">$login_label</span> <span class="hl opt">=</span> <span class="hl str">'Login'</span><span class="hl opt">;</span>
+<span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+  <span class="hl kwc">$login_label</span> <span class="hl opt">=</span> <span class="hl str">'Email'</span><span class="hl opt">;</span>
+<span class="hl opt">}</span>
+<span class="hl kwc">$password</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'password'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'password'</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+<span class="hl kwc">$remember</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'remember'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'remember'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl num">1</span><span class="hl opt">,</span>
+  <span class="hl str">'checked'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'remember'</span><span class="hl opt">),</span>
+  <span class="hl str">'style'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'margin:0;padding:0'</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+
+<strong><span class="hl kwc">$botdetectCaptcha</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>          <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span>       <span class="hl opt">=&gt;</span> <span class="hl str">''</span><span class="hl opt">,</span>
+  <span class="hl str">'maxlength'</span>   <span class="hl opt">=&gt;</span> <span class="hl str">'100'</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'50'</span>
+<span class="hl opt">);</span></strong>
+<span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_open</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">uri_string</span><span class="hl opt">());</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;table&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl kwc">$login_label</span><span class="hl opt">,</span> <span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$login</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]])</span>?<span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]]:</span><span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl str">'Password'</span><span class="hl opt">,</span> <span class="hl kwc">$password</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_password</span><span class="hl opt">(</span><span class="hl kwc">$password</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$password</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$password</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]])</span>?<span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$password</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]]:</span><span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+
+
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span>Captcha<span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span> 
+      <strong><span class="hl com">&lt;!-- Show captcha image --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwc">$captchaHtml</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$botdetectCaptcha</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span></strong>
+    <span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span>
+      <strong><span class="hl com">&lt;!-- Captcha validation failed, show error message --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span></strong>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">])</span>? <span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] :</span> <span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span>
+    <span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;/tr&gt;</span>
+
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">colspan</span>=<span class="hl str">"3"</span><span class="hl kwa">&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_checkbox</span><span class="hl opt">(</span><span class="hl kwc">$remember</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl str">'Remember me'</span><span class="hl opt">,</span> <span class="hl kwc">$remember</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">anchor</span><span class="hl opt">(</span><span class="hl str">'/auth/forgot_password/'</span><span class="hl opt">,</span> <span class="hl str">'Forgot password'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'allow_registration'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">))</span> <span class="hl kwa">echo</span> <span class="hl kwd">anchor</span><span class="hl opt">(</span><span class="hl str">'/auth/register/'</span><span class="hl opt">,</span> <span class="hl str">'Register'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+    <span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+<span class="hl kwa">&lt;/table&gt;</span>
+
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_submit</span><span class="hl opt">(</span><span class="hl str">'submit'</span><span class="hl opt">,</span> <span class="hl str">'Let me in'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_close</span><span class="hl opt">();</span> <span class="hl kwa">?&gt;</span>
+</pre>
+
+<p>The above code uses the CodeIgniter form helpers to generate a form, although the actual form can be created in many other ways. 
+The only requirement is that the form contains an input field of your choice where the user can retype the characters shown in the Captcha image. 
+This user-entered code should be available to you in Controller code after form submission.</p>
+
+<p>Note that the action of the form points to the same action of the Controller the View belongs to. 
+Also, the name of the input field corresponds to the variable in the request object that we will use for validation in the Controller</p>
+
+<p>The Captcha markup made available in the Controller is used in the View to compose a simple form with one input field and a Captcha image. 
+The View utilizes a BotDetect supplied Css helper method to add the required stylesheet. 
+Finally, it prints out a message about the Captcha validation status (set in the login() method of the auth Controller).</p>
+
+  <p class="toplink"><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#top" title="CodeIgniter 3.0 Tank Auth CAPTCHA Example">[back to top]</a></p>
+
+<h2 id="tank_auth_register_form_view">View – <code>/application/views/auth/register_form.php</code></h2>
+
+<pre class="hl"><strong><span class="hl com">&lt;!-- include the BotDetect layout stylesheet --&gt;</span>
+<span class="hl kwa">&lt;link</span> <span class="hl kwb">type</span>=<span class="hl str">"text/css"</span> <span class="hl kwb">rel</span>=<span class="hl str">"Stylesheet"</span> <span class="hl kwb">href</span>=<span class="hl str">"&lt;?php echo CaptchaUrls::LayoutStylesheetUrl() ?&gt;"</span> <span class="hl kwa">/&gt;</span></strong>
+
+
+<span class="hl kwa">&lt;?php</span>
+<span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$use_username</span><span class="hl opt">) {</span>
+  <span class="hl kwc">$username</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+    <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'username'</span><span class="hl opt">,</span>
+    <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'username'</span><span class="hl opt">,</span>
+    <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'username'</span><span class="hl opt">),</span>
+    <span class="hl str">'maxlength'</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'username_max_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">),</span>
+    <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+  <span class="hl opt">);</span>
+<span class="hl opt">}</span>
+<span class="hl kwc">$email</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'email'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'email'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">),</span>
+  <span class="hl str">'maxlength'</span> <span class="hl opt">=&gt;</span> <span class="hl num">80</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+<span class="hl kwc">$password</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'password'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'password'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">),</span>
+  <span class="hl str">'maxlength'</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_max_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">),</span>
+  <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+<span class="hl kwc">$confirm_password</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'confirm_password'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'confirm_password'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'confirm_password'</span><span class="hl opt">),</span>
+  <span class="hl str">'maxlength'</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_max_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">),</span>
+  <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+
+<strong><span class="hl kwc">$botdetectCaptcha</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>          <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span>       <span class="hl opt">=&gt;</span> <span class="hl str">''</span><span class="hl opt">,</span>
+  <span class="hl str">'maxlength'</span>   <span class="hl opt">=&gt;</span> <span class="hl str">'100'</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'50'</span>
+<span class="hl opt">);</span></strong>
+<span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_open</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">uri_string</span><span class="hl opt">());</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;table&gt;</span>
+  <span class="hl kwa">&lt;?php</span> <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$use_username</span><span class="hl opt">) {</span> <span class="hl kwa">?&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl str">'Username'</span><span class="hl opt">,</span> <span class="hl kwc">$username</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$username</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$username</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$username</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]])</span>?<span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$username</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]]:</span><span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+  <span class="hl kwa">&lt;?php</span> <span class="hl opt">}</span> <span class="hl kwa">?&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl str">'Email Address'</span><span class="hl opt">,</span> <span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$email</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]])</span>?<span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]]:</span><span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl str">'Password'</span><span class="hl opt">,</span> <span class="hl kwc">$password</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_password</span><span class="hl opt">(</span><span class="hl kwc">$password</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$password</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl str">'Confirm Password'</span><span class="hl opt">,</span> <span class="hl kwc">$confirm_password</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_password</span><span class="hl opt">(</span><span class="hl kwc">$confirm_password</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$confirm_password</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span>Captcha<span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span>
+      <strong><span class="hl com">&lt;!-- Show captcha image --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwc">$captchaHtml</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$botdetectCaptcha</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span></strong>
+    <span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span>
+      <strong><span class="hl com">&lt;!-- Captcha validation failed, show error message --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">])</span>? <span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] :</span> <span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span></strong>
+    <span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;/tr&gt;</span>
+
+<span class="hl kwa">&lt;/table&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_submit</span><span class="hl opt">(</span><span class="hl str">'register'</span><span class="hl opt">,</span> <span class="hl str">'Register'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_close</span><span class="hl opt">();</span> <span class="hl kwa">?&gt;</span>
+</pre>
+
+<p>The above code uses the CodeIgniter form helpers to generate a form, 
+although the actual form can be created in many other ways. 
+The only requirement is that the form contains an input field of your choice where the user can retype the characters shown in the Captcha image. 
+This user-entered code should be available to you in Controller code after form submission.</p>
+
+<p>Note that the action of the form points to the same action of the Controller the View belongs to. 
+Also, the name of the input field corresponds to the variable in the request object that we will use for validation in the Controller</p>
+
+<p>The Captcha markup made available in the Controller is used in the View to compose a simple form with one input field and a Captcha image. 
+The View utilizes a BotDetect supplied Css helper method to add the required stylesheet. 
+Finally, it prints out a message about the Captcha validation status (set in the register() method of the auth Controller).</p>
+
+  <p class="toplink"><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#top" title="CodeIgniter 3.0 Tank Auth CAPTCHA Example">[back to top]</a></p>
+
+<h2 id="tank_auth_forgot_password_form_view">View – <code>/application/views/auth/forgot_password_form.php</code></h2>
+
+<pre class="hl"><strong><span class="hl com">&lt;!-- include the BotDetect layout stylesheet --&gt;</span>
+<span class="hl kwa">&lt;link</span> <span class="hl kwb">type</span>=<span class="hl str">"text/css"</span> <span class="hl kwb">rel</span>=<span class="hl str">"Stylesheet"</span> <span class="hl kwb">href</span>=<span class="hl str">"&lt;?php echo CaptchaUrls::LayoutStylesheetUrl() ?&gt;"</span> <span class="hl kwa">/&gt;</span></strong>
+
+<span class="hl kwa">&lt;?php</span>
+
+<span class="hl kwc">$login</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'login'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'login'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'login'</span><span class="hl opt">),</span>
+  <span class="hl str">'maxlength'</span> <span class="hl opt">=&gt;</span> <span class="hl num">80</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+
+<strong><span class="hl kwc">$botdetectCaptcha</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>          <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span>       <span class="hl opt">=&gt;</span> <span class="hl str">''</span><span class="hl opt">,</span>
+  <span class="hl str">'maxlength'</span>   <span class="hl opt">=&gt;</span> <span class="hl str">'100'</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'50'</span>
+<span class="hl opt">);</span></strong>
+
+<span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'use_username'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">)) {</span>
+  <span class="hl kwc">$login_label</span> <span class="hl opt">=</span> <span class="hl str">'Email or login'</span><span class="hl opt">;</span>
+<span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+  <span class="hl kwc">$login_label</span> <span class="hl opt">=</span> <span class="hl str">'Email'</span><span class="hl opt">;</span>
+<span class="hl opt">}</span>
+<span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_open</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">uri_string</span><span class="hl opt">());</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;table&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">colspan</span>=<span class="hl str">"2"</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]])</span>?<span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]]:</span><span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span>
+
+      <strong><span class="hl com">&lt;!-- Show captcha error message --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">])</span>? <span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] :</span> <span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span></strong>
+    <span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl kwc">$login_label</span><span class="hl opt">,</span> <span class="hl kwc">$login</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$login</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span>Captcha<span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span> 
+      <strong><span class="hl com">&lt;!-- Show captcha image --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwc">$captchaHtml</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$botdetectCaptcha</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span></strong>
+    <span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;/tr&gt;</span>
+
+<span class="hl kwa">&lt;/table&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_submit</span><span class="hl opt">(</span><span class="hl str">'reset'</span><span class="hl opt">,</span> <span class="hl str">'Get a new password'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_close</span><span class="hl opt">();</span> <span class="hl kwa">?&gt;</span>
+</pre>
+
+<p>The above code uses the CodeIgniter form helpers to generate a form, although the actual form can be created in many other ways. 
+The only requirement is that the form contains an input field of your choice where the user can retype the characters shown in the Captcha image. 
+This user-entered code should be available to you in Controller code after form submission.</p>
+
+<p>Note that the action of the form points to the same action of the Controller the View belongs to. 
+Also, the name of the input field corresponds to the variable in the request object that we will use for validation in the Controller</p>
+
+<p>The Captcha markup made available in the Controller is used in the View to compose a simple form with one input field and a Captcha image. 
+The View utilizes a BotDetect supplied Css helper method to add the required stylesheet. 
+Finally, it prints out a message about the Captcha validation status (set in the forgot_password() method of the auth Controller).</p>
+
+  <p class="toplink"><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#top" title="CodeIgniter 3.0 Tank Auth CAPTCHA Example">[back to top]</a></p>
+
+<h2 id="tank_auth_send_again_view">View – <code>/application/views/auth/send_again_form.php</code></h2>
+
+<pre class="hl"><strong><span class="hl com">&lt;!-- include the BotDetect layout stylesheet --&gt;</span>
+<span class="hl kwa">&lt;link</span> <span class="hl kwb">type</span>=<span class="hl str">"text/css"</span> <span class="hl kwb">rel</span>=<span class="hl str">"Stylesheet"</span> <span class="hl kwb">href</span>=<span class="hl str">"&lt;?php echo CaptchaUrls::LayoutStylesheetUrl() ?&gt;"</span> <span class="hl kwa">/&gt;</span></strong>
+
+<span class="hl kwa">&lt;?php</span>
+<span class="hl kwc">$email</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'email'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>  <span class="hl opt">=&gt;</span> <span class="hl str">'email'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span> <span class="hl opt">=&gt;</span> <span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">),</span>
+  <span class="hl str">'maxlength'</span> <span class="hl opt">=&gt;</span> <span class="hl num">80</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>  <span class="hl opt">=&gt;</span> <span class="hl num">30</span><span class="hl opt">,</span>
+<span class="hl opt">);</span>
+
+<strong><span class="hl kwc">$botdetectCaptcha</span> <span class="hl opt">=</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+  <span class="hl str">'name'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'id'</span>          <span class="hl opt">=&gt;</span> <span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span>
+  <span class="hl str">'value'</span>       <span class="hl opt">=&gt;</span> <span class="hl str">''</span><span class="hl opt">,</span>
+  <span class="hl str">'maxlength'</span>   <span class="hl opt">=&gt;</span> <span class="hl str">'100'</span><span class="hl opt">,</span>
+  <span class="hl str">'size'</span>        <span class="hl opt">=&gt;</span> <span class="hl str">'50'</span>
+<span class="hl opt">);</span>
+<span class="hl kwa">?&gt;</span></strong>
+
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_open</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">uri_string</span><span class="hl opt">());</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;table&gt;</span>
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_label</span><span class="hl opt">(</span><span class="hl str">'Email Address'</span><span class="hl opt">,</span> <span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'id'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$email</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]);</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]])</span>?<span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl kwc">$email</span><span class="hl opt">[</span><span class="hl str">'name'</span><span class="hl opt">]]:</span><span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span><span class="hl kwa">&lt;/td&gt;</span>
+  <span class="hl kwa">&lt;/tr&gt;</span>
+
+  <span class="hl kwa">&lt;tr&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span>Captcha<span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td&gt;</span> 
+      <strong><span class="hl com">&lt;!-- Show captcha image --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwc">$captchaHtml</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_input</span><span class="hl opt">(</span><span class="hl kwc">$botdetectCaptcha</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span></strong>
+    <span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;td</span> <span class="hl kwb">style</span>=<span class="hl str">"color: red;"</span><span class="hl kwa">&gt;</span>
+      <strong><span class="hl com">&lt;!-- Captcha validation failed, show error message --&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_error</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+      <span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">])</span>? <span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] :</span> <span class="hl str">''</span><span class="hl opt">;</span> <span class="hl kwa">?&gt;</span></strong>
+    <span class="hl kwa">&lt;/td&gt;</span>
+    <span class="hl kwa">&lt;/tr&gt;</span>
+    
+<span class="hl kwa">&lt;/table&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_submit</span><span class="hl opt">(</span><span class="hl str">'send'</span><span class="hl opt">,</span> <span class="hl str">'Send'</span><span class="hl opt">);</span> <span class="hl kwa">?&gt;</span>
+<span class="hl kwa">&lt;?php</span> <span class="hl kwa">echo</span> <span class="hl kwd">form_close</span><span class="hl opt">();</span> <span class="hl kwa">?&gt;</span>
+</pre>
+
+<p>The above code uses the CodeIgniter form helpers to generate a form, 
+although the actual form can be created in many other ways. 
+The only requirement is that the form contains an input field of your choice where the user can retype the characters shown in the Captcha image. 
+This user-entered code should be available to you in Controller code after form submission.</p>
+
+<p>Note that the action of the form points to the same action of the Controller the View belongs to. 
+Also, the name of the input field corresponds to the variable in the request object that we will use for validation in the Controller</p>
+
+<p>The Captcha markup made available in the Controller is used in the View to compose a simple form with one input field and a Captcha image. 
+The View utilizes a BotDetect supplied Css helper method to add the required stylesheet. 
+Finally, it prints out a message about the Captcha validation status (set in the send_again() method of the auth Controller).</p>
+
+  <p class="toplink"><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#top" title="CodeIgniter 3.0 Tank Auth CAPTCHA Example">[back to top]</a></p>
+
+<h2 id="tank_auth_controller">Controller – <code>/application/controllers/Auth.php</code></h2>
+
+<pre><span class="hl opt">&lt;</span>?php <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwd">defined</span><span class="hl opt">(</span><span class="hl str">'BASEPATH'</span><span class="hl opt">))</span> <span class="hl kwa">exit</span><span class="hl opt">(</span><span class="hl str">'No direct script access allowed'</span><span class="hl opt">);</span>
+
+<span class="hl kwa">class</span> Auth <span class="hl kwa">extends</span> CI_Controller
+<span class="hl opt">{</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">__construct</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    parent<span class="hl opt">::</span><span class="hl kwd">__construct</span><span class="hl opt">();</span>
+
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">helper</span><span class="hl opt">(</span><span class="hl kwa">array</span><span class="hl opt">(</span><span class="hl str">'form'</span><span class="hl opt">,</span> <span class="hl str">'url'</span><span class="hl opt">));</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">library</span><span class="hl opt">(</span><span class="hl str">'form_validation'</span><span class="hl opt">);</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">helper</span><span class="hl opt">(</span><span class="hl str">'security'</span><span class="hl opt">);</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">library</span><span class="hl opt">(</span><span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">load</span><span class="hl opt">(</span><span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl kwa">function</span> <span class="hl kwd">index</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$message</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>session<span class="hl opt">-&gt;</span><span class="hl kwd">flashdata</span><span class="hl opt">(</span><span class="hl str">'message'</span><span class="hl opt">)) {</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/general_message'</span><span class="hl opt">,</span> <span class="hl kwa">array</span><span class="hl opt">(</span><span class="hl str">'message'</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$message</span><span class="hl opt">));</span>
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Login user on the site</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">login</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">()) {</span> <span class="hl slc">// logged in</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">''</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">elseif</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">(</span>FALSE<span class="hl opt">)) {</span> <span class="hl slc">// logged in, not activated</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/send_again/'</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+      <strong><span class="hl slc">// load the BotDetect Captcha library and set its parameter</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">library</span><span class="hl opt">(</span><span class="hl str">'botdetect/BotDetectCaptcha'</span><span class="hl opt">,</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+        <span class="hl str">'captchaConfig'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'LoginCaptcha'</span>
+      <span class="hl opt">));</span>
+
+      <span class="hl slc">// validate the user-entered Captcha code when the form is submitted</span>
+      <span class="hl kwc">$code</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>input<span class="hl opt">-&gt;</span><span class="hl kwd">post</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$isHuman</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Validate</span><span class="hl opt">(</span><span class="hl kwc">$code</span><span class="hl opt">);</span>
+
+       <span class="hl slc">// captcha code input field is required</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span> <span class="hl str">'Captcha Code'</span><span class="hl opt">,</span> <span class="hl str">'required'</span><span class="hl opt">);</span></strong>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'login_by_username'</span><span class="hl opt">] = (</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'login_by_username'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">)</span> <span class="hl kwa">AND</span>
+                      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'use_username'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">));</span>
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'login_by_email'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'login_by_email'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'login'</span><span class="hl opt">,</span> <span class="hl str">'Login'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">,</span> <span class="hl str">'Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'remember'</span><span class="hl opt">,</span> <span class="hl str">'Remember me'</span><span class="hl opt">,</span> <span class="hl str">'integer'</span><span class="hl opt">);</span>
+
+      <span class="hl slc">// Get login for counting attempts to login</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'login_count_attempts'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">)</span> <span class="hl kwa">AND</span>
+                      <span class="hl opt">(</span><span class="hl kwc">$login</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>input<span class="hl opt">-&gt;</span><span class="hl kwd">post</span><span class="hl opt">(</span><span class="hl str">'login'</span><span class="hl opt">))) {</span>
+        <span class="hl kwc">$login</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>security<span class="hl opt">-&gt;</span><span class="hl kwd">xss_clean</span><span class="hl opt">(</span><span class="hl kwc">$login</span><span class="hl opt">);</span>
+      <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+        <span class="hl kwc">$login</span> <span class="hl opt">=</span> <span class="hl str">''</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+        <span class="hl slc">// validate captcha and Login</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$isHuman</span> <span class="hl opt">&amp;&amp;</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">login</span><span class="hl opt">(</span>
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'login'</span><span class="hl opt">),</span>
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">),</span>
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'remember'</span><span class="hl opt">),</span>
+          <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'login_by_username'</span><span class="hl opt">],</span>
+          <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'login_by_email'</span><span class="hl opt">])) {</span> <span class="hl slc">// success</span>
+          <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">''</span><span class="hl opt">);</span>
+
+        <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+          <strong><span class="hl slc">// Captcha validation failed, show error message</span>
+          <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$isHuman</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] =</span> <span class="hl str">'CAPTCHA validation failed, please try again.'</span><span class="hl opt">;</span>
+          <span class="hl opt">}</span></strong>
+
+          <span class="hl kwc">$errors</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">get_error_message</span><span class="hl opt">();</span>
+          <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwa">isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'banned'</span><span class="hl opt">])) {</span>               <span class="hl slc">// banned user</span>
+            <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_banned'</span><span class="hl opt">).</span><span class="hl str">' '</span><span class="hl opt">.</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'banned'</span><span class="hl opt">]);</span>
+
+          <span class="hl opt">}</span> <span class="hl kwa">elseif</span> <span class="hl opt">(</span><span class="hl kwa">isset</span><span class="hl opt">(</span><span class="hl kwc">$errors</span><span class="hl opt">[</span><span class="hl str">'not_activated'</span><span class="hl opt">])) {</span> <span class="hl slc">// not activated user</span>
+              <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/send_again/'</span><span class="hl opt">);</span>
+
+          <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span> <span class="hl slc">// fail</span>
+            <span class="hl kwa">foreach</span> <span class="hl opt">(</span><span class="hl kwc">$errors</span> <span class="hl kwa">as</span> <span class="hl kwc">$k</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$v</span><span class="hl opt">)</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl kwc">$k</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl kwc">$v</span><span class="hl opt">);</span>
+          <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">}</span>
+
+      <strong><span class="hl slc">// make Captcha Html accessible to View code</span>
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'captchaHtml'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Html</span><span class="hl opt">();</span></strong>
+
+
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/login_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Logout user</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">logout</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">logout</span><span class="hl opt">();</span>
+
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_logged_out'</span><span class="hl opt">));</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Register user on the site</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">register</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">()) {</span> <span class="hl slc">// logged in</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">''</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">elseif</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">(</span>FALSE<span class="hl opt">)) {</span> <span class="hl slc">// logged in, not activated</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/send_again/'</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">elseif</span> <span class="hl opt">(!</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'allow_registration'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">)) {</span> <span class="hl slc">// registration is off</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_registration_disabled'</span><span class="hl opt">));</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+      <strong><span class="hl slc">// load the BotDetect Captcha library and set its parameter</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">library</span><span class="hl opt">(</span><span class="hl str">'botdetect/BotDetectCaptcha'</span><span class="hl opt">,</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+        <span class="hl str">'captchaConfig'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'RegisterCaptcha'</span>
+      <span class="hl opt">));</span>
+
+      <span class="hl slc">// validate the user-entered Captcha code when the form is submitted</span>
+      <span class="hl kwc">$code</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>input<span class="hl opt">-&gt;</span><span class="hl kwd">post</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$isHuman</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Validate</span><span class="hl opt">(</span><span class="hl kwc">$code</span><span class="hl opt">);</span>
+
+      <span class="hl slc">// captcha code input field is required</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span> <span class="hl str">'Captcha Code'</span><span class="hl opt">,</span> <span class="hl str">'required'</span><span class="hl opt">);</span></strong>
+
+      <span class="hl kwc">$use_username</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'use_username'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$use_username</span><span class="hl opt">) {</span>
+        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'username'</span><span class="hl opt">,</span> <span class="hl str">'Username'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|min_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'username_min_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|max_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'username_max_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|alpha_dash'</span><span class="hl opt">);</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">,</span> <span class="hl str">'Email'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|valid_email'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">,</span> <span class="hl str">'Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|min_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_min_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|max_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_max_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|alpha_dash'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'confirm_password'</span><span class="hl opt">,</span> <span class="hl str">'Confirm Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|matches[password]'</span><span class="hl opt">);</span>
+
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+      <span class="hl kwc">$email_activation</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'email_activation'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span> <span class="hl kwc">$isHuman</span> <span class="hl opt">&amp;&amp; !</span><span class="hl kwd">is_null</span><span class="hl opt">(</span><span class="hl kwc">$data</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">create_user</span><span class="hl opt">(</span>
+            <span class="hl kwc">$use_username</span> ? <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'username'</span><span class="hl opt">) :</span> <span class="hl str">''</span><span class="hl opt">,</span>
+            <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">),</span>
+            <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">),</span>
+            <span class="hl kwc">$email_activation</span><span class="hl opt">))) {</span>  <span class="hl slc">// success</span>
+
+          <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'site_name'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+
+          <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$email_activation</span><span class="hl opt">) {</span> <span class="hl slc">// send "activate" email</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'activation_period'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'email_activation_expire'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">) /</span> <span class="hl num">3600</span><span class="hl opt">;</span>
+
+            <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_send_email</span><span class="hl opt">(</span><span class="hl str">'activate'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'email'</span><span class="hl opt">],</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+
+            <span class="hl kwa">unset</span><span class="hl opt">(</span><span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'password'</span><span class="hl opt">]);</span> <span class="hl slc">// Clear password (just for any case)</span>
+
+            <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_registration_completed_1'</span><span class="hl opt">));</span>
+
+          <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+            <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'email_account_details'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">)) {</span>  <span class="hl slc">// send "welcome" email</span>
+
+              <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_send_email</span><span class="hl opt">(</span><span class="hl str">'welcome'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'email'</span><span class="hl opt">],</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+            <span class="hl opt">}</span>
+            <span class="hl kwa">unset</span><span class="hl opt">(</span><span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'password'</span><span class="hl opt">]);</span> <span class="hl slc">// Clear password (just for any case)</span>
+
+            <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_registration_completed_2'</span><span class="hl opt">).</span><span class="hl str">' '</span><span class="hl opt">.</span><span class="hl kwd">anchor</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">,</span> <span class="hl str">'Login'</span><span class="hl opt">));</span>
+          <span class="hl opt">}</span>
+        <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+          <strong><span class="hl slc">// Captcha validation failed, show error message</span>
+          <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$isHuman</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] =</span> <span class="hl str">'CAPTCHA validation failed, please try again.'</span><span class="hl opt">;</span>
+          <span class="hl opt">}</span></strong>
+
+          <span class="hl kwc">$errors</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">get_error_message</span><span class="hl opt">();</span>
+          <span class="hl kwa">foreach</span> <span class="hl opt">(</span><span class="hl kwc">$errors</span> <span class="hl kwa">as</span> <span class="hl kwc">$k</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$v</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl kwc">$k</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl kwc">$v</span><span class="hl opt">);</span>
+          <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">}</span>
+
+      <strong><span class="hl slc">// make Captcha Html accessible to View code</span>
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'captchaHtml'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Html</span><span class="hl opt">();</span></strong>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'use_username'</span><span class="hl opt">] =</span> <span class="hl kwc">$use_username</span><span class="hl opt">;</span>      
+
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/register_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Send activation email again, to the same or new email address</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">send_again</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">(</span>FALSE<span class="hl opt">)) {</span>             <span class="hl slc">// not logged in or activated</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+      <strong><span class="hl slc">// load the BotDetect Captcha library and set its parameter</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">library</span><span class="hl opt">(</span><span class="hl str">'botdetect/BotDetectCaptcha'</span><span class="hl opt">,</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+        <span class="hl str">'captchaConfig'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'SendAgainCaptcha'</span>
+      <span class="hl opt">));</span>
+
+      <span class="hl slc">// validate the user-entered Captcha code when the form is submitted</span>
+      <span class="hl kwc">$code</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>input<span class="hl opt">-&gt;</span><span class="hl kwd">post</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$isHuman</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Validate</span><span class="hl opt">(</span><span class="hl kwc">$code</span><span class="hl opt">);</span>
+
+      <span class="hl slc">// Captcha Code input field is required</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span> <span class="hl str">'Captcha Code'</span><span class="hl opt">,</span> <span class="hl str">'required'</span><span class="hl opt">);</span></strong>
+
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">,</span> <span class="hl str">'Email'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|valid_email'</span><span class="hl opt">);</span>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$isHuman</span> <span class="hl opt">&amp;&amp; !</span><span class="hl kwd">is_null</span><span class="hl opt">(</span><span class="hl kwc">$data</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">change_email</span><span class="hl opt">(</span>
+                      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">)))) {</span> <span class="hl slc">// success</span>
+
+          <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'site_name'</span><span class="hl opt">]  =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+          <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'activation_period'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'email_activation_expire'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">) /</span> <span class="hl num">3600</span><span class="hl opt">;</span>
+
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_send_email</span><span class="hl opt">(</span><span class="hl str">'activate'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'email'</span><span class="hl opt">],</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwd">sprintf</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_activation_email_sent'</span><span class="hl opt">),</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'email'</span><span class="hl opt">]));</span>
+
+        <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+          <strong><span class="hl slc">// Captcha validation failed, show error message</span>
+          <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$isHuman</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] =</span> <span class="hl str">'CAPTCHA validation failed, please try again.'</span><span class="hl opt">;</span>
+          <span class="hl opt">}</span></strong>
+
+          <span class="hl kwc">$errors</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">get_error_message</span><span class="hl opt">();</span>
+          <span class="hl kwa">foreach</span> <span class="hl opt">(</span><span class="hl kwc">$errors</span> <span class="hl kwa">as</span> <span class="hl kwc">$k</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$v</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl kwc">$k</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl kwc">$v</span><span class="hl opt">);</span>
+          <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">}</span>
+
+      <strong><span class="hl slc">// make Captcha Html accessible to View code</span>
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'captchaHtml'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Html</span><span class="hl opt">();</span></strong>
+
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/send_again_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Activate user account.</span>
+<span class="hl com">   * User is verified by user_id and authentication code in the URL.</span>
+<span class="hl com">   * Can be called by clicking on link in mail.</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">activate</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwc">$user_id</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">segment</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">);</span>
+    <span class="hl kwc">$new_email_key</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">segment</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">);</span>
+
+    <span class="hl slc">// Activate user</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">activate_user</span><span class="hl opt">(</span><span class="hl kwc">$user_id</span><span class="hl opt">,</span> <span class="hl kwc">$new_email_key</span><span class="hl opt">)) {</span> <span class="hl slc">// success</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">logout</span><span class="hl opt">();</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_activation_completed'</span><span class="hl opt">).</span><span class="hl str">' '</span><span class="hl opt">.</span><span class="hl kwd">anchor</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">,</span> <span class="hl str">'Login'</span><span class="hl opt">));</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span> <span class="hl slc">// fail</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_activation_failed'</span><span class="hl opt">));</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Generate reset code (to change password) and send it to user</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">forgot_password</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">()) {</span> <span class="hl slc">// logged in</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">''</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">elseif</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">(</span>FALSE<span class="hl opt">)) {</span> <span class="hl slc">// logged in, not activated</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/send_again/'</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+      <strong><span class="hl slc">// load the BotDetect Captcha library and set its parameter</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">library</span><span class="hl opt">(</span><span class="hl str">'botdetect/BotDetectCaptcha'</span><span class="hl opt">,</span> <span class="hl kwa">array</span><span class="hl opt">(</span>
+        <span class="hl str">'captchaConfig'</span> <span class="hl opt">=&gt;</span> <span class="hl str">'ForgotPasswordCaptcha'</span>
+      <span class="hl opt">));</span>
+
+      <span class="hl slc">// validate the user-entered Captcha code when the form is submitted</span>
+      <span class="hl kwc">$code</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>input<span class="hl opt">-&gt;</span><span class="hl kwd">post</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$isHuman</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Validate</span><span class="hl opt">(</span><span class="hl kwc">$code</span><span class="hl opt">);</span>
+
+      <span class="hl slc">// Captcha Code input field is required</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'CaptchaCode'</span><span class="hl opt">,</span> <span class="hl str">'Captcha Code'</span><span class="hl opt">,</span> <span class="hl str">'required'</span><span class="hl opt">);</span></strong>
+
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'login'</span><span class="hl opt">,</span> <span class="hl str">'Email or login'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean'</span><span class="hl opt">);</span>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$isHuman</span> <span class="hl opt">&amp;&amp; !</span><span class="hl kwd">is_null</span><span class="hl opt">(</span><span class="hl kwc">$data</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">forgot_password</span><span class="hl opt">(</span>
+                        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'login'</span><span class="hl opt">)))) {</span>
+
+          <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'site_name'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+
+          <span class="hl slc">// Send email with password activation link</span>
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_send_email</span><span class="hl opt">(</span><span class="hl str">'forgot_password'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'email'</span><span class="hl opt">],</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_new_password_sent'</span><span class="hl opt">));</span>
+
+        <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+
+          <strong><span class="hl slc">// Captcha validation failed, show error message</span>
+          <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$isHuman</span><span class="hl opt">) {</span>
+              <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl str">'captchaValidationMessage'</span><span class="hl opt">] =</span> <span class="hl str">'CAPTCHA validation failed, please try again.'</span><span class="hl opt">;</span>
+          <span class="hl opt">}</span></strong>
+
+          <span class="hl kwc">$errors</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">get_error_message</span><span class="hl opt">();</span>
+          <span class="hl kwa">foreach</span> <span class="hl opt">(</span><span class="hl kwc">$errors</span> <span class="hl kwa">as</span> <span class="hl kwc">$k</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$v</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl kwc">$k</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl kwc">$v</span><span class="hl opt">);</span>
+          <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">}</span>
+
+      <strong><span class="hl slc">// make Captcha Html accessible to View code</span>
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'captchaHtml'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>botdetectcaptcha<span class="hl opt">-&gt;</span><span class="hl kwd">Html</span><span class="hl opt">();</span></strong>
+
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/forgot_password_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Replace user password (forgotten) with a new one (set by user).</span>
+<span class="hl com">   * User is verified by user_id and authentication code in the URL.</span>
+<span class="hl com">   * Can be called by clicking on link in mail.</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">reset_password</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwc">$user_id</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">segment</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">);</span>
+    <span class="hl kwc">$new_pass_key</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">segment</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">);</span>
+
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'new_password'</span><span class="hl opt">,</span> <span class="hl str">'New Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|min_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_min_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|max_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_max_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|alpha_dash'</span><span class="hl opt">);</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'confirm_new_password'</span><span class="hl opt">,</span> <span class="hl str">'Confirm new Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|matches[new_password]'</span><span class="hl opt">);</span>
+
+    <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwd">is_null</span><span class="hl opt">(</span><span class="hl kwc">$data</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">reset_password</span><span class="hl opt">(</span>
+                      <span class="hl kwc">$user_id</span><span class="hl opt">,</span> <span class="hl kwc">$new_pass_key</span><span class="hl opt">,</span>
+                      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'new_password'</span><span class="hl opt">)))) {</span>  <span class="hl slc">// success</span>
+
+        <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'site_name'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+
+        <span class="hl slc">// Send email with new password</span>
+        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_send_email</span><span class="hl opt">(</span><span class="hl str">'reset_password'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'email'</span><span class="hl opt">],</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+
+        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_new_password_activated'</span><span class="hl opt">).</span><span class="hl str">' '</span><span class="hl opt">.</span><span class="hl kwd">anchor</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">,</span> <span class="hl str">'Login'</span><span class="hl opt">));</span>
+
+      <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>                            <span class="hl slc">// fail</span>
+        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_new_password_failed'</span><span class="hl opt">));</span>
+      <span class="hl opt">}</span>
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+      <span class="hl slc">// Try to activate user by password key (if not activated yet)</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'email_activation'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">)) {</span>
+        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">activate_user</span><span class="hl opt">(</span><span class="hl kwc">$user_id</span><span class="hl opt">,</span> <span class="hl kwc">$new_pass_key</span><span class="hl opt">,</span> FALSE<span class="hl opt">);</span>
+      <span class="hl opt">}</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">can_reset_password</span><span class="hl opt">(</span><span class="hl kwc">$user_id</span><span class="hl opt">,</span> <span class="hl kwc">$new_pass_key</span><span class="hl opt">)) {</span>
+        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_new_password_failed'</span><span class="hl opt">));</span>
+      <span class="hl opt">}</span>
+    <span class="hl opt">}</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/reset_password_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Change user password</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">change_password</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">()) {</span> <span class="hl slc">// not logged in or not activated</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'old_password'</span><span class="hl opt">,</span> <span class="hl str">'Old Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'new_password'</span><span class="hl opt">,</span> <span class="hl str">'New Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|min_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_min_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|max_length['</span><span class="hl opt">.</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'password_max_length'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">).</span><span class="hl str">']|alpha_dash'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'confirm_new_password'</span><span class="hl opt">,</span> <span class="hl str">'Confirm new Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|matches[new_password]'</span><span class="hl opt">);</span>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">change_password</span><span class="hl opt">(</span>
+                        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'old_password'</span><span class="hl opt">),</span>
+                        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'new_password'</span><span class="hl opt">))) {</span> <span class="hl slc">// success</span>
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_password_changed'</span><span class="hl opt">));</span>
+
+        <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span> <span class="hl slc">// fail</span>
+          <span class="hl kwc">$errors</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">get_error_message</span><span class="hl opt">();</span>
+          <span class="hl kwa">foreach</span> <span class="hl opt">(</span><span class="hl kwc">$errors</span> <span class="hl kwa">as</span> <span class="hl kwc">$k</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$v</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl kwc">$k</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl kwc">$v</span><span class="hl opt">);</span>
+          <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/change_password_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Change user email</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">change_email</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">()) {</span> <span class="hl slc">// not logged in or not activated</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">,</span> <span class="hl str">'Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean'</span><span class="hl opt">);</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">,</span> <span class="hl str">'Email'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean|valid_email'</span><span class="hl opt">);</span>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwd">is_null</span><span class="hl opt">(</span><span class="hl kwc">$data</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">set_new_email</span><span class="hl opt">(</span>
+                      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">),</span>
+                      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">)))) {</span> <span class="hl slc">// success</span>
+
+          <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'site_name'</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">);</span>
+
+          <span class="hl slc">// Send email with new email address and its activation link</span>
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_send_email</span><span class="hl opt">(</span><span class="hl str">'change_email'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'new_email'</span><span class="hl opt">],</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwd">sprintf</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_new_email_sent'</span><span class="hl opt">),</span> <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'new_email'</span><span class="hl opt">]));</span>
+
+        <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+            <span class="hl kwc">$errors</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">get_error_message</span><span class="hl opt">();</span>
+            <span class="hl kwa">foreach</span> <span class="hl opt">(</span><span class="hl kwc">$errors</span> <span class="hl kwa">as</span> <span class="hl kwc">$k</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$v</span><span class="hl opt">) {</span>
+              <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl kwc">$k</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl kwc">$v</span><span class="hl opt">);</span>
+            <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/change_email_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Replace user email with a new one.</span>
+<span class="hl com">   * User is verified by user_id and authentication code in the URL.</span>
+<span class="hl com">   * Can be called by clicking on link in mail.</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">reset_email</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwc">$user_id</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">segment</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">);</span>
+    <span class="hl kwc">$new_email_key</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>uri<span class="hl opt">-&gt;</span><span class="hl kwd">segment</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">);</span>
+
+    <span class="hl slc">// Reset email</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">activate_new_email</span><span class="hl opt">(</span><span class="hl kwc">$user_id</span><span class="hl opt">,</span> <span class="hl kwc">$new_email_key</span><span class="hl opt">)) {</span> <span class="hl slc">// success</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">logout</span><span class="hl opt">();</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_new_email_activated'</span><span class="hl opt">).</span><span class="hl str">' '</span><span class="hl opt">.</span><span class="hl kwd">anchor</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">,</span> <span class="hl str">'Login'</span><span class="hl opt">));</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span> <span class="hl slc">// fail</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_new_email_failed'</span><span class="hl opt">));</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Delete user from the site (only when user is logged in)</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @return void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">unregister</span><span class="hl opt">()</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(!</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">is_logged_in</span><span class="hl opt">()) {</span> <span class="hl slc">// not logged in or not activated</span>
+      <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/login/'</span><span class="hl opt">);</span>
+
+    <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_rules</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">,</span> <span class="hl str">'Password'</span><span class="hl opt">,</span> <span class="hl str">'trim|required|xss_clean'</span><span class="hl opt">);</span>
+
+      <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">] =</span> <span class="hl kwa">array</span><span class="hl opt">();</span>
+
+      <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">run</span><span class="hl opt">()) {</span> <span class="hl slc">// validation ok</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">delete_user</span><span class="hl opt">(</span>
+                        <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>form_validation<span class="hl opt">-&gt;</span><span class="hl kwd">set_value</span><span class="hl opt">(</span><span class="hl str">'password'</span><span class="hl opt">))) {</span> <span class="hl slc">// success</span>
+          <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span><span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_message_unregistered'</span><span class="hl opt">));</span>
+
+        <span class="hl opt">}</span> <span class="hl kwa">else</span> <span class="hl opt">{</span> <span class="hl slc">// fail</span>
+          <span class="hl kwc">$errors</span> <span class="hl opt">=</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>tank_auth<span class="hl opt">-&gt;</span><span class="hl kwd">get_error_message</span><span class="hl opt">();</span>
+          <span class="hl kwa">foreach</span> <span class="hl opt">(</span><span class="hl kwc">$errors</span> <span class="hl kwa">as</span> <span class="hl kwc">$k</span> <span class="hl opt">=&gt;</span> <span class="hl kwc">$v</span><span class="hl opt">) {</span>
+            <span class="hl kwc">$data</span><span class="hl opt">[</span><span class="hl str">'errors'</span><span class="hl opt">][</span><span class="hl kwc">$k</span><span class="hl opt">] =</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl kwc">$v</span><span class="hl opt">);</span>
+          <span class="hl opt">}</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'auth/unregister_form'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">);</span>
+    <span class="hl opt">}</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Show info message</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @param string</span>
+<span class="hl com">   * @return  void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">_show_message</span><span class="hl opt">(</span><span class="hl kwc">$message</span><span class="hl opt">)</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>session<span class="hl opt">-&gt;</span><span class="hl kwd">set_flashdata</span><span class="hl opt">(</span><span class="hl str">'message'</span><span class="hl opt">,</span> <span class="hl kwc">$message</span><span class="hl opt">);</span>
+    <span class="hl kwd">redirect</span><span class="hl opt">(</span><span class="hl str">'/auth/'</span><span class="hl opt">);</span>
+  <span class="hl opt">}</span>
+
+  <span class="hl com">/**</span>
+<span class="hl com">   * Send email message of given type (activate, forgot_password, etc.)</span>
+<span class="hl com">   *</span>
+<span class="hl com">   * @param string</span>
+<span class="hl com">   * @param string</span>
+<span class="hl com">   * @param array</span>
+<span class="hl com">   * @return  void</span>
+<span class="hl com">   */</span>
+  <span class="hl kwa">function</span> <span class="hl kwd">_send_email</span><span class="hl opt">(</span><span class="hl kwc">$type</span><span class="hl opt">,</span> <span class="hl kwc">$email</span><span class="hl opt">, &amp;</span><span class="hl kwc">$data</span><span class="hl opt">)</span>
+  <span class="hl opt">{</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">library</span><span class="hl opt">(</span><span class="hl str">'email'</span><span class="hl opt">);</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>email<span class="hl opt">-&gt;</span><span class="hl kwd">from</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'webmaster_email'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">),</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">));</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>email<span class="hl opt">-&gt;</span><span class="hl kwd">reply_to</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'webmaster_email'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">),</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">));</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>email<span class="hl opt">-&gt;</span><span class="hl kwd">to</span><span class="hl opt">(</span><span class="hl kwc">$email</span><span class="hl opt">);</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>email<span class="hl opt">-&gt;</span><span class="hl kwd">subject</span><span class="hl opt">(</span><span class="hl kwd">sprintf</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>lang<span class="hl opt">-&gt;</span><span class="hl kwd">line</span><span class="hl opt">(</span><span class="hl str">'auth_subject_'</span><span class="hl opt">.</span><span class="hl kwc">$type</span><span class="hl opt">),</span> <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>config<span class="hl opt">-&gt;</span><span class="hl kwd">item</span><span class="hl opt">(</span><span class="hl str">'website_name'</span><span class="hl opt">,</span> <span class="hl str">'tank_auth'</span><span class="hl opt">)));</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>email<span class="hl opt">-&gt;</span><span class="hl kwd">message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'email/'</span><span class="hl opt">.</span><span class="hl kwc">$type</span><span class="hl opt">.</span><span class="hl str">'-html'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">,</span> TRUE<span class="hl opt">));</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>email<span class="hl opt">-&gt;</span><span class="hl kwd">set_alt_message</span><span class="hl opt">(</span><span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>load<span class="hl opt">-&gt;</span><span class="hl kwd">view</span><span class="hl opt">(</span><span class="hl str">'email/'</span><span class="hl opt">.</span><span class="hl kwc">$type</span><span class="hl opt">.</span><span class="hl str">'-txt'</span><span class="hl opt">,</span> <span class="hl kwc">$data</span><span class="hl opt">,</span> TRUE<span class="hl opt">));</span>
+    <span class="hl kwc">$this</span><span class="hl opt">-&gt;</span>email<span class="hl opt">-&gt;</span><span class="hl kwd">send</span><span class="hl opt">();</span>
+  <span class="hl opt">}</span>
+
+<span class="hl opt">}</span>
+
+<span class="hl com">/* End of file auth.php */</span>
+<span class="hl com">/* Location: ./application/controllers/Auth.php */</span>
+</pre>
+
+<p>The example Controller follows the basic instructions from the <a href="https://captcha.com/doc/php/howto/codeigniter-captcha.html">BotDetect CodeIgniter 3.0 guide</a>.</p>
+
+<p>- login() method:</p>
+<p>After loading the required helpers and the BotDetect Captcha CodeIgniter library, the Html required for displaying the Captcha image and integrated controls is made available to the View by adding it to the $data array.</p>
+
+<p>The sample form submits the data to the same Controller action that shows it (login), which is where we check the submitted data and pass it to the Validate() method of the Captcha library object.</p>
+
+<p>- register() method:</p>
+<p>After loading the required helpers and the BotDetect Captcha CodeIgniter library, the Html required for displaying the Captcha image and integrated controls is made available to the View by adding it to the $data array.</p>
+
+<p>The sample form submits the data to the same Controller action that shows it (register), which is where we check the submitted data and pass it to the Validate() method of the Captcha library object.</p>
+
+<p>- forgot_password() method:</p>
+<p>After loading the required helpers and the BotDetect Captcha CodeIgniter library, the Html required for displaying the Captcha image and integrated controls is made available to the View by adding it to the $data array.</p>
+
+<p>The sample form submits the data to the same Controller action that shows it (forgot_password), which is where we check the submitted data and pass it to the Validate() method of the Captcha library object.</p>
+
+<p>- send_again() method:</p>
+<p>After loading the required helpers and the BotDetect Captcha CodeIgniter library,  the Html required for displaying the Captcha image and integrated controls is made available to the View by adding it to the $data array.</p>
+
+<p>The sample form submits the data to the same Controller action that shows it (send_again), which is where we check the submitted data and pass it to the Validate() method of the Captcha library object.</p>
+
+  <p class="toplink"><a href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#top" title="CodeIgniter 3.0 Tank Auth CAPTCHA Example">[back to top]</a></p>
+  <br><br>
+  </div>
+
+    <div class="column" id="left">
+      <div>
+                 <ul class="navigation navlevel0">
+          <li class="first expanded">
+            <a href="https://captcha.com/" title="BotDetect CAPTCHA Generator Homepage">CAPTCHA Generator Home</a>
+            <ul class="navigation navlevel1">
+              <li class="first">
+                <a href="https://captcha.com/references.html" title="BotDetect CAPTCHA Customer References">Customer References</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/demos/features/captcha-demo.aspx" title="BotDetect CAPTCHA Online Demos">CAPTCHA Demo</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/captcha-download.html?version=php" title="Download BotDetect CAPTCHA Free Version">CAPTCHA Download</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/captcha-examples.html" title="BotDetect CAPTCHA Image &amp; Audio CAPTCHA Samples">CAPTCHA Samples</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/captcha-localizations.html" title="BotDetect CAPTCHA Localization Details &amp; Downloads Page">CAPTCHA Localizations</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/asp.net-captcha.html" title="BotDetect ASP.NET CAPTCHA Control">ASP.NET CAPTCHA Control</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/java-captcha.html" title="BotDetect Java CAPTCHA library">Java CAPTCHA Library <span class="alpha">Alpha</span></a>
+              </li>
+              <li>
+                <a href="https://captcha.com/asp-captcha.html" title="BotDetect ASP Classic CAPTCHA Component">ASP Classic CAPTCHA</a>
+              </li>
+              <li class="expanded">
+                <a href="https://captcha.com/php-captcha.html" title="BotDetect PHP CAPTCHA Library">PHP CAPTCHA Library</a>
+                <ul class="navigation navlevel2">
+                  <li class="first">
+                    <a href="https://captcha.com/doc/php/captcha-getting-started.html" title="Getting Started With BotDetect PHP CAPTCHA">Getting Started</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/php-captcha-quickstart.html" title="BotDetect CAPTCHA Plain PHP Integration Guides &amp; Examples">Plain PHP CAPTCHA</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/wordpress-captcha.html" title="BotDetect CAPTCHA WordPress Plugin">WordPress CAPTCHA</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/cakephp-captcha-quickstart.html" title="BotDetect CAPTCHA CakePHP Integration Guides &amp; Examples">CakePHP CAPTCHA</a>
+                  </li>
+                  <li class="expanded">
+                    <a href="https://captcha.com/doc/php/codeigniter-captcha-quickstart.html" title="BotDetect CAPTCHA CodeIgniter Integration Guides &amp; Examples">CodeIgniter CAPTCHA</a>
+                    <ul class="navigation navlevel3">
+                      <li class="first">
+                        <a href="https://captcha.com/doc/php/codeigniter-captcha-quickstart.html" title="BotDetect CodeIgniter CAPTCHA Quickstart">CodeIgniter CAPTCHA Quickstart</a>
+                      </li>
+                      <li>
+                        <a href="https://captcha.com/doc/php/howto/codeigniter-captcha.html" title="How to Add BotDetect PHP CAPTCHA Protection to CodeIgniter Applications">CodeIgniter CAPTCHA Integration Guide</a>
+                      </li>
+                      <li>
+                        <a href="https://captcha.com/doc/php/samples/codeigniter-basic-captcha-sample.html" title="CodeIgniter Basic CAPTCHA Code Example">CodeIgniter Basic CAPTCHA Example</a>
+                      </li>
+                      <li>
+                        <a href="https://captcha.com/doc/php/samples/codeigniter-form-validation-captcha-sample.html" title="CodeIgniter Form Validation CAPTCHA Code Example">CodeIgniter Form Validation CAPTCHA Example</a>
+                      </li>
+                      <li>
+                        <a href="https://captcha.com/doc/php/samples/codeigniter-bit-auth-captcha-example.html" title="CodeIgniter Bit Auth CAPTCHA Code Example">CodeIgniter Bit Auth CAPTCHA Example</a>
+                      </li>
+                      <li>
+                        <a href="https://captcha.com/doc/php/samples/codeigniter-ion-auth-captcha-example.html" title="CodeIgniter Ion Auth CAPTCHA Code Example">CodeIgniter Ion Auth CAPTCHA Example</a>
+                      </li>
+                      <li class="last expanded">
+                        <span>CodeIgniter Tank Auth CAPTCHA Example</span>
+                        <ul class="navigation navlevel4">
+                          <li class="first">
+                            <span>CodeIgniter 3.0</span>
+                          </li>
+                          <li class="last">
+                            <a href="https://captcha.com/doc/php/examples/codeigniter-2.2-tank-auth-captcha-example.html" title="CodeIgniter 2.2 Tank Auth CAPTCHA Code Example">CodeIgniter 2.2</a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/laravel-captcha-quickstart.html" title="BotDetect CAPTCHA Laravel Integration Guides &amp; Examples">Laravel CAPTCHA</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/symfony-captcha-bundle-quickstart.html" title="BotDetect CAPTCHA Symfony Integration Guides &amp; Examples">Symfony CAPTCHA</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/composer-captcha.html" title="The BotDetect CAPTCHA Composer Package">Composer CAPTCHA</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/captcha-options.html" title="BotDetect CAPTCHA PHP Configuration Guides &amp; Examples">Configuration</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/howto/captcha-deployment.html" title="BotDetect CAPTCHA PHP Deployment Guides &amp; Examples">Deployment</a>
+                  </li>
+                  <li>
+                    <a href="https://captcha.com/doc/php/captcha-faq.html" title="BotDetect CAPTCHA PHP Technical FAQ">Technical FAQ</a>
+                  </li>
+                  <li class="last">
+                    <a href="https://captcha.com/doc/php/captcha-api-reference.html" title="BotDetect PHP CAPTCHA API Reference">API Reference</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="https://captcha.com/captcha-faq.html" title="BotDetect CAPTCHA General FAQ">BotDetect General FAQ</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/captcha-roadmap-and-release-notes.html" title="BotDetect CAPTCHA Release Notes">Roadmap &amp; Release Notes</a>
+              </li>
+              <li>
+                <a href="https://captcha.com/captcha-migration-guides.html" title="BotDetect CAPTCHA Migration Guides">Migration Guides</a>
+              </li>
+              <li class="last">
+                <a href="https://captcha.com/captcha-known-issues.html" title="BotDetect CAPTCHA Known Issues">Known Issues</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://captcha.com/shop.html" title="BotDetect CAPTCHA Online Store">Shop</a>
+          </li>
+          <li>
+            <a href="https://captcha.com/documentation.html" title="BotDetect CAPTCHA Documentation Index">Documentation</a>
+          </li>
+          <li>
+            <a href="https://captcha.com/captcha-accessibility.html" title="Strict Standards - Introduction to CAPTCHA Accessibility">Captcha Accessibility</a>
+          </li>
+          <li>
+            <a href="https://captcha.com/articles/can-captcha-be-broken.html" title="CAPTCHA Articles">Articles</a>
+          </li>
+          <li>
+            <a href="https://captcha.com/about/captcha-inc.html" title="About Captcha, Inc">About</a>
+          </li>
+          <li class="last">
+            <a href="https://captcha.com/blog/" title="Captcha, Inc Blog">Blog</a>
+          </li>
+        </ul>
+      </div>
+
+            
+      
+      
+      <div id="current_versions">
+        <h3>Current BotDetect Versions</h3>
+        <ul>
+          <li>
+            <span style="font-family:Arial;font-size:12px;padding-left:0">BotDetect ASP.NET CAPTCHA</span><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#aspnet-release-notes" title="BotDetect ASP.NET CAPTCHA Control Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2016-03-07</span></div>
+              <div style="display:inline;">v4.0.0</div>
+            </a><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#aspnet-release-notes" title="BotDetect ASP.NET CAPTCHA Control Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2015-12-03</span></div>
+              <div style="display:inline;">v3.0.18</div>
+            </a>
+          </li>
+					<li>
+            <span style="font-family:Arial;font-size:12px;padding-left:0">BotDetect Java CAPTCHA</span><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#java-release-notes" title="BotDetect Java CAPTCHA Library Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2016-03-07</span></div>
+              <div style="display:inline;">v4.0.Alpha4</div>
+            </a><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#java-release-notes" title="BotDetect Java CAPTCHA Library Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2015-12-03</span></div>
+              <div style="display:inline;">v3.0.Alpha3</div>
+            </a>
+          </li>
+          <li>
+            <span style="font-family:Arial;font-size:12px;padding-left:0">BotDetect ASP Classic CAPTCHA</span><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#asp-release-notes" title="BotDetect ASP Classic CAPTCHA Component Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2016-03-07</span></div>
+              <div style="display:inline;">v4.0.0</div>
+            </a><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#asp-release-notes" title="BotDetect ASP Classic CAPTCHA Component Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2015-12-03</span></div>
+              <div style="display:inline;">v3.0.18</div>
+            </a>
+          </li>
+          <li>
+            <span style="font-family:Arial;font-size:12px;padding-left:0">BotDetect PHP CAPTCHA</span><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#php-release-notes" title="BotDetect PHP CAPTCHA Library Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2016-03-07</span></div>
+              <div style="display:inline;">v4.0.0</div>
+            </a><br>
+            <a href="https://captcha.com/captcha-roadmap-and-release-notes.html#php-release-notes" title="BotDetect PHP CAPTCHA Library Release Notes">
+              <div style="display:inline;"><span style="padding-left:0;padding-right:15px;">2015-12-03</span></div>
+              <div style="display:inline;">v3.0.4</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      
+      <div class="extra">
+				<h3>Popular Content</h3><ul><li><a href="https://captcha.com/articles/audio-captcha.html" title="Sound Advice: All About Audio CAPTCHA">Audio Captcha</a></li><li><a href="https://captcha.com/captcha-accessibility.html" title="Strict Standards: Introduction to CAPTCHA Accessibility">Captcha Accessibility</a></li><li><a href="https://captcha.com/accessibility/section508-captcha.html" title="Section 508 CAPTCHA: How to Make CAPTCHA Comply with Access Board Section 508 Standards">Section 508 Captcha</a></li><li><a href="https://captcha.com/accessibility/wcag-captcha.html" title="WCAG CAPTCHA: How to Make CAPTCHA Conform to W3C WCAG 2.0 Standards">WCAG Captcha</a></li><li><a href="https://captcha.com/accessibility/ada-captcha.html" title="ADA CAPTCHA: Does CAPTCHA Need to Comply with the ADA Standards?">ADA Captcha</a></li><li><a href="https://captcha.com/mvc-captcha.html" title="BotDetect MVC CAPTCHA Documentation">MVC Captcha</a></li><li><a href="https://captcha.com/javascript-captcha.html" title="BotDetect JavaScript CAPTCHA Documentation">JavaScript Captcha</a></li><li><a href="https://captcha.com/ajax-captcha.html" title="BotDetect Ajax CAPTCHA Documentation">Ajax Captcha</a></li><li><a href="https://captcha.com/jquery-captcha.html" title="BotDetect jQuery CAPTCHA Documentation">jQuery Captcha</a></li></ul>      </div>
+    </div>
+
+    <div class="column" id="right">
+      <div class="references_movie">
+        <a href="https://captcha.com/references.html" title="BotDetect Captcha Customer References">BotDetect Captcha Customer References</a>        <div id="references_movie_container" style="height:120px"><a href="http://www.buecher.de/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: block; opacity: 0.992464;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.buecher.de.jpg" class="references_movie_logo" alt="http://www.buecher.de"></a><a href="http://www.christies.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.christies.com.jpg" class="references_movie_logo" alt="http://www.christies.com"></a><a href="http://www.coned.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.coned.com.jpg" class="references_movie_logo" alt="http://www.coned.com"></a><a href="http://www.commbank.com.au/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.commbank.com.au.jpg" class="references_movie_logo" alt="http://www.commbank.com.au"></a><a href="http://www.codeproject.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.codeproject.com.jpg" class="references_movie_logo" alt="http://www.codeproject.com"></a><a href="http://www.dell.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.dell.com.png" class="references_movie_logo" alt="http://www.dell.com"></a><a href="http://www.hp.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.hp.com.png" class="references_movie_logo" alt="http://www.hp.com"></a><a href="http://www.toyota-europe.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.toyota-europe.com.jpg" class="references_movie_logo" alt="http://www.toyota-europe.com"></a><a href="http://www.microsoft.pl/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.microsoft.pl.jpg" class="references_movie_logo" alt="http://www.microsoft.pl"></a><a href="http://www.jnj.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.jnj.com.jpg" class="references_movie_logo" alt="http://www.jnj.com"></a><a href="http://us.playstation.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/us.playstation.com.png" class="references_movie_logo" alt="http://us.playstation.com"></a><a href="http://www.nasdaq.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.nasdaq.com.png" class="references_movie_logo" alt="http://www.nasdaq.com"></a><a href="http://www.morganstanley.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.morganstanley.com.png" class="references_movie_logo" alt="http://www.morganstanley.com"></a><a href="http://www.accenture.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.accenture.com.png" class="references_movie_logo" alt="http://www.accenture.com"></a><a href="http://www.harrisinteractive.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.harrisinteractive.com.jpg" class="references_movie_logo" alt="http://www.harrisinteractive.com"></a><a href="http://www.godaddy.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.godaddy.com.jpg" class="references_movie_logo" alt="http://www.godaddy.com"></a><a href="http://www.intuit.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.intuit.com.png" class="references_movie_logo" alt="http://www.intuit.com"></a><a href="http://www.navy.mil/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.navy.mil.jpg" class="references_movie_logo" alt="http://www.navy.mil"></a><a href="http://www.state.gov/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.state.gov.jpg" class="references_movie_logo" alt="http://www.state.gov"></a><a href="http://www.supremecourt.gov/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.supremecourt.gov.png" class="references_movie_logo" alt="http://www.supremecourt.gov"></a><a href="http://bank.hangseng.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/bank.hangseng.com.jpg" class="references_movie_logo" alt="http://bank.hangseng.com"></a><a href="http://emea.trendmicro.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/emea.trendmicro.com.jpg" class="references_movie_logo" alt="http://emea.trendmicro.com"></a><a href="http://www.telekom.de/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.telekom.de.png" class="references_movie_logo" alt="http://www.telekom.de"></a><a href="http://www.webmoney.ru/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.webmoney.ru.png" class="references_movie_logo" alt="http://www.webmoney.ru"></a><a href="http://www.westernunion.com/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.westernunion.com.png" class="references_movie_logo" alt="http://www.westernunion.com"></a><a href="http://en.swisscom.ch/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/en.swisscom.ch.jpg" class="references_movie_logo" alt="http://en.swisscom.ch"></a><a href="http://www.emimusic.ca/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: none;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.emimusic.ca.jpg" class="references_movie_logo" alt="http://www.emimusic.ca"></a><a href="http://www.eurocontrol.int/" target="_blank" ref="nofollow" class="references_movie_link" style="position: absolute; padding-left: 0px; padding-right: 0px; display: block; opacity: 0.00753563;"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/www.eurocontrol.int.jpg" class="references_movie_logo" alt="http://www.eurocontrol.int"></a></div>
+      </div>
+
+      <div class="action"><a href="https://captcha.com/demos/features/captcha-demo.aspx" title="Run the BotDetect CAPTCHA Online Demo"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/demo.png" alt="Run the BotDetect CAPTCHA Online Demo"><span><strong class="highlight">Live</strong> BotDetect Captcha  <strong>Demo</strong></span></a></div>
+
+      <div class="action"><a href="https://captcha.com/captcha-download.html?version=php" title="Download the BotDetect PHP CAPTCHA Free Version"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/download.png" alt="Download the BotDetect CAPTCHA  Free Version"><span><strong class="highlight">Free</strong> BotDetect Captcha  <strong>Download</strong></span></a></div>
+
+      <div class="action"><a href="https://captcha.com/shop.html" title="Purchase BotDetect CAPTCHA  License Upgrades"><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/shop.png" alt="Purchase BotDetect CAPTCHA  License Upgrades"><span><strong class="highlight">Full</strong> BotDetect Captcha  <strong>Purchase</strong></span></a></div>
+
+      <div id="image_examples">
+        <h3>BotDetect Captcha Image Samples</h3><!-- Set16-->
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-chipped.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<a href="https://captcha.com/captcha-localizations.html#korean-captcha" title="Korean Captcha "><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-hangul-strippy.jpg" alt="BotDetect Korean CAPTCHA  image style screenshot"> </a>
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-spiderweb2.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-chess3d.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-ripple2.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<!-- Set7-->
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-circles.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-thickthinlines.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-chalkboard.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<a href="https://captcha.com/captcha-localizations.html#japanese-captcha" title="Japanese Captcha "><img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-hiragana-wavycolorletters.jpg" alt="BotDetect Japanese CAPTCHA  image style screenshot"> </a>
+<img src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/botdetect-captcha-bubbles.jpg" alt="BotDetect CAPTCHA  image style screenshot">
+<p><a href="https://captcha.com/captcha-examples.html" title="View all BotDetect CAPTCHA  image screenshots">More CAPTCHA  image samples...</a></p>      </div>
+
+      <div id="sound_examples">
+        <h3>BotDetect Audio Captcha Sound Samples</h3><a class="sample" href="https://captcha.com/sounds/radio.wav" title="Play BotDetect Audio CAPTCHA sound Sample" onclick="l_PlaySound(&#39;../../../sounds/radio.wav&#39;, &#39;radio_sample_placeholder&#39;); return false;">Radio</a><div class="placeholder" id="radio_sample_placeholder">&nbsp;</div><a class="sample" href="https://captcha.com/sounds/hivemind.wav" title="Play BotDetect Audio CAPTCHA sound Sample" onclick="l_PlaySound(&#39;../../../sounds/hivemind.wav&#39;, &#39;hivemind_sample_placeholder&#39;); return false;">HiveMind</a><div class="placeholder" id="hivemind_sample_placeholder">&nbsp;</div><a class="sample" href="https://captcha.com/sounds/robot.wav" title="Play BotDetect Audio CAPTCHA sound Sample" onclick="l_PlaySound(&#39;../../../sounds/robot.wav&#39;, &#39;robot_sample_placeholder&#39;); return false;">Robot</a><div class="placeholder" id="robot_sample_placeholder">&nbsp;</div><a class="sample" href="https://captcha.com/sounds/pulse.wav" title="Play BotDetect Audio CAPTCHA sound Sample" onclick="l_PlaySound(&#39;../../../sounds/pulse.wav&#39;, &#39;pulse_sample_placeholder&#39;); return false;">Pulse</a><div class="placeholder" id="pulse_sample_placeholder">&nbsp;</div><a class="sample" href="https://captcha.com/sounds/dispatch.wav" title="Play BotDetect Audio CAPTCHA sound Sample" onclick="l_PlaySound(&#39;../../../sounds/dispatch.wav&#39;, &#39;dispatch_sample_placeholder&#39;); return false;">Dispatch</a><div class="placeholder" id="dispatch_sample_placeholder">&nbsp;</div><p><a href="https://captcha.com/audio-captcha-examples.html" title="View all BotDetect audio CAPTCHA sound samples">More audio CAPTCHA sound samples...</a></p>      </div>    </div>
+
+    <div class="pagecontrols-top">
+       <div class="print">
+        <span class="print_icon">
+          <a class="stbutton ptico_default" href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#" onclick="l_PrintPage();"></a>
+        </span>
+      </div>
+      <div class="gplus"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1463630019632" name="I0_1463630019632" src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div>
+      <div class="searchbox">
+        <form id="cse-search-box" action="https://captcha.com/search-results.html">
+          <input class="searchInactive" type="text" name="q" id="query">
+        </form>
+      </div>
+    </div>
+
+    <div class="pagecontrols-bottom">
+      <div class="print">
+        <span class="print_icon">
+          <a class="stbutton ptico_default" href="https://captcha.com/doc/php/samples/codeigniter-tank-auth-captcha-example.html#" onclick="l_PrintPage();"></a>
+        </span>
+      </div>		
+      <div class="gplus"><div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I1_1463630019638" name="I1_1463630019638" src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div></div>
+    </div>		
+
+  </div>
+  
+    
+
+  <div class="header">
+    <div class="header_inner">
+      <div class="logocontainer">
+        <a href="https://captcha.com/" title="BotDetect CAPTCHA Homepage"><span class="logo">&nbsp;</span></a>
+      </div>
+      <div class="topmenu">
+        <ul class="links">
+          <li style="width: 110px"><a style="width: 110px" id="home" accesskey="1" href="https://captcha.com/" title="BotDetect CAPTCHA Generator Homepage">Home</a></li>
+          <li style="width: 110px"><a style="width: 110px" id="dotnet-captcha" href="https://captcha.com/asp.net-captcha.html" title="BotDetect ASP.NET CAPTCHA Control">.NET Captcha</a></li>
+          <li style="width: 110px"><a style="width: 110px" id="java-captcha" href="https://captcha.com/java-captcha.html" title="BotDetect Java CAPTCHA Library">Java Captcha<span class="alpha">Alpha</span></a></li>
+          <li style="width: 110px"><a style="width: 110px" id="asp-captcha" href="https://captcha.com/asp-captcha.html" title="BotDetect ASP Classic CAPTCHA Component">ASP Captcha</a></li>
+          <li style="width: 110px"><a style="width: 110px" id="php-captcha" href="https://captcha.com/php-captcha.html" title="BotDetect PHP CAPTCHA Library">PHP Captcha</a></li>
+          <li style="width: 110px"><a style="width: 110px" id="documentation" href="https://captcha.com/documentation.html" title="BotDetect CAPTCHA Documentation Index">Documentation</a></li>
+          <li style="width: 91px"><a style="width: 91px" id="downloads" href="https://captcha.com/captcha-download.html" title="Download BotDetect CAPTCHA Free Version">Download</a></li>
+          <li style="width: 91px"><a style="width: 91px" id="demo" href="https://captcha.com/demos/features/captcha-demo.aspx" title="BotDetect CAPTCHA Features Demo">Demo</a></li>
+          <li style="width: 91px"><a style="width: 91px" id="support" href="https://captcha.com/contact.html" title="Contact Captcha, Inc Support Department">Support</a></li>
+          <li style="width: 91px"><a style="width: 91px" id="shop" href="https://captcha.com/shop.html" title="Buy BotDetect CAPTCHA Licenses">Shop</a></li>
+          <li style="width: 91px"><a style="width: 91px" id="references" href="https://captcha.com/references.html" title="BotDetect CAPTCHA Customer References">References</a></li>
+          <li style="width: 93px"><a style="width: 93px" id="contact" accesskey="9" href="https://captcha.com/contact.html" title="Contact Captcha, Inc.">Contact</a></li>
+          <li style="width: 93px"><a style="width: 93px" id="about" href="https://captcha.com/about/captcha-inc.html" title="About Captcha, Inc.">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="navigation">
+      <ul class="links">
+        <li><a href="https://captcha.com/asp.net-captcha.html" title="BotDetect ASP.NET CAPTCHA Control">.NET Captcha</a></li>
+        <li><a href="https://captcha.com/java-captcha.html" title="BotDetect Java CAPTCHA Control">Java Captcha</a></li>
+        <li><a href="https://captcha.com/asp-captcha.html" title="BotDetect ASP Classic CAPTCHA Component">ASP Captcha</a></li>
+        <li><a href="https://captcha.com/php-captcha.html" title="BotDetect PHP CAPTCHA Library">PHP Captcha</a></li>
+        <li><a href="https://captcha.com/mvc-captcha.html" title="BotDetect MVC CAPTCHA Documentation">MVC Captcha</a></li>
+        <li><a href="https://captcha.com/javascript-captcha.html" title="BotDetect JavaScript CAPTCHA Documentation">JavaScript Captcha</a></li>
+        <li><a href="https://captcha.com/ajax-captcha.html" title="BotDetect Ajax CAPTCHA Documentation">Ajax Captcha</a></li>
+        <li><a href="https://captcha.com/jquery-captcha.html" title="BotDetect jQuery CAPTCHA Documentation">jQuery Captcha</a></li>
+        <li><a href="https://captcha.com/captcha-download.html" title="Download BotDetect CAPTCHA Free Version">Download</a></li>
+        <li><a href="https://captcha.com/demos/features/captcha-demo.aspx" title="BotDetect CAPTCHA Features Demo">Demo</a></li>
+        <li><a href="https://captcha.com/" title="BotDetect CAPTCHA Generator Homepage">Captcha Generator</a></li>
+        <li><a href="https://captcha.com/documentation.html" title="BotDetect CAPTCHA Documentation Index">Documentation</a></li>
+        <li><a href="https://captcha.com/contact.html" title="Contact Captcha, Inc Support Department">Support</a></li>
+        <li><a href="https://captcha.com/shop.html" title="Buy BotDetect CAPTCHA Licenses">Shop</a></li>
+        <li><a href="https://captcha.com/references.html" title="BotDetect CAPTCHA Customer References">References</a></li>
+        <li><a href="https://captcha.com/about/captcha-inc.html" title="About Captcha, Inc.">About</a></li>
+        <li><a href="https://captcha.com/contact.html" title="captcha.com Webmaster Contact">Contact</a></li>
+        <li><a href="https://captcha.com/privacy.html" title="captcha.com Privacy Policy">Privacy</a></li>
+        <li><a href="https://captcha.com/terms.html" title="captcha.com Terms of Use">Terms</a></li>
+                
+          <li><a href="https://captcha.com/sitemap.html" title="captcha.com Sitemap">Sitemap</a></li>
+            
+              </ul>
+    </div>
+    <div class="legal">
+      <p>© Captcha, Inc. 2004-2016. All rights reserved.</p>
+      <p>BotDetect, BotDetect CAPTCHA, Lanap, Lanap CAPTCHA, Lanap BotDetect, Lanap BotDetect CAPTCHA, Lanapsoft, Lanapsoft CAPTCHA, Lanapsoft BotDetect, Lanapsoft BotDetect CAPTCHA, and Lanap Software are trademarks of Captcha, Inc. All other product, brand, and company names are mentioned for identification purposes only and are trademarks or registered trademarks of their respective owners.</p>
+      <p>Captcha, Inc. -- formerly: Lanapsoft, Inc. / Lanap, Inc.</p>
+    </div>
+  </div>
+</div>
+<div class="footer_outer"></div>
+<br>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 989336542;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "N3WACJrTiAgQ3qfg1wM";
+var google_conversion_value = 0;
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/conversion.js">
+</script><img height="1" width="1" border="0" alt="" src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/saved_resource">
+<noscript>
+&lt;div style="display:inline;"&gt;
+&lt;img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/989336542/?value=0&amp;amp;label=N3WACJrTiAgQ3qfg1wM&amp;amp;guid=ON&amp;amp;script=0"/&gt;
+&lt;/div&gt;
+</noscript>
+<script type="text/javascript">
+try{if(typeof(Storage)!=='undefined')localStorage.setItem('ZZZZZga','UA-221733-4');}catch(e){};
+try {
+var pageTracker = _gat._getTracker(localStorage.getItem('ZZZZZga'));
+pageTracker._setAllowHash(false);
+pageTracker._setAllowLinker(true);
+pageTracker._trackPageview();
+}catch(err){
+window.addEventListener('load', function() {
+try {
+jQuery.post('https://captcha.com/forms/js-error-logger.php',
+{msg: 'Analytics error: '+err,
+url: 'nourl',
+line: 'noline',
+window: window.location.href});
+}catch(e){};})};
+
+</script>
+
+
+
+
+<iframe name="oauth2relay733176530" id="oauth2relay733176530" src="./CodeIgniter 3.0 Tank Auth CAPTCHA code example_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><div id="widthie" style="top: -30px;"><p style="margin:0;padding:0;">Width: 1792</p></div></body></html>

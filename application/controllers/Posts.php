@@ -7,6 +7,8 @@ class Posts extends CI_Controller {
 	{
 		parent::__construct();
       $this->load->library('session');
+      $this->load->library('tank_auth');
+      
       $this->load->model('model_template');
       $this->load->model('model_posts');
       $this->load->helper(array('form', 'url'));
@@ -27,6 +29,10 @@ class Posts extends CI_Controller {
 	####################################################################
 	public function save_project()
 	{
+
+		$is_logged_in = $this->tank_auth->is_logged_in();if(!$is_logged_in){redirect("auth/login");}      
+		$view_data['is_logged_in'] = $is_logged_in;
+
 		if(isset($_REQUEST['post_title']))
 		{
 			$data["post_title"]= $_REQUEST["post_title"];

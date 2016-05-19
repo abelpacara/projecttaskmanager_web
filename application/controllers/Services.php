@@ -39,9 +39,9 @@ class Services extends CI_Controller {
 	####################################################################
 	public function add_project()
 	{
-		if(isset($_REQUEST['post_title']))
+		if(isset($_REQUEST['post_content']))
 		{
-			$data["post_title"]= $_REQUEST["post_title"];
+			//$data["post_title"]= $_REQUEST["post_title"];
 			$data["post_content"]= $_REQUEST["post_content"];
 			$data["post_type"]= "project";
 
@@ -89,7 +89,20 @@ class Services extends CI_Controller {
 		{
 			$data["post_content"]= $_REQUEST["post_content"];
 			$data["parent_id"]= $_REQUEST["parent_id"];
+			$data["project_id"]= $_REQUEST["project_id"];
+
+			if(! isset($_REQUEST["forum_id"]) OR $_REQUEST["forum_id"] == NULL OR $_REQUEST["forum_id"]==0){
+				$data["forum_id"]= $_REQUEST["parent_id"];	
+			}
+			else{
+				$data["forum_id"]= $_REQUEST["forum_id"];		
+			}
+
+			
+
 			$data["post_type"]= "comment";
+
+
 
 			$this->model_posts->add_post($data);
 		}
