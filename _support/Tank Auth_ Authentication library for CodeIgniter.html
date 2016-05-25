@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://konyukhov.com/soft/tank_auth/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <title>Tank Auth: Authentication library for CodeIgniter</title>
+    <meta property="og:title" content="Tank Auth: Authentication library for CodeIgniter">
+    <meta name="keywords" content="Tank Auth, authentication, authorization, CodeIgniter, PHP-framework">
+    <meta name="description" content="Tank Auth is an authentication library for PHP-framework CodeIgniter. It&#39;s very compact, fast and reliable.">
+    <meta property="og:description" content="Tank Auth is an authentication library for PHP-framework CodeIgniter. It&#39;s very compact, fast and reliable.">
+    <meta property="og:url" content="https://konyukhov.com/soft/tank_auth/">
+    
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Konyukhov.com">
+    <meta property="og:image" content="https://konyukhov.com/img/photo_cv.jpg">
+    <link rel="shortcut icon" href="https://konyukhov.com/favicon.ico">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./Tank Auth_ Authentication library for CodeIgniter_files/generic.css" media="screen,projection">
+    <link rel="stylesheet" type="text/css" href="./Tank Auth_ Authentication library for CodeIgniter_files/cv-print.css" media="print">
+    
+    <script async="" src="./Tank Auth_ Authentication library for CodeIgniter_files/analytics.js"></script><script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3406034-3', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+<body style="margin-top: 0px;">
+    <span id="top"></span>
+    <div class="container">
+        <header>
+    <a id="name" href="https://konyukhov.com/">Ilya Konyukhov</a>
+    <nav>
+        <ul>
+            
+            <li><a href="https://konyukhov.com/">Home</a></li>
+            
+            
+            <li><a href="https://konyukhov.com/soft/">Projects</a></li>
+            
+            
+            <li><a href="https://konyukhov.com/cv/">Resumé</a></li>
+            
+            
+            <li><a href="https://konyukhov.com/contact/">Contact</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+        <div class="content-top"></div>
+        <div class="content">
+            <h1>Tank Auth</h1>
+            <div class="image-fr"><a href="http://codeigniter.com/" target="_blank"><img src="./Tank Auth_ Authentication library for CodeIgniter_files/logo_codeigniter.png" alt="CodeIgniter"></a></div>
+            <p>Tank Auth is an authentication library for PHP-framework <a href="http://codeigniter.com/" target="_blank">CodeIgniter</a>. It's based on <a href="http://dexcell.shinsengumiteam.com/dx_auth/" target="_blank">DX Auth</a>, although the code was seriously reworked.</p>
+            <p>The latest version is <strong>1.0.9</strong>.</p>
+            <p style="text-align: center;"><a href="https://konyukhov.com/soft/tank_auth.zip"><img src="./Tank Auth_ Authentication library for CodeIgniter_files/btn_download.png" alt="Download Tank Auth"></a></p>
+            <p style="text-align: center;"><a href="https://github.com/TankAuth/Tank-Auth" target="_blank">Project repository</a></p>
+            <div class="cleaner h30"></div>
+            <section>
+                <h2 id="changelog">Changelog</h2>
+                <dl>
+                    <dt>1.0.9</dt>
+                    <dd>PHPass settings are moved to config-file for better control over user data.</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.8</dt>
+                    <dd>Some technical changes to make the library compatible with CodeIgniter v.2.0.0.</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.7</dt>
+                    <dd>New parameter <strong>db_table_prefix</strong> is added to config-file. It defines prefix prepended to every table name (except <strong>ci_sessions</strong>) used by the library.</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.6</dt>
+                    <dd>Resetting forgotten password option is added for non-activated user. Clicking a link in resetting password email activates user as well.</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.5</dt>
+                    <dd>Minor changes resulting from the CI-community feedback.</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.4</dt>
+                    <dd>A sample controller <strong>welcome</strong> is added, to demonstrate how to use the library. The library successfully tested with <a href="http://bleakview.orgfree.com/obsession/" target="_blank">OBSession</a>.</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.3</dt>
+                    <dd>Small bug fixes. The database structure is not affected.</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.2</dt>
+                    <dd>SQL injection is fixed (thanks to <em>Laurentvw</em>).</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.1</dt>
+                    <dd><strong>use_username</strong> config-parameter is added. Now username is optional (only email is necessary).</dd>
+                </dl>
+                <dl>
+                    <dt>1.0.0</dt>
+                    <dd>The library is released.</dd>
+                </dl>
+            </section>
+            <div class="cleaner h30"></div>
+            <section>
+                <h2 id="features">Features</h2>
+                <p>The key points of the library are:</p>
+                <h3>It's simple</h3>
+                <ul>
+                    <li>Basic auth options (login, logout, register, unregister).</li>
+                    <li>Very compact (less than 20 files and 4 DB-tables).</li>
+                    <li>Username is optional, only email is obligatory.</li>
+                </ul>
+                <h3>It's secure</h3>
+                <ul>
+                    <li>Using <a href="http://www.openwall.com/phpass/" target="_blank">phpass</a> library for password hashing (instead of unsafe md5).</li>
+                    <li>Counting login attempt for bruteforce preventing (optional). Failed login attempts determined by IP and by username.</li>
+                    <li>Logging last login IP-address and time (optional).</li>
+                    <li>CAPTCHA for registration and repetitive login attempt (optional).</li>
+                    <li>Unactivated accounts and forgotten password requests auto-expire.</li>
+                </ul>
+                <h3>It's easy to manage</h3>
+                <ul>
+                    <li>Strict MVC model: controller for controlling, views for representation and library as model interface.</li>
+                    <li>Language file support.</li>
+                    <li>View files contain only necessary HTML code without redundant decoration.</li>
+                    <li>Most of the features are optional and can be tuned or switched-off in well-documented config file.</li>
+                </ul>
+                <h3>It's full featured</h3>
+                <ul>
+                    <li>Login using username, email address or both (depending on config settings).</li>
+                    <li>Registration is instant or after activation by email (optional).</li>
+                    <li>"Remember me" option.</li>
+                    <li>Forgot password (letting users pick a new password upon reactivation).</li>
+                    <li>Change password or email for registered users.</li>
+                    <li>Email or password can be changed even before account is activated.</li>
+                    <li>Ban user (optional).</li>
+                    <li>User Profile (optional).</li>
+                    <li>CAPTCHA support (CI-native and reCAPTCHA are available).</li>
+                    <li>HTML or plain-text emails.</li>
+                </ul>
+            </section>
+            <div class="cleaner h30"></div>
+            <section>
+                <h2 id="install">Installing Tank Auth</h2>
+                <ol>
+                    <li><a href="https://konyukhov.com/soft/tank_auth.zip">Download</a> the latest version of the library.</li>
+                    <li>Unzip the package.</li>
+                    <li>Copy the <strong>application</strong> folder content to your CI <strong>application</strong> folder.</li>
+                    <li>Copy the <strong>captcha</strong> folder to your CI folder. Make sure this folder is writable by web server.</li>
+                    <li>Install database schema into your MySQL database.</li>
+                    <li>Open the <strong>application/config/config.php</strong> file in your CI installation and change <strong>$config['sess_use_database']</strong> value to <strong>TRUE</strong>.</li>
+                </ol>
+                <p>That's it!</p>
+                <p>Please don't forget to look into config files (<strong>tank_auth.php</strong> and <strong>email.php</strong>) if something will go wrong. The library should work perfectly right after installation, but depending on your server condition and your own needs some options would better be changed.</p>
+                <p><strong>WARNING:</strong> By default the library generates strong system-specific password hashes that are not portable. It means that once created, user database cannot be dumped and exported to another server. This behavior can be changed in config-file as well.</p>
+            </section>
+            <div class="cleaner h30"></div>
+            <section>
+                <h2 id="nutshell">The library in a nutshell</h2>
+                <p>The library uses MVC model, which means that all database-related methods are incapsulated in model files, and the library itself is used as interface to these methods. A controller (<strong>auth</strong>) dispatches incoming requests, calls the library methods and renders corresponding views (to show in browser or to send as emails). The controller includes the following methods:</p>
+                <ul>
+                    <li><strong>login</strong>: Login user on the site. If login is successful and user account is activated, s/he is redirected to the home page. If account is not activated, then <strong>send_again</strong> is invoked (see below). In case of login failure user remains on the same page.</li>
+                    <li><strong>logout</strong>: Logout user.</li>
+                    <li><strong>register</strong>: Register user on the site. If registration is successful, a new user account is created. If <strong>email_activation</strong> flag in config-file is set to TRUE, then this account have to be activated by clicking special link sent by email; otherwise it is activated already. Please notice: after registration user remains unauthenticated; login is still required.</li>
+                    <li><strong>send_again</strong>: Send activation email again, to the same or new email address. This method is invoked every time after non-activated user logins on the site. It may be useful when user didn't receive activation mail sent on registration due to problem with mailbox or a misprint in email address. User may change their email or leave it as is.</li>
+                    <li><strong>activate</strong>: Activate user account. Normally this method is invoked by clicking a link in activation email. Clicking a link in "forgot password" email activates account as well. User is verified by user Id and authentication code in the URL.</li>
+                    <li><strong>forgot_password</strong>: Generate special reset code (to change password) and send it to user. Obviously this method may be used when user has forgotten their password.</li>
+                    <li><strong>reset_password</strong>: Replace user password (forgotten) with a new one (set by user). The method can be called by clicking on link in mail. User is verified by user Id and authentication code in the URL.</li>
+                    <li><strong>change_password</strong>: "Normal" password changing (as compared with resetting forgotten password). Can be called only when user is logged in and activated. For higher security user's old password is needed.</li>
+                    <li><strong>change_email</strong>: Change user's email. Can be called only when user is logged in and activated. For higher security user's password is required. The new email won't be applied until it is activated by clicking a link in a mail sent to this email address.</li>
+                    <li><strong>reset_email</strong>: Activate new email address and replace user's email with a new one. This method can be called by clicking a link in mail. User is verified by user Id and authentication code in the URL.</li>
+                    <li><strong>unregister</strong>: Delete user account. Can be called only when user is logged in and activated. For higher security user's password is required.</li>
+                </ul>
+                <p>Since the <strong>auth</strong> controller does all the management of user account (including login and logout), so it unlikely that you will have to call the most of the library methods directly. But some of them definitely you will:</p>
+                <ul>
+                    <li><strong>is_logged_in</strong>: Check if user logged in on the site.</li>
+                    <li><strong>get_user_id</strong>: Get user_id if user is logged in on the site, FALSE otherwise.</li>
+                    <li><strong>get_username</strong>: Get username for authenticated user, FALSE otherwise. This method is meaningless if username is not used on registration (in this case it returns an empty string for every user).</li>
+                </ul>
+            </section>
+            <div class="cleaner h30"></div>
+            <a class="go-to-top" href="https://konyukhov.com/soft/tank_auth/#top">Go to Top</a>
+            <div class="cleaner"></div>
+        </div>
+        <div class="content-bottom"></div>
+        <footer>
+    © 2016 Ilya Konyukhov
+</footer>
+
+    </div>
+
+
+<div id="widthie" style="top: -30px;"><p style="margin:0;padding:0;">Width: 1792</p></div></body></html>

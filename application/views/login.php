@@ -9,15 +9,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Guardar Discussion</h1>
+	<h1>Guardar Foro</h1>
 
 	<div id="body">		
 		<?php 
 		echo form_open_multipart($this->uri->uri_string());
 		?>
-			<input type="text" name="post_title" placeholder="Titulo"/><br/>
-			<textarea name="post_content" placeholder="Descripcion"></textarea><br/>
-			<input type="submit" name="guardar" value="Guardar"/>
+			<input type="text" name="user_email" placeholder="Email"/><br/>			
+			<input type="password" name="user_password" placeholder="Password"/><br/>			
+			<input type="submit" name="login" value="Login"/>
 		<?php
 		echo form_close();
 		?>
