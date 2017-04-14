@@ -13,6 +13,12 @@ class Model_Posts extends Model_Template
       return $this->db->insert_id();
    }
 
+   function get_list_projects(){
+
+    $query = $this->db->query("SELECT * FROM posts WHERE post_type='project';");         
+      return $query->result_array();
+   }
+
    function get_list_posts(){
 
    	$query = $this->db->query("SELECT * FROM posts;");         

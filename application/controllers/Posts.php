@@ -37,6 +37,8 @@ class Posts extends CI_Controller {
 	{
 		if(isset($_REQUEST['post_title']))
 		{
+
+			$data["parent_id"]= $_REQUEST["project_id"];
 			$data["post_title"]= $_REQUEST["post_title"];
 			$data["post_content"]= $_REQUEST["post_content"];
 			$data["post_type"]= "discussion";
@@ -44,7 +46,12 @@ class Posts extends CI_Controller {
 			$this->model_posts->add_post($data);
 		}
 
-		$this->load->view('posts/save_discussion');
+		$view_data['list_projects']= $this->model_posts->get_list_projects();
+
+		$this->load->view('template/header');
+		$this->load->view('posts/save_discussion', $view_data);
+		$this->load->view('template/footer');
+
 		print_r($this->model_posts->get_list_posts());		
 	}
 	####################################################################
