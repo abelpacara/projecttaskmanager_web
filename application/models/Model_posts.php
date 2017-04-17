@@ -18,6 +18,11 @@ class Model_Posts extends Model_Template
     $query = $this->db->query("SELECT * FROM posts WHERE post_type='project';");         
       return $query->result_array();
    }
+   function get_list_discussions(){
+
+    $query = $this->db->query("SELECT * FROM posts WHERE post_type='discussion';");         
+      return $query->result_array();
+   }
 
    function get_list_posts(){
 

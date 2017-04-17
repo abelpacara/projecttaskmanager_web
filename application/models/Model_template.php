@@ -157,6 +157,13 @@ class Model_Template extends CI_Model
          
       return $query->result_array();
    }
+
+   #######################################################
+   function get_list_table_column_search($table, $column_name, $search_value){
+      $sql = "SELECT ".$column_name." FROM ".$table." WHERE ".$column_name." LIKE '%".$search_value."%';";
+      $query = $this->db->query($sql);
+      return $query->result_array();
+   }
    #############################################################################
    function get_list_table_enum_column_values($table, $column)
    {

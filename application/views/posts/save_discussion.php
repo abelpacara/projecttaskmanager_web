@@ -1,6 +1,3 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
 <div id="container">
 	<h1>Guardar Foro</h1>
 
