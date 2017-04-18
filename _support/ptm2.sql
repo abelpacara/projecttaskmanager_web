@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2017 at 12:24 AM
+-- Generation Time: Apr 17, 2017 at 01:08 AM
 -- Server version: 5.7.17-0ubuntu0.16.04.2
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `inventories` (
   `id_inventory` int(11) NOT NULL,
   `inventory_category_id` int(11) NOT NULL,
+  `inventory_name` text NOT NULL,
   `inventory_mark` text NOT NULL,
   `inventory_model` text NOT NULL,
   `inventory_register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -43,9 +44,9 @@ CREATE TABLE `inventories` (
 -- Dumping data for table `inventories`
 --
 
-INSERT INTO `inventories` (`id_inventory`, `inventory_category_id`, `inventory_mark`, `inventory_model`, `inventory_register_date`, `inventory_quantity`, `inventory_buy_price`, `inventory_description`) VALUES
-(1, 1, 'DELL', 'VOSTRO 19', '2017-04-18 02:47:03', 0, 0, ''),
-(2, 2, 'ASDFSD', 'ADF', '2017-04-18 02:47:16', 0, 0, '');
+INSERT INTO `inventories` (`id_inventory`, `inventory_category_id`, `inventory_name`, `inventory_mark`, `inventory_model`, `inventory_register_date`, `inventory_quantity`, `inventory_buy_price`, `inventory_description`) VALUES
+(1, 0, 'DELL VOSTRO', 'DELL', 'VOSTRO 19', '2017-04-16 01:50:59', 0, 0, ''),
+(2, 0, 'ADSF', 'ASDFSD', 'ADF', '2017-04-16 22:10:13', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -58,14 +59,6 @@ CREATE TABLE `inventories_categories` (
   `inventory_category_name` text NOT NULL,
   `inventory_category_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `inventories_categories`
---
-
-INSERT INTO `inventories_categories` (`id_inventory_category`, `inventory_category_name`, `inventory_category_description`) VALUES
-(1, 'COMPUTADORA', ''),
-(2, 'IMPRESORA', '');
 
 -- --------------------------------------------------------
 
@@ -109,6 +102,7 @@ CREATE TABLE `kardexes_status` (
 --
 
 INSERT INTO `kardexes_status` (`id_kadex_status`, `kardex_id`, `location_id`, `kardex_status_value`, `kardex_status_register_date`, `kardex_status_description`) VALUES
+(1, 1, 2, '', '2017-04-16 01:50:59', 0),
 (2, 2, 5, 'baja', '2017-04-16 22:10:13', 0),
 (3, 1, 2, 'alta', '2017-04-17 05:03:13', 0),
 (4, 1, 3, 'alta', '2017-04-17 05:05:22', 0),
@@ -230,7 +224,7 @@ ALTER TABLE `inventories`
 -- AUTO_INCREMENT for table `inventories_categories`
 --
 ALTER TABLE `inventories_categories`
-  MODIFY `id_inventory_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_inventory_category` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `kardexes`
 --
