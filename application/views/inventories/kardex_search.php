@@ -75,24 +75,17 @@
 				<th>Modelo</th>
 				<th>Codigo</th>
 				<th>Serie</th>
-				<th>Estado</th>
-				<th>Localidad</th>
-				<th>Fecha Ultimo Registro</th>
 			</tr>
 
 			<?php
 			for($i=0; $i<count($list_found_kardexes); $i++){
 				?>
 				<tr>
-					<td><?php echo $i+1?></td>
-					<td><?php echo $list_found_kardexes[$i]['inventory_name']?></td>
+					<td><?php echo $i+1?></td>					
 					<td><?php echo $list_found_kardexes[$i]['inventory_mark']?></td>
 					<td><?php echo $list_found_kardexes[$i]['inventory_model']?></td>
 					<td><?php echo $list_found_kardexes[$i]['kardex_code']?></td>
 					<td><?php echo $list_found_kardexes[$i]['kardex_serial']?></td>
-					<td><?php echo $list_found_kardexes[$i]['kardex_status_value']?></td>
-					<td><?php echo $list_found_kardexes[$i]['location_name']?></td>
-					<td><?php echo $list_found_kardexes[$i]['kardex_status_register_date']?></td>
 					<td><a href='<?php echo site_url("/inventories/kardex_save2?kardex_id=".$list_found_kardexes[$i]['id_kardex']); ?>'>Modificar</a></td>
 				</tr>
 				<?php

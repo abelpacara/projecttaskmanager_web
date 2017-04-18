@@ -60,61 +60,32 @@
 		echo form_open_multipart($this->uri->uri_string());
 		?>
 			<table>
+				<tr>					
+					<td>Equipo</td>
+					<td><?php echo $kardex['inventory_category_name']?></td>
+				</tr>
+				<tr>					
+					<td>Marca</td>
+					<td><?php echo $kardex['inventory_mark']?></td>
+				</tr>
+				<tr>
+					<td>Modelo</td>
+					<td><?php echo $kardex['inventory_model']?></td>
+				</tr>
 				<tr>
 					<td>
 						Codigo		
 					</td>
 					<td>	
-   					 <?php echo $kardex['kardex_code']?>
+   					 <input id="kardex_code" name="kardex_code" value="<?php echo $kardex['kardex_code']?>" placeholder="Codigo">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Codigo		
+						Serial		
 					</td>
 					<td>
-						<?php echo $kardex['kardex_serial']?>
-					</td>
-				</tr>
-				<tr>
-					<td>			
-						<select name="kardex_status_value">
-						<option value="">Estado kardex ...</option>
-						<?php
-						for($i=0; $i<count($list_kardexes_status) ; $i++){
-							?>
-							<option value="<?php echo $list_kardexes_status[$i]?>"><?php echo $list_kardexes_status[$i]?></option>
-							<?php
-						}?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>							
-						<select name="location_id">
-							<option value="">Localizacion ...</option>
-							<?php
-							for($i=0; $i<count($list_locations) ; $i++){
-								?>
-								<option value="<?php echo $list_locations[$i]['id_location']?>"><?php echo $list_locations[$i]['location_name']?></option>
-								<?php
-							}?>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>							
-						<input id="inventory_name" value="" type="text" name="inventory_name" placeholder="Nombre"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input id="inventory_mark" value="" type="text" name="inventory_mark" placeholder="Marca"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input id="inventory_model" value="" type="text" name="inventory_model" placeholder="Modelo"/>
+						<input id="kardex_serial" name="kardex_serial" value="<?php echo $kardex['kardex_serial']?>" placeholder="Serial">
 					</td>
 				</tr>
 				<tr>
@@ -128,5 +99,29 @@
 		echo form_close();
 		?>
 		
+		<table>
+			<tr>
+				<th>Categoria</th>
+				<th>Marca</th>
+				<th>Modelo</th>
+				<th>Codigo</th>
+				<th>Serial</th>
+				<th>Cambiar estado</th>
+			</tr>
+			<?php
+			for($i=0; $i<count($list_kardexes); $i++){?>
+				<tr>
+					<td><?php echo $list_kardexes[$i]['inventory_category_name'] ?></td>
+					<td><?php echo $list_kardexes[$i]['inventory_mark'] ?></td>
+					<td><?php echo $list_kardexes[$i]['inventory_model'] ?></td>
+					<td><?php echo $list_kardexes[$i]['kardex_code'] ?></td>
+					<td><?php echo $list_kardexes[$i]['kardex_serial'] ?></td>
+					<td><a href="<?php echo site_url("inventories/kardex_status_save")."?kardex_id=".$list_kardexes[$i]['id_kardex'] ?>">Cambiar estado</td>
+				</tr>
+			<?php
+			}
+			?>
+		</table>
+
 	</div>
 </div>

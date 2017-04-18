@@ -11,6 +11,13 @@ class Inventories extends CI_Controller {
       $this->load->model('model_inventories');
       $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
+		$this->load->library('ciqrcode');
+	}
+	####################################################################
+	public function qr_generate(){
+		//header("Content-Type: image/png");
+		$params['data'] = 'This is a text to encode become QR Code';
+		$this->ciqrcode->generate($params);
 	}
 	####################################################################
 	public function index()
@@ -31,15 +38,41 @@ class Inventories extends CI_Controller {
 		$this->load->view('template/header');
 		$this->load->view('inventories/kardex_search', $view_data);
 		$this->load->view('template/footer');
+	}
+	####################################################################
+	public function kardex_status_save()
+	{
+		if(isset($_REQUEST['btn_save'])) // verify if FOUND
+		{
+			$data_kardex_status["kardex_status_value"]= $_REQUEST["kardex_status_value"];
+			$data_kardex_status["location_id"]= $_REQUEST["location_id"];
+			$data_kardex_status["kardex_id"]= $_REQUEST["kardex_id"];
+			$this->model_inventories->add_kardex_status($data_kardex_status);
+		}
+		
+		$view_data['kardex'] = $this->model_inventories->get_kardex_by_id($_REQUEST['kardex_id']);
+
+		$view_data['list_kardexes_status_values'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
+		$view_data['list_locations']= $this->model_inventories->get_list_locations();
+
+		$view_data['list_kardexes_status'] = $this->model_inventories->get_list_kardexes_status();
+		
+		$this->load->view('template/header');
+		$this->load->view('inventories/kardex_status_save', $view_data);
+		$this->load->view('template/footer');		
 	}	
 	####################################################################
 	public function kardex_search(){		
 		
 		$list_found_kardexes = array();
-		if(isset($_REQUEST['btn_search'])){			
-			$list_found_kardexes = $this->model_inventories->get_list_found_kardexes($_REQUEST['kardex_code'], $_REQUEST['kardex_serial']);
+		$kardex_code = "";
+		$kardex_serial = "";
+		if(isset($_REQUEST['btn_search'])){
+			$kardex_code = $_REQUEST['kardex_code'];
+			$kardex_serial = $_REQUEST['kardex_serial'];
 		}
-		$view_data['list_found_kardexes'] = $list_found_kardexes;
+		$view_data['list_found_kardexes'] = $this->model_inventories->get_list_found_kardexes($kardex_code, $kardex_serial);
+		 
 
 		
 
@@ -104,15 +137,13 @@ class Inventories extends CI_Controller {
 			$data_kardex_status["location_id"]= $_REQUEST["location_id"];
 			$data_kardex_status["kardex_id"]= $_REQUEST["kardex_id"];
 			$this->model_inventories->add_kardex_status($data_kardex_status);
-
-			$view_data['kardex']= $this->model_inventories->get_kardex_by_id($_REQUEST['kardex_id']);
 		}
-		else{
-			$view_data['kardex']= $this->model_inventories->get_kardex_by_id($_REQUEST['kardex_id']);
-		}
-
+		$view_data['kardex']= $this->model_inventories->get_kardex_by_id($_REQUEST['kardex_id']);
+		
 		$view_data['list_kardexes_status'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
 		$view_data['list_locations']= $this->model_inventories->get_list_locations();
+
+		$view_data['list_kardexes']= $this->model_inventories->get_list_kardexes();		
 		
 		$this->load->view('template/header');
 		$this->load->view('inventories/kardex_save2', $view_data);
