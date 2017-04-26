@@ -3,14 +3,14 @@
 <script src = "<?php echo base_url("public/js/jquery-ui.js"); ?>"></script>
 
 <div id="container">
-	<h1>Guardar Kardex</h1>
+	<h1>Guardar Estado Kardex</h1>
 
 	<div id="body">		
 		
 		<?php
 		echo form_open_multipart($this->uri->uri_string());
 		?>
-			<table>
+			<table border="1">
 				<tr>					
 					<td>Equipo</td>
 					<td><?php echo $kardex['inventory_category_name']?></td>
@@ -40,15 +40,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>			
+					<td colspan="2">			
 						<select name="kardex_status_value">
 						<option value="">Estado kardex ...</option>
 						<?php
 						for($i=0; $i<count($list_kardexes_status_values) ; $i++){
 							?>
-							<option value="<?php echo $list_kardexes_status_values[$i]?>"
-								<?php if(strcasecmp($kardex['kardex_status_value'], $list_kardexes_status_values[$i])==0) { echo " SELECTED "; } ?>
-								>
+							<option value="<?php echo $list_kardexes_status_values[$i]?>">
 								<?php echo $list_kardexes_status_values[$i]?>
 							</option>
 							<?php
@@ -57,15 +55,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td>							
+					<td colspan="2">							
 						<select name="location_id">
 							<option value="">Localizacion ...</option>
 							<?php
 							for($i=0; $i<count($list_locations) ; $i++){
 								?>
-								<option value="<?php echo $list_locations[$i]['id_location']?>"
-								<?php if(strcasecmp($kardex['location_name'], $list_locations[$i]['location_name'])==0) { echo " SELECTED "; } ?>
-								>
+								<option value="<?php echo $list_locations[$i]['id_location']?>">
 									<?php echo $list_locations[$i]['location_name']?>										
 								</option>
 								<?php
@@ -75,7 +71,8 @@
 				</tr>				
 				
 				<tr>
-					<td>						
+					<td colspan="2">
+						<input type="hidden" name="kardex_id" value="<?php echo $kardex['id_kardex']?>"/>						
 						<input type="submit" name="btn_save" value="Guardar"/>
 					</td>
 				</tr>
@@ -83,24 +80,18 @@
 		<?php
 		echo form_close();
 		?>
-		<table>
-			<tr>
-				<th>Categoria</th>
-				<th>Marca</th>
-				<th>Modelo</th>
-				<th>Codigo</th>
-				<th>Serial</th>
+		<table border="1">
+			<tr>				
 				<th>Estado</th>
-				<th>Localizacion</th>				
+				<th>Localizacion</th>
+				<th>Fecha de registro</th>
 			</tr>
 			<?php
 			for($i=0; $i<count($list_kardexes_status); $i++){?>
 				<tr>
-					<td><?php echo $list_kardexes_status[$i]['inventory_category_name'] ?></td>
-					<td><?php echo $list_kardexes_status[$i]['inventory_mark'] ?></td>
-					<td><?php echo $list_kardexes_status[$i]['inventory_model'] ?></td>
-					<td><?php echo $list_kardexes_status[$i]['kardex_code'] ?></td>
-					<td><?php echo $list_kardexes_status[$i]['kardex_serial'] ?></td>					
+					<td><?php echo $list_kardexes_status[$i]['kardex_status_value'] ?></td>
+					<td><?php echo $list_kardexes_status[$i]['location_name'] ?></td>					
+					<td><?php echo $list_kardexes_status[$i]['kardex_status_register_date'] ?></td>					
 				</tr>
 			<?php
 			}

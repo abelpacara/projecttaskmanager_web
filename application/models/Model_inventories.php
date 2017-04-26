@@ -8,22 +8,27 @@ class Model_Inventories extends Model_Template
    #######################################################   
    function get_list_found_kardexes($kardex_code="", $kardex_serial=""){
 
-      $sql_search ="";
+     /* $sql_search="";
+      $sql_code="";
       if(isset($kardex_code) AND strcasecmp($kardex_code, "")!=0){
-        $sql_search = " kardex_code ='".$kardex_code."' ";
-      }
-      $sql_search ="";
-      if(strcasecmp($sql_search, "")!=0){
-        $sql_search .= " AND ";
+        $sql_code = " kardex_code ='".$kardex_code."' ";
       }
 
+      $sql_serial="";
       if(isset($kardex_serial) AND strcasecmp($kardex_serial, "")!=0){
-        $sql_search .= " kardex_serial ='".$kardex_serial."' ";
+        $sql_serial .= " kardex_serial ='".$kardex_serial."' ";
       }
 
-      if(strcasecmp($sql_search, "")!=0){
-        $sql_search = " WHERE  ".$sql_search;
+      if(strcasecmp($sql_code, "")!=0 OR strcasecmp($sql_serial, "")!=0){
+        $sql_search .= " WHERE ";
       }
+
+
+      if(strcasecmp($sql_code, "")!=0 AND strcasecmp($sql_serial, "")!=0){
+        $sql_search .= $sql_code." AND ".$sql_serial;
+      }
+
+
 
 
       $sql = "SELECT * FROM kardexes 
@@ -31,8 +36,30 @@ class Model_Inventories extends Model_Template
               ON (id_inventory_category = inventory_category_id AND id_inventory=inventory_id)
               ".$sql_search;
 
+      echo $sql;
+
       $query = $this->db->query($sql);
+      return $query->result_array();*/
+
+
+      $this->db->select('*');
+      $this->db->from('kardexes');
+      $this->db->join('inventories', 'id_inventory = inventory_id');
+      $this->db->join('inventories_categories', 'id_inventory_category = inventory_category_id');      
+
+      if(isset($kardex_code) AND strcasecmp($kardex_code, "")!=0){
+        $this->db->like('kardex_code', $kardex_code);
+      }
+
+      if(isset($kardex_serial) AND strcasecmp($kardex_serial, "")!=0){
+        $this->db->like('kardex_serial', $kardex_serial);
+      }
+
+
+      $query = $this->db->get();
+
       return $query->result_array();
+
    }
    #######################################################   
    function get_kardex_status_by_id($kardex_status_id){
@@ -44,6 +71,15 @@ class Model_Inventories extends Model_Template
       echo $sql;
       $query = $this->db->query($sql);
       return $query->row_array();
+   }
+   #######################################################   
+   function get_list_kardexes(){
+      $sql = "SELECT * FROM kardexes 
+              LEFT JOIN (inventories_categories, inventories) 
+              ON (id_inventory_category = inventory_category_id AND id_inventory=inventory_id)";
+
+      $query = $this->db->query($sql);
+      return $query->result_array();
    }
    #######################################################   
    function get_kardex_by_id($kardex_id){
@@ -69,12 +105,13 @@ class Model_Inventories extends Model_Template
    
    #######################################################
    function get_list_kardexes_status(){
-      $sql = "SELECT * FROM kardexes 
+      $sql = "SELECT kardexes_status.*, locations.* FROM kardexes 
               LEFT JOIN (inventories_categories, inventories, kardexes_status, locations)  
               ON (id_inventory_category = inventory_category_id
                 AND id_inventory = inventory_id
                 AND id_kardex = kardex_id
-                AND id_location = location_id);";
+                AND id_location = location_id)
+              ORDER BY kardex_status_register_date DESC;";
       $query = $this->db->query($sql);
       return $query->result_array();
    }
@@ -83,6 +120,11 @@ class Model_Inventories extends Model_Template
       $query = $this->db->insert('kardexes_status', $data);
       return $this->db->insert_id();
       
+   }
+   #######################################################
+   function save_kardex($data, $kardex_id){
+      $query = $this->db->update('kardexes', $data, "id_kardex=".$kardex_id);
+      return $this->db->insert_id();      
    }
    #######################################################
    function add_kardex($data){

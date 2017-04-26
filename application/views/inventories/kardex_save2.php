@@ -86,6 +86,8 @@
 					</td>
 					<td>
 						<input id="kardex_serial" name="kardex_serial" value="<?php echo $kardex['kardex_serial']?>" placeholder="Serial">
+						<input type="hidden" name="kardex_id" value="<?php echo $kardex['id_kardex']?>">
+
 					</td>
 				</tr>
 				<tr>

@@ -133,12 +133,13 @@ class Inventories extends CI_Controller {
 	{
 		if(isset($_REQUEST['btn_save'])) // verify if FOUND
 		{
-			$data_kardex_status["kardex_status_value"]= $_REQUEST["kardex_status_value"];
-			$data_kardex_status["location_id"]= $_REQUEST["location_id"];
-			$data_kardex_status["kardex_id"]= $_REQUEST["kardex_id"];
-			$this->model_inventories->add_kardex_status($data_kardex_status);
+			$data_kardex["kardex_code"]= $_REQUEST["kardex_code"];
+			$data_kardex["kardex_serial"]= $_REQUEST["kardex_serial"];
+			$this->model_inventories->save_kardex($data_kardex, $_REQUEST["kardex_id"]);
 		}
+
 		$view_data['kardex']= $this->model_inventories->get_kardex_by_id($_REQUEST['kardex_id']);
+		
 		
 		$view_data['list_kardexes_status'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
 		$view_data['list_locations']= $this->model_inventories->get_list_locations();

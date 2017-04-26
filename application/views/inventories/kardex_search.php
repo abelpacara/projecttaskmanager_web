@@ -52,7 +52,7 @@
    
 
 <div id="container">
-	<h1>Guardar Kardex</h1>
+	<h1>Buscar Kardex</h1>
 
 	<div id="body">		
 		
