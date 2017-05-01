@@ -54,9 +54,9 @@ class Model_Inventories extends Model_Template
       if(isset($kardex_serial) AND strcasecmp($kardex_serial, "")!=0){
         $this->db->like('kardex_serial', $kardex_serial);
       }
-
-
       $query = $this->db->get();
+
+      //echo $this->db->last_query()."<br>";
 
       return $query->result_array();
 
