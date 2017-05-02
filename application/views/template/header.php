@@ -69,9 +69,10 @@ header('Access-Control-Allow-Origin: *');
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kardex <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          	<li><a href="#">Agregar kardex</a></li>
-            <li><a href="#">Agregar Inventario</a></li>
-            <li><a href="#">Nueva Categoria Inventario</a></li>            
+          	<li><a href="<?php echo site_url('/inventories/kardex_status_save')?>">(4) Agregar Kardex Estado</a></li>
+          	<li><a href="<?php echo site_url('/inventories/kardex_add')?>">(3) Agregar Kardex</a></li>
+            <li><a href="<?php echo site_url('/inventories/inventory_add')?>">(2) Agregar Inventario</a></li>
+            <li><a href="<?php echo site_url('/inventories/inventory_category_add')?>">(1) Nueva Categoria Inventario</a></li>            
             <li role="separator" class="divider"></li>
             <li><a href="#">Reporte de Estado kardex</a></li>
           </ul>

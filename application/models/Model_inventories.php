@@ -5,42 +5,20 @@ class Model_Inventories extends Model_Template
        parent::__construct();       
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
+   
+   #######################################################   
+   function get_list_inventories(){
+
+      $this->db->select('*');      
+      $this->db->from('inventories');
+      $this->db->join('inventories_categories', 'id_inventory_category = inventory_category_id');      
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }
    #######################################################   
    function get_list_found_kardexes($kardex_code="", $kardex_serial=""){
-
-     /* $sql_search="";
-      $sql_code="";
-      if(isset($kardex_code) AND strcasecmp($kardex_code, "")!=0){
-        $sql_code = " kardex_code ='".$kardex_code."' ";
-      }
-
-      $sql_serial="";
-      if(isset($kardex_serial) AND strcasecmp($kardex_serial, "")!=0){
-        $sql_serial .= " kardex_serial ='".$kardex_serial."' ";
-      }
-
-      if(strcasecmp($sql_code, "")!=0 OR strcasecmp($sql_serial, "")!=0){
-        $sql_search .= " WHERE ";
-      }
-
-
-      if(strcasecmp($sql_code, "")!=0 AND strcasecmp($sql_serial, "")!=0){
-        $sql_search .= $sql_code." AND ".$sql_serial;
-      }
-
-
-
-
-      $sql = "SELECT * FROM kardexes 
-              LEFT JOIN (inventories_categories, inventories) 
-              ON (id_inventory_category = inventory_category_id AND id_inventory=inventory_id)
-              ".$sql_search;
-
-      echo $sql;
-
-      $query = $this->db->query($sql);
-      return $query->result_array();*/
-
+ 
 
       $this->db->select('*');
       $this->db->from('kardexes');
@@ -56,7 +34,7 @@ class Model_Inventories extends Model_Template
       }
       $query = $this->db->get();
 
-      //echo $this->db->last_query()."<br>";
+      echo $this->db->last_query()."<br>";
 
       return $query->result_array();
 
@@ -74,11 +52,13 @@ class Model_Inventories extends Model_Template
    }
    #######################################################   
    function get_list_kardexes(){
-      $sql = "SELECT * FROM kardexes 
-              LEFT JOIN (inventories_categories, inventories) 
-              ON (id_inventory_category = inventory_category_id AND id_inventory=inventory_id)";
+      $this->db->select('*');
+      $this->db->from('kardexes');
+      $this->db->join('inventories', 'id_inventory = inventory_id');
+      $this->db->join('inventories_categories', 'id_inventory_category = inventory_category_id');      
 
-      $query = $this->db->query($sql);
+      $query = $this->db->get();
+
       return $query->result_array();
    }
    #######################################################   
@@ -127,13 +107,28 @@ class Model_Inventories extends Model_Template
       return $this->db->insert_id();      
    }
    #######################################################
-   function add_kardex($data){
+   function kardex_add($data){
       $query = $this->db->insert('kardexes', $data);
       return $this->db->insert_id();      
    }
    #######################################################
-   function add_inventory($data){
+   function inventory_add($data){
       $query = $this->db->insert('inventories', $data);
+      return $this->db->insert_id();
+   }
+   #######################################################   
+   function get_list_inventories_categories(){
+
+      $this->db->select('*');            
+      $this->db->from('inventories_categories');      
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }
+   
+   #######################################################
+   function inventory_category_add($data){
+      $query = $this->db->insert('inventories_categories', $data);
       return $this->db->insert_id();
    }
    #######################################################

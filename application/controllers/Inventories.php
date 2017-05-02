@@ -150,28 +150,63 @@ class Inventories extends CI_Controller {
 		$this->load->view('inventories/kardex_save', $view_data);
 		$this->load->view('template/footer');		
 	}
-	
 	####################################################################
-	public function save_inventory()
+	public function kardex_add()
 	{
-		if(isset($_REQUEST['post_title']))
-		{
+		if(isset($_REQUEST['btn_save'])){
 
-			$data["parent_id"]= $_REQUEST["project_id"];
-			$data["post_title"]= $_REQUEST["post_title"];
-			$data["post_content"]= $_REQUEST["post_content"];
-			$data["post_type"]= "discussion";
-
-			$this->model_posts->add_post($data);
+			$data['inventory_category_id'] = $_REQUEST['inventory_category_id'];
+			$data['inventory_mark'] = $_REQUEST['inventory_mark'];
+			$data['inventory_model'] = $_REQUEST['inventory_model'];
+			$data['inventory_descripcion'] = $_REQUEST['inventory_descripcion'];
+			$this->model_inventories->inventory_category_add($data);
 		}
 
-		$view_data['list_projects']= $this->model_posts->get_list_projects();
+		$view_data['list_kardexes']= $this->model_inventories->get_list_kardexes();
 
 		$this->load->view('template/header');
-		$this->load->view('posts/save_discussion', $view_data);
+		$this->load->view('inventories/kardex_add', $view_data);
 		$this->load->view('template/footer');
 
-		print_r($this->model_posts->get_list_posts());		
+	}
+	####################################################################
+	public function inventory_add()
+	{
+		if(isset($_REQUEST['btn_save'])){
+
+			$data['inventory_category_id'] = $_REQUEST['inventory_category_id'];
+			$data['inventory_mark'] = $_REQUEST['inventory_mark'];
+			$data['inventory_model'] = $_REQUEST['inventory_model'];
+			$data['inventory_description'] = $_REQUEST['inventory_description'];
+			$this->model_inventories->inventory_add($data);
+		}
+
+		$view_data['list_inventories_categories']= $this->model_inventories->get_list_inventories_categories();
+		$view_data['list_inventories']= $this->model_inventories->get_list_inventories();
+
+		$this->load->view('template/header');
+		$this->load->view('inventories/inventory_add', $view_data);
+		$this->load->view('template/footer');
+
+	}
+	
+	####################################################################
+	public function inventory_category_add()
+	{
+		if(isset($_REQUEST['btn_save'])){
+
+			
+			$data['inventory_category_name'] = $_REQUEST['inventory_category_name'];			
+			$data['inventory_category_description'] = $_REQUEST['inventory_category_description'];
+			$this->model_inventories->inventory_category_add($data);
+		}
+
+		$view_data['list_inventories_categories']= $this->model_inventories->get_list_inventories_categories();		
+
+		$this->load->view('template/header');
+		$this->load->view('inventories/inventory_category_add', $view_data);
+		$this->load->view('template/footer');
+
 	}
 	
 }
