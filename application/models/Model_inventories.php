@@ -34,8 +34,6 @@ class Model_Inventories extends Model_Template
       }
       $query = $this->db->get();
 
-      echo $this->db->last_query()."<br>";
-
       return $query->result_array();
 
    }
@@ -46,7 +44,6 @@ class Model_Inventories extends Model_Template
               ON (id_inventory_category = inventory_category_id AND id_inventory=inventory_id)
               WHERE id_kardex='".$kardex_status_id."'";
 
-      echo $sql;
       $query = $this->db->query($sql);
       return $query->row_array();
    }
@@ -68,7 +65,6 @@ class Model_Inventories extends Model_Template
               ON (id_inventory_category = inventory_category_id AND id_inventory=inventory_id)
               WHERE id_kardex='".$kardex_id."'";
 
-      echo $sql;
       $query = $this->db->query($sql);
       return $query->row_array();
    }
