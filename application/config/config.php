@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 ############$config['base_url'] = 'http://boliviawebdesign.com/projecttaskmanager_web';
+//$config['base_url'] = 'http://localhost/projecttaskmanager_web';
 $config['base_url'] = '';
 
 

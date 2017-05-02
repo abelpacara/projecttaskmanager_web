@@ -1,5 +1,4 @@
       <link href = "<?php echo base_url("public/css/jquery-ui.css"); ?>"    rel = "stylesheet">
-      <script src = "<?php echo base_url("public/js/jquery-3.2.1.js");?>"></script>
       <script src = "<?php echo base_url("public/js/jquery-ui.js"); ?>"></script>
       
       <!-- Javascript -->
@@ -46,7 +45,7 @@
 					<td><?php echo $list_found_kardexes[$i]['inventory_model']?></td>
 					<td><?php echo $list_found_kardexes[$i]['kardex_code']?></td>
 					<td><?php echo $list_found_kardexes[$i]['kardex_serial']?></td>
-					<td><a href='<?php echo site_url("/inventories/kardex_save2?kardex_id=".$list_found_kardexes[$i]['id_kardex']); ?>'>Modificar</a></td>
+					<td><a href='<?php echo site_url("/inventories/kardex_save?kardex_id=".$list_found_kardexes[$i]['id_kardex']); ?>'>Modificar</a></td>
 				</tr>
 				<?php
 			}?>

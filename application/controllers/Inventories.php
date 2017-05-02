@@ -129,7 +129,7 @@ class Inventories extends CI_Controller {
 		echo json_encode($matches);
 	}	
 	####################################################################
-	public function kardex_save2()
+	public function kardex_save()
 	{
 		if(isset($_REQUEST['btn_save'])) // verify if FOUND
 		{
@@ -147,75 +147,10 @@ class Inventories extends CI_Controller {
 		$view_data['list_kardexes']= $this->model_inventories->get_list_kardexes();		
 		
 		$this->load->view('template/header');
-		$this->load->view('inventories/kardex_save2', $view_data);
-		$this->load->view('template/footer');		
-	}
-	####################################################################
-	public function kardex_save()
-	{
-		if(isset($_REQUEST['btn_search'])) {
-
-
-			$this->model_inventories->get_inventory($_REQUEST["inventory_name"]);
-
-			$data_inventory["inventory_mark"]= $_REQUEST["inventory_mark"];			
-			$data_inventory["inventory_model"]= $_REQUEST["inventory_model"];
-
-			$id_inventory = $this->model_inventories->add_inventory($data_inventory);
-
-
-			$data_kardex["inventory_id"]= $id_inventory;
-			$data_kardex["kardex_code"]= $_REQUEST["kardex_code"];
-			$data_kardex["kardex_serial"]= $_REQUEST["kardex_serial"];			
-			
-			$id_kardex = $this->model_inventories->add_kardex($data_kardex);
-
-			$data_kardex_status["kardex_status_value"]= $_REQUEST["kardex_status_value"];
-			$data_kardex_status["location_id"]= $_REQUEST["location_id"];
-
-
-
-
-			if($found){
-				$view_data['found'] = 1;
-			}
-		}
-		if(isset($_REQUEST['btn_save'])) // verify if FOUND
-		{
-
-			$data_inventory["inventory_name"]= $_REQUEST["inventory_name"];
-			$data_inventory["inventory_mark"]= $_REQUEST["inventory_mark"];			
-			$data_inventory["inventory_model"]= $_REQUEST["inventory_model"];
-
-			$id_inventory = $this->model_inventories->add_inventory($data_inventory);
-
-
-			$data_kardex["inventory_id"]= $id_inventory;
-			$data_kardex["kardex_code"]= $_REQUEST["kardex_code"];
-			$data_kardex["kardex_serial"]= $_REQUEST["kardex_serial"];			
-			
-			$id_kardex = $this->model_inventories->add_kardex($data_kardex);
-
-			$data_kardex_status["kardex_status_value"]= $_REQUEST["kardex_status_value"];
-			$data_kardex_status["location_id"]= $_REQUEST["location_id"];
-			$data_kardex_status["kardex_id"]= $id_kardex;
-			$this->model_inventories->add_kardex_status($data_kardex_status);
-		}
-
-		$list_kardexes_code = $this->model_inventories->get_list_kardexes_code();
-
-		print_r($list_kardexes_code);
-
-		$view_data['list_kardexes']= $this->model_inventories->get_list_kardexes();
-
-		$view_data['list_kardexes_status'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
-
-		$view_data['list_locations']= $this->model_inventories->get_list_locations();
-		
-		$this->load->view('template/header');
 		$this->load->view('inventories/kardex_save', $view_data);
 		$this->load->view('template/footer');		
 	}
+	
 	####################################################################
 	public function save_inventory()
 	{
