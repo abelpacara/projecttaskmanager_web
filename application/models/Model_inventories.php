@@ -7,6 +7,10 @@ class Model_Inventories extends Model_Template
    }
    
    #######################################################   
+   function get_list_inventories_categories_by($search_value=""){
+      return $this->get_list_table_column_search("inventories_categories", "inventory_category_name", $search_value);
+   }
+   #######################################################   
    function get_list_inventories(){
 
       $this->db->select('*');      

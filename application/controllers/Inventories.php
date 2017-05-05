@@ -13,6 +13,7 @@ class Inventories extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->library('ciqrcode');
 	}
+	
 	####################################################################
 	public function qr_generate(){
 		//header("Content-Type: image/png");
@@ -80,17 +81,7 @@ class Inventories extends CI_Controller {
 		$this->load->view('inventories/kardex_search', $view_data);
 		$this->load->view('template/footer');
 	}
-	####################################################################
-	public function kardex_data(){		
-		header('Access-Control-Allow-Origin: *');
-
-		$matches = array();
-		if(isset($_REQUEST['kardex_code'])){			
-
-			$matches = $this->model_inventories->get_kardex("kardex_code", $_REQUEST['kardex_code']);
-		}
-		print_r($matches);		
-	}
+	
 	####################################################################
 	public function list_kardexes_code(){		
 		header('Access-Control-Allow-Origin: *');
@@ -101,22 +92,7 @@ class Inventories extends CI_Controller {
 		}		
 		echo json_encode($matches);
 	}
-	####################################################################
-	function array_values_recursive($ary)
-	{
-	   $lst = array();
-	   foreach( array_keys($ary) as $k ){
-	      $v = $ary[$k];
-	      if (is_scalar($v)) {
-	         $lst[] = $v;
-	      } elseif (is_array($v)) {
-	         $lst = array_merge( $lst,
-	            $this->array_values_recursive($v)
-	         );
-	      }
-	   }
-	   return $lst;
-	}
+	
 	####################################################################
 	public function list_kardexes_status(){
 

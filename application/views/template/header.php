@@ -27,7 +27,8 @@ header('Access-Control-Allow-Origin: *');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src = "<?php echo base_url("public/js/jquery-3.2.1.js");?>"></script>
+<script src = "<?php echo base_url("public/js/jquery-1.12.4.js"); ?>"></script>
+<script src = "<?php //echo base_url("public/js/jquery-3.2.1.js");?>"></script>
 <script src = "<?php echo base_url("public/js/bootstrap.js");?>"></script>
 	<meta charset="utf-8">
 	<title>Project Task Manager</title>

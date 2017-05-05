@@ -1,18 +1,18 @@
       <link href = "<?php echo base_url("public/css/jquery-ui.css"); ?>"    rel = "stylesheet">
-      <script src = "<?php echo base_url("public/js/jquery-1.10.2.js");?>"></script>
       <script src = "<?php echo base_url("public/js/jquery-ui.js"); ?>"></script>
       
       <!-- Javascript -->
       <script>
-         /*
+         
           $( function() {
 			    			 
-			    $("#kardex_code" ).autocomplete({
+			    /**#################################################**/
+			    $("#inventory_category_name" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
-			          url: "http://localhost/projecttaskmanager_web/index.php/inventories/list_kardexes_code",
+			          url: "http://localhost/projecttaskmanager_web/index.php/services/list_categories",
 			          dataType: "json",
-			          async:false,			          
+			          async:true,			          
 			          data: {
 			            term: request.term
 			          },
@@ -26,26 +26,65 @@
 			        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
 
 			        		$.ajax( {
-				          url: "http://localhost/projecttaskmanager_web/index.php/inventories/kardex_data",
+				          url: "http://localhost/projecttaskmanager_web/index.php/services/kardex_data",
 				          dataType: "json",
-				          async:false,				          
+				          async:true,				          
 				          data: {
-									kardex_code : ui.item.value				            
+									inventory_category_name : ui.item.value				            
 				          },
 				          success: function( response ) {
 				            //response( data );
 				          }
 				        }).done(function(data) {
 							  
-							  alert(data);
+							  
 							   if ( console && console.log ) {
-								      console.log( "Sample of data:"+data);
+								      
 								    }
 					  		   });
 					  }	
 	      	});
 	   	});
-			*/
+			
+			/**#################################################**/
+			    $("#inventory_category_name" ).autocomplete({
+			      source: function( request, response ) {
+			        $.ajax( {
+			          url: "http://localhost/projecttaskmanager_web/index.php/services/list_categories",
+			          dataType: "json",
+			          async:true,			          
+			          data: {
+			            term: request.term
+			          },
+			          success: function( data ) {
+			            response( data );
+			          }
+			        } );
+			      },
+			      minLength: 1,
+			      select: function( event, ui ) {
+			        //log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+
+			        		$.ajax( {
+				          url: "http://localhost/projecttaskmanager_web/index.php/services/kardex_data",
+				          dataType: "json",
+				          async:true,				          
+				          data: {
+									inventory_category_name : ui.item.value				            
+				          },
+				          success: function( response ) {
+				            //response( data );
+				          }
+				        }).done(function(data) {
+							  
+							  
+							   if ( console && console.log ) {
+								      
+								    }
+					  		   });
+					  }	
+	      	});
+	   	});
 
       </script>
    </head>
