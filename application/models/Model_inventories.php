@@ -5,10 +5,81 @@ class Model_Inventories extends Model_Template
        parent::__construct();       
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
-   
    #######################################################   
-   function get_list_inventories_categories_by($search_value=""){
-      return $this->get_list_table_column_search("inventories_categories", "inventory_category_name", $search_value);
+   function get_list_kardexes_full(){
+      $this->db->select('*');
+      $this->db->from('kardexes');
+      $this->db->join('inventories', 'id_inventory = inventory_id');
+      $this->db->join('kardexes_status', 'id_kardex = kardex_id');      
+      $this->db->join('inventories_categories', 'id_inventory_category = inventory_category_id');      
+      $this->db->join('locations', 'id_location = location_id');      
+      $this->db->group_by('id_kardex'); 
+
+      $query = $this->db->get();
+
+      echo "<br>".$this->db->last_query();
+
+      return $query->result_array();
+   }
+   ###############################################################
+   function generate_list_locations_tree(&$list_tree, $parent_id=null, $level=0)
+   {
+      $this->db->select("*");        
+      $this->db->from("locations");     
+      $this->db->where("parent_id", $parent_id);                  
+      $query = $this->db->get();
+      
+      $list_result = $query->result_array();
+            
+      if(count($list_result)>0)
+      {
+         for($i=0;$i<count($list_result);$i++)
+         {
+            $row = $list_result[$i];
+            $row['level']=$level;
+            $list_tree[] = $row;
+
+            $this->generate_list_locations_tree($list_tree, $list_result[$i]['id_location'], $level+1);
+         }
+      }
+   }
+   #######################################################
+   function inventory_category_add($data){
+      $query = $this->db->insert('inventories_categories', $data);
+      return $this->db->insert_id();      
+   }
+   #######################################################   
+   function get_inventory_by($inventory_mark, $inventory_model){
+      $this->db->select('*');      
+      $this->db->from('inventories');
+      $this->db->where('inventory_mark', $inventory_mark);
+      $this->db->where('inventory_model', $inventory_model);
+
+      $query = $this->db->get();
+      return $query->row_array();
+   }
+   #######################################################   
+   function get_inventory_category_by($inventory_category){
+      $this->db->select('*');      
+      $this->db->from('inventories_categories');
+      $this->db->where('inventory_category_name', $inventory_category);
+
+      $query = $this->db->get();
+      return $query->row_array();
+   }
+   #######################################################   
+   function is_kardex_code_exists($kardex_code_search){
+      $this->db->select('*');      
+      $this->db->from('kardexes');
+      $this->db->where('kardex_code', $kardex_code_search);
+
+      $query = $this->db->get();
+      $row = $query->row_array();
+
+      if(count($row)>0){
+        return TRUE;
+      }
+      return FALSE;
    }
    #######################################################   
    function get_list_inventories(){
@@ -96,7 +167,7 @@ class Model_Inventories extends Model_Template
       return $query->result_array();
    }
    #######################################################
-   function add_kardex_status($data){
+   function kardex_status_add($data){
       $query = $this->db->insert('kardexes_status', $data);
       return $this->db->insert_id();
       
@@ -126,11 +197,6 @@ class Model_Inventories extends Model_Template
       return $query->result_array();
    }
    
-   #######################################################
-   function inventory_category_add($data){
-      $query = $this->db->insert('inventories_categories', $data);
-      return $this->db->insert_id();
-   }
    #######################################################
    function get_list_locations(){
       $sql = "SELECT * FROM locations;";

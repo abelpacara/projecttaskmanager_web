@@ -13,6 +13,33 @@ class Services extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('model_inventories');
 	}
+	####################################################################
+	public function kardex_code_search(){
+		header('Access-Control-Allow-Origin: *');		
+		if($this->model_inventories->is_kardex_code_exists($_REQUEST['term'])){
+			echo "Ya existe el codigo, intenta con otro";
+		}
+	}
+	####################################################################
+	public function list_inventories_models(){
+		header('Access-Control-Allow-Origin: *');
+
+		$matches = array();
+		if(isset($_REQUEST['term'])){			
+			$matches = $this->array_values_recursive( $this->model_inventories->get_list_table_column_search("inventories", "inventory_model", $_REQUEST['term']) );
+		}		
+		echo json_encode($matches);
+	}
+	####################################################################
+	public function list_inventories_marks(){
+		header('Access-Control-Allow-Origin: *');
+
+		$matches = array();
+		if(isset($_REQUEST['term'])){			
+			$matches = $this->array_values_recursive( $this->model_inventories->get_list_table_column_search("inventories", "inventory_mark", $_REQUEST['term']) );	
+		}
+		echo json_encode($matches);
+	}
 
 	####################################################################
 	public function kardex_data(){		
@@ -26,12 +53,12 @@ class Services extends CI_Controller {
 		echo json_encode($matches);
 	}
 	####################################################################
-	public function list_categories(){
+	public function list_inventories_categories(){
 		header('Access-Control-Allow-Origin: *');
 
 		$matches = array();
 		if(isset($_REQUEST['term'])){			
-			$matches = $this->array_values_recursive( $this->model_inventories->get_list_inventories_categories_by($_REQUEST['term']) );
+			$matches = $this->array_values_recursive( $this->model_inventories->get_list_table_column_search("inventories_categories", "inventory_category_name", $_REQUEST['term']) );
 		}		
 		echo json_encode($matches);
 	}
