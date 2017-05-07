@@ -1,6 +1,17 @@
-      <link href = "<?php echo base_url("public/css/jquery-ui.css"); ?>"    rel = "stylesheet">
-      <script src = "<?php echo base_url("public/js/jquery-ui.js"); ?>"></script>
-      
+<link href = "<?php echo base_url("public/css/jquery-ui.css"); ?>"    rel = "stylesheet">
+<script src = "<?php echo base_url("public/js/jquery-ui.js"); ?>"></script>
+
+<script>
+$(function() {
+   
+   $( "#kardex_status_register_date" ).datepicker({ dateFormat: 'dd/mm/yy',changeMonth: true,changeYear: true, firstDay: 1 });
+});
+$(function(){
+   //$('.style_mask').customStyle();
+});
+</script>
+
+
       <!-- Javascript -->
       <script>
          
@@ -137,7 +148,20 @@
 				<tr>
 					<td>Localidad</td>	
 					<td>
-	              <?php echo get_display_locations_tree($list_locations_tree,"location_id","localidad seleccionado");?>
+						<select name="location_id">
+							<option>Localidades...</option>
+							<?php 
+		              	//echo get_display_locations_tree($list_locations_tree,"location_id","localidad seleccionado");
+							for($i=0; $i<count($list_locations); $i++){
+							?>
+								<option value="<?php echo $list_locations[$i]['id_location']?>">
+									<?php echo $list_locations[$i]['location_name']?>
+								</option>
+							<?php
+							}
+		              	?>	
+						</select>
+	              
 	         	</td>
          	</tr>
          	<tr>
@@ -158,6 +182,14 @@
 					</td>
 				</tr>
 				<tr>
+					<td>
+						Fecha
+					</td>
+					<td>
+						<input id="kardex_status_register_date" value="<?php echo $kardex_status_register_date?>" name="kardex_status_register_date" readonly="true" id="end_date" class="arrow_drowpdown"/>
+					</td>
+				</tr>
+				<tr>
 					<td colspan="3">						
 						<input type="submit" name="btn_save" value="Guardar"/>
 					</td>
@@ -169,26 +201,33 @@
 		
 		<table border="1">
 			<tr>
-				<th>Categoria</th>
-				<th>Marca</th>
-				<th>Modelo</th>
-				<th>Codigo</th>
-				<th>Serial</th>
+				<th rowspan="2">#</th>
+				<th rowspan="2">Categoria</th>
+				<th rowspan="2">Marca</th>
+				<th rowspan="2">Modelo</th>
+				<th rowspan="2">Codigo</th>
+				<th rowspan="2">Serial</th>
+				<th colspan="3">Ultimo Estado</th>				
+			</tr>
+			<tr>				
 				<th>Estado</th>
 				<th>Localidad</th>
 				<th>Fecha</th>
 			</tr>
+
 			<?php
 			for($i=0; $i<count($list_kardexes_full); $i++){?>
 				<tr>
+					<td><?php echo $i+1 ?></td>
 					<td><?php echo $list_kardexes_full[$i]['inventory_category_name'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['inventory_mark'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['inventory_model'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['kardex_code'] ?></td>
-					<td><?php echo $list_kardexes_full[$i]['kardex_serial'] ?></td>					
+					<td><?php echo $list_kardexes_full[$i]['kardex_serial'] ?></td>		
+
 					<td><?php echo $list_kardexes_full[$i]['kardex_status_value'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['location_name'] ?></td>
-					<td><?php echo $list_kardexes_full[$i]['kardex_status_register_date'] ?></td>					
+					<td><?php echo date("d/m/Y", strtotime($list_kardexes_full[$i]['kardex_status_register_date'])) ?></td>					
 				</tr>
 			<?php
 			}

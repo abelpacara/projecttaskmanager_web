@@ -7,18 +7,19 @@ class Model_Inventories extends Model_Template
    }
    #######################################################   
    function get_list_kardexes_full(){
-      $this->db->select('*');
-      $this->db->from('kardexes');
-      $this->db->join('inventories', 'id_inventory = inventory_id');
-      $this->db->join('kardexes_status', 'id_kardex = kardex_id');      
-      $this->db->join('inventories_categories', 'id_inventory_category = inventory_category_id');      
-      $this->db->join('locations', 'id_location = location_id');      
-      $this->db->group_by('id_kardex'); 
+      $sql = "SELECT  *
+              FROM (SELECT m1.*
+                    FROM kardexes_status m1 LEFT JOIN kardexes_status m2
+                     ON (m1.kardex_id = m2.kardex_id AND m1.id_kardex_status < m2.id_kardex_status)
+                    WHERE m2.id_kardex_status IS NULL) AS kardexes_status_aux
 
-      $query = $this->db->get();
+              JOIN  kardexes ON (id_kardex = kardexes_status_aux.kardex_id)
+              JOIN inventories ON id_inventory = inventory_id
+              JOIN locations ON id_location = location_id
+              JOIN inventories_categories ON id_inventory_category = inventory_category_id
+              ORDER BY kardexes_status_aux.id_kardex_status DESC";
 
-      echo "<br>".$this->db->last_query();
-
+      $query = $this->db->query($sql);
       return $query->result_array();
    }
    ###############################################################
@@ -199,8 +200,10 @@ class Model_Inventories extends Model_Template
    
    #######################################################
    function get_list_locations(){
-      $sql = "SELECT * FROM locations;";
-      $query = $this->db->query($sql);
+      $this->db->select('*');            
+      $this->db->from('locations');      
+
+      $query = $this->db->get();
       return $query->result_array();
    }   
 }

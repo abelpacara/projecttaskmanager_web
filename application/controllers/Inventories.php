@@ -161,15 +161,18 @@ class Inventories extends CI_Controller {
 			$kardex_status_data['location_id'] = $_REQUEST['location_id'];
 			$kardex_status_data['kardex_status_value'] = $_REQUEST['kardex_status_value'];
 			$kardex_status_data['kardex_status_description'] = $_REQUEST['kardex_status_description'];
+			$kardex_status_data['kardex_status_register_date'] = date("Y-m-d", strtotime($_REQUEST['kardex_status_register_date']) );
 			$kardex_status_data['kardex_id'] = $id_kardex;
 			$this->model_inventories->kardex_status_add($kardex_status_data);
 		}
 
 
-		  $list_locations_tree = array();      
+		 /* $list_locations_tree = array();      
       $this->model_inventories->generate_list_locations_tree($list_locations_tree);
-      $view_data['list_locations_tree'] = $list_locations_tree;
+      $view_data['list_locations_tree'] = $list_locations_tree;*/
 
+      $view_data['list_locations'] = $this->model_inventories->get_list_locations();
+      $view_data['kardex_status_register_date'] = date('d/m/Y', strtotime($this->model_inventories->get_system_time()) );
 
 		$view_data['list_kardexes_status_values'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
 
