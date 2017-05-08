@@ -227,7 +227,7 @@ $(function(){
 
 					<td><?php echo $list_kardexes_full[$i]['kardex_status_value'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['location_name'] ?></td>
-					<td><?php echo date("d/m/Y", strtotime($list_kardexes_full[$i]['kardex_status_register_date'])) ?></td>					
+					<td><?php echo date("d-m-Y", strtotime($list_kardexes_full[$i]['kardex_status_register_date'])) ?></td>
 				</tr>
 			<?php
 			}
