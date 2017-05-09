@@ -19,7 +19,7 @@ $(function(){
 
           	  $( "#kardex_code" ).change(function() {					
 			        $.ajax( {
-			          url: "http://localhost/projecttaskmanager_web/index.php/services/kardex_code_search",
+			          url: "<?php echo base_url('services/kardex_code_search')?>",
 			          dataType: "html",
 			          async:true,			          
 			          data: {
@@ -38,7 +38,7 @@ $(function(){
 			    $("#inventory_category_name" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
-			          url: "http://localhost/projecttaskmanager_web/index.php/services/list_inventories_categories",
+			          url: "<?php echo base_url('services/list_inventories_categories')?>",
 			          dataType: "json",
 			          async:true,			          
 			          data: {
@@ -59,7 +59,7 @@ $(function(){
 			    $("#inventory_mark" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
-			          url: "http://localhost/projecttaskmanager_web/index.php/services/list_inventories_marks",
+			          url: "<?php echo base_url('services/list_inventories_marks')?>",
 			          dataType: "json",
 			          async:true,			          
 			          data: {
@@ -78,7 +78,7 @@ $(function(){
 			    $("#inventory_model" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
-			          url: "http://localhost/projecttaskmanager_web/index.php/services/list_inventories_models",
+			          url: "<?php echo base_url('services/list_inventories_models')?>",
 			          dataType: "json",
 			          async:true,
 			          data: {

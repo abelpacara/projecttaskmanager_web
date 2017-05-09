@@ -137,7 +137,7 @@ class Inventories extends CI_Controller {
 				$id_inventory_category = $inventory_category['id_inventory_category'];
 			}
 			else{
-				$inventory_category_data['category_inventory_name'] = $_REQUEST['inventory_category_name'];
+				$inventory_category_data['inventory_category_name'] = $_REQUEST['inventory_category_name'];
 				$id_inventory_category = $this->model_inventories->inventory_category_add($inventory_category_data);
 			}
 
