@@ -5,19 +5,29 @@ class Model_Inventories extends Model_Template
        parent::__construct();       
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
+   /**
+   *get too last kardex status 
+   */
    #######################################################   
-   function get_list_kardexes_full(){
+   function get_list_kardexes_full($location_id=""){
+      $sql_location="";
+      if(isset($location_id) AND strcasecmp(trim($location_id),"")!=0){
+        $sql_location = " WHERE id_location = '".$location_id."' ";
+      }
+
       $sql = "SELECT  *
               FROM (SELECT m1.*
                     FROM kardexes_status m1 LEFT JOIN kardexes_status m2
                      ON (m1.kardex_id = m2.kardex_id AND m1.id_kardex_status < m2.id_kardex_status)
                     WHERE m2.id_kardex_status IS NULL) AS kardexes_status_aux
 
-              JOIN  kardexes ON (id_kardex = kardexes_status_aux.kardex_id)
+              JOIN kardexes ON (id_kardex = kardexes_status_aux.kardex_id)
               JOIN inventories ON id_inventory = inventory_id
               JOIN locations ON id_location = location_id
               JOIN inventories_categories ON id_inventory_category = inventory_category_id
+              ".$sql_location."
               ORDER BY kardexes_status_aux.id_kardex_status DESC";
+
 
       $query = $this->db->query($sql);
       return $query->result_array();
@@ -170,8 +180,7 @@ class Model_Inventories extends Model_Template
    #######################################################
    function kardex_status_add($data){
       $query = $this->db->insert('kardexes_status', $data);
-      return $this->db->insert_id();
-      
+      return $this->db->insert_id();      
    }
    #######################################################
    function save_kardex($data, $kardex_id){
@@ -198,12 +207,4 @@ class Model_Inventories extends Model_Template
       return $query->result_array();
    }
    
-   #######################################################
-   function get_list_locations(){
-      $this->db->select('*');            
-      $this->db->from('locations');      
-
-      $query = $this->db->get();
-      return $query->result_array();
-   }   
 }

@@ -137,7 +137,7 @@ class Inventories extends CI_Controller {
 				$id_inventory_category = $inventory_category['id_inventory_category'];
 			}
 			else{
-				$inventory_category_data['category_inventory_name'] = $_REQUEST['inventory_category_name'];
+				$inventory_category_data['inventory_category_name'] = $_REQUEST['inventory_category_name'];
 				$id_inventory_category = $this->model_inventories->inventory_category_add($inventory_category_data);
 			}
 
@@ -161,7 +161,12 @@ class Inventories extends CI_Controller {
 			$kardex_status_data['location_id'] = $_REQUEST['location_id'];
 			$kardex_status_data['kardex_status_value'] = $_REQUEST['kardex_status_value'];
 			$kardex_status_data['kardex_status_description'] = $_REQUEST['kardex_status_description'];
-			$kardex_status_data['kardex_status_register_date'] = date("Y-m-d", strtotime($_REQUEST['kardex_status_register_date']) );
+			
+
+			list($day, $month, $year) = explode("/", $_REQUEST['kardex_status_register_date']);
+
+			$kardex_status_data['kardex_status_register_date'] = $year."-".$month."-".$day;
+
 			$kardex_status_data['kardex_id'] = $id_kardex;
 			$this->model_inventories->kardex_status_add($kardex_status_data);
 		}

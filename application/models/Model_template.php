@@ -6,6 +6,15 @@ class Model_Template extends CI_Model
        parent::__construct();       
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
+   
+   #######################################################
+   function get_list_locations(){
+      $this->db->select('*');            
+      $this->db->from('locations');      
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }   
    #############################################################################
    function add_time_default_to_user($user_id)
    {
