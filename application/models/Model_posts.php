@@ -14,6 +14,7 @@ class Model_Posts extends Model_Template
       return $this->db->insert_id();
    }
 
+<<<<<<< HEAD
    function get_list_activities($user_id){
 
       $sql_user = "";
@@ -48,6 +49,20 @@ class Model_Posts extends Model_Template
       ORDER BY tablex.id_post DESC");         
       return $query->result_array();
    }
+=======
+   function get_list_projects(){
+
+    $query = $this->db->query("SELECT * FROM posts WHERE post_type='project';");         
+      return $query->result_array();
+   }
+   function get_list_discussions(){
+
+    $query = $this->db->query("SELECT * FROM posts WHERE post_type='discussion';");         
+      return $query->result_array();
+   }
+
+   function get_list_posts(){
+>>>>>>> origin/feature/INVENTARIOS
 
    function get_list_projects($user_id){
       $query = $this->db->query("SELECT * FROM posts 
