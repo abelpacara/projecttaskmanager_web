@@ -11,8 +11,11 @@ SET FOREIGN_KEY_CHECKS=0;
 # Structure for the `inventories` table : 
 #
 
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `inventories`;
 
+=======
+>>>>>>> master
 CREATE TABLE `inventories` (
   `id_inventory` int(11) NOT NULL AUTO_INCREMENT,
   `inventory_category_id` int(11) NOT NULL,
@@ -29,8 +32,11 @@ CREATE TABLE `inventories` (
 # Structure for the `inventories_categories` table : 
 #
 
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `inventories_categories`;
 
+=======
+>>>>>>> master
 CREATE TABLE `inventories_categories` (
   `id_inventory_category` int(11) NOT NULL AUTO_INCREMENT,
   `inventory_category_name` text NOT NULL,
@@ -41,8 +47,11 @@ CREATE TABLE `inventories_categories` (
 # Structure for the `kardexes` table : 
 #
 
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `kardexes`;
 
+=======
+>>>>>>> master
 CREATE TABLE `kardexes` (
   `id_kardex` int(11) NOT NULL AUTO_INCREMENT,
   `inventory_id` int(11) NOT NULL,
@@ -56,8 +65,11 @@ CREATE TABLE `kardexes` (
 # Structure for the `kardexes_status` table : 
 #
 
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `kardexes_status`;
 
+=======
+>>>>>>> master
 CREATE TABLE `kardexes_status` (
   `id_kardex_status` int(11) NOT NULL AUTO_INCREMENT,
   `kardex_id` int(11) NOT NULL,
@@ -73,8 +85,11 @@ CREATE TABLE `kardexes_status` (
 # Structure for the `locations` table : 
 #
 
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `locations`;
 
+=======
+>>>>>>> master
 CREATE TABLE `locations` (
   `id_location` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) DEFAULT NULL,
@@ -87,8 +102,11 @@ CREATE TABLE `locations` (
 # Structure for the `posts` table : 
 #
 
+<<<<<<< HEAD
 DROP TABLE IF EXISTS `posts`;
 
+=======
+>>>>>>> master
 CREATE TABLE `posts` (
   `id_post` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL,
