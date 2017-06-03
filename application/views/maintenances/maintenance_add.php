@@ -2,6 +2,23 @@
 <script src = "<?php echo base_url("public/js/jquery-ui.js"); ?>"></script>
 
 <script>
+$(document).ready(function(){
+   
+   $(".selector").click(function () {
+      
+      var id = $(this).attr('id');   
+      
+      if($("#"+id).is(':checked')) { 
+         $('#selected_'+id).removeClass("ptm_opacity_user_member");
+      }
+      else
+      {
+         $('#selected_'+id).addClass("ptm_opacity_user_member");   
+      }
+   });
+});
+</script>
+<script>
 $(function() {
    
    $( "#maintenance_register_date" ).datepicker({ dateFormat: 'dd/mm/yy',changeMonth: true,changeYear: true, firstDay: 1 });
@@ -104,7 +121,7 @@ $(function(){
    
 
 <div id="container">
-	<h1>Agregar Mantenimiento</h1>
+	<h1>Registrar Mantenimiento</h1>
 
 	<div id="body">		
 		
@@ -169,15 +186,16 @@ $(function(){
 					
 						<?php
 						for($i=0; $i<count($list_kardexes); $i++){?>
-							<div class="device_item">			
+							<div  id="selected_<?php echo $i?>"  class="device_item ptm_opacity_user_member">			
 									<table>
 										<tr>	
+																				
+											<td>
+												<input type="checkbox"  id="<?php echo $i?>" class="selector" name="list_id_kardexes[]" value="<?php echo $list_kardexes[$i]['id_kardex']?>" />
+											</td>
 											<td>
 												# <?php echo $i+1?>
-											</td>										
-											<td>
-												<input type="checkbox" name="list_id_kardexes[]" value="<?php echo $list_kardexes[$i]['id_kardex']?>" />
-											</td>
+											</td>	
 										</tr>
 										<tr>
 											<th>Tipo</th>			
@@ -200,7 +218,7 @@ $(function(){
 											<td><?php echo $list_kardexes[$i]['kardex_serial'] ?></td>		
 										</tr>
 										<tr>
-											<th>Ultima fecha de cambio de estado</th>											
+											<th>Ultimo cambio en</th>											
 											<td><?php echo date("d-m-Y", strtotime($list_kardexes[$i]['kardex_status_register_date'])) ?></td>		
 										</tr>
 										<tr>
@@ -296,13 +314,14 @@ $(function(){
 		?>
 
 		<table border="1">
-			
+			<caption>LISTA DE MANTENIMIENTOS</caption>
 			<tr>
-				<th>#</th>
-				<th>Descripcion</th>
-				<th>Fecha de mantenimiento</th>
-				<th>Localidad</th>
-				<th>Equipos</th>
+				
+				<th width="3%"  style="text-align: center; font-weight: bold;">#</th>
+				<th width="30%" style="text-align: center; font-weight: bold;">DESCRIPCION</th>
+				<th width="10%" style="text-align: center; font-weight: bold;">FECHA</th>
+				<th width="10%" style="text-align: center; font-weight: bold;">LOCALIDAD</th>
+				<th width="47%" style="text-align: center; font-weight: bold;">EQUIPOS</th>
 			</tr>
 
 			<?php
@@ -322,11 +341,10 @@ $(function(){
 								<th>Tipo</th>			
 								<th>Marca</th>
 								<th>Modelo</th>
-								<th>Codigo</th>																		
-								<th>Serial</th>	
+								<th>Codigo</th>								
 								<th>Estado</th>																	
 								<th>Localidad</th>
-								<th>Ultimo mantenimiento</th>
+								<th>Ultimo cambio en</th>
 								
 							</tr>
 							<?php 
@@ -338,8 +356,7 @@ $(function(){
 									<td><?php echo $list_maintenances_kardexes[$k]['inventory_category_name']?></td>
 									<td><?php echo $list_maintenances_kardexes[$k]['inventory_mark']?></td>
 									<td><?php echo $list_maintenances_kardexes[$k]['inventory_model']?></td>
-									<td><?php echo $list_maintenances_kardexes[$k]['kardex_code']?></td>
-									<td><?php echo $list_maintenances_kardexes[$k]['kardex_serial']?></td>
+									<td><?php echo $list_maintenances_kardexes[$k]['kardex_code']?></td>									
 									<td><?php echo $list_maintenances_kardexes[$k]['kardex_status_value']?></td>
 									<td><?php echo $list_maintenances_kardexes[$k]['location_name']?></td>
 									<td><?php echo $list_maintenances_kardexes[$k]['kardex_status_register_date']?></td>

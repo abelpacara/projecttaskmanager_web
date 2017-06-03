@@ -104,7 +104,7 @@ $(function(){
    
 
 <div id="container">
-	<h1>Agregar Kardex</h1>
+	<h1>Registrar Kardex</h1>
 
 	<div id="body">		
 		
@@ -130,7 +130,7 @@ $(function(){
 					</td>
 				</tr>
 				<tr>					
-					<td>Categoria</td>
+					<td>Tipo</td>
 					<td>
 						<input id="inventory_category_name" type="text" name="inventory_category_name">
 					</td>
@@ -160,8 +160,7 @@ $(function(){
 							<?php
 							}
 		              	?>	
-						</select>
-	              
+						</select>	              
 	         	</td>
          	</tr>
          	<tr>
@@ -200,6 +199,7 @@ $(function(){
 		?>
 		
 		<table border="1">
+			<CAPTION>LISTA DE KARDEX DE EQUIPOS</CAPTION>
 			<tr>
 				<th rowspan="2">#</th>
 				<th rowspan="2">Categoria</th>
@@ -207,9 +207,10 @@ $(function(){
 				<th rowspan="2">Modelo</th>
 				<th rowspan="2">Codigo</th>
 				<th rowspan="2">Serial</th>
-				<th colspan="3">Ultimo Estado</th>				
+				<th colspan="4">Ultimo cambio en</th>				
 			</tr>
-			<tr>				
+			<tr>
+				<th>ID KARDEX STATUS</th>				
 				<th>Estado</th>
 				<th>Localidad</th>
 				<th>Fecha</th>
@@ -224,7 +225,8 @@ $(function(){
 					<td><?php echo $list_kardexes_full[$i]['inventory_model'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['kardex_code'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['kardex_serial'] ?></td>		
-
+					
+					<td><?php echo $list_kardexes_full[$i]['id_kardex_status'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['kardex_status_value'] ?></td>
 					<td><?php echo $list_kardexes_full[$i]['location_name'] ?></td>
 					<td><?php echo date("d-m-Y", strtotime($list_kardexes_full[$i]['kardex_status_register_date'])) ?></td>

@@ -11,6 +11,7 @@ class Model_Template extends CI_Model
    function get_list_locations(){
       $this->db->select('*');            
       $this->db->from('locations');      
+      $this->db->order_by('location_name', 'ASC');      
 
       $query = $this->db->get();
       return $query->result_array();

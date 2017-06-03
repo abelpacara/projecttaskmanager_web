@@ -6,14 +6,22 @@ class Model_Maintenances extends Model_Template
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
    #######################################################   
-   function get_list_maintenances($location_id=""){
+   function get_list_maintenances($location_id="", $maitenance_start_register_date="", $maitenance_end_register_date=""){
 
-      $this->db->select('*');            
+      $this->db->select('*');
       $this->db->from('maintenances');
       $this->db->join('locations', "id_location=location_id");
       if(isset($location_id) AND strcasecmp($location_id, "")!=0){
         $this->db->where('location_id', $location_id);  
       }
+      if(isset($maitenance_start_register_date) AND strcasecmp($maitenance_start_register_date, "")!=0){
+        $this->db->where('maitenance_start_register_date', $maitenance_start_register_date);  
+      }
+      if(isset($maitenance_end_register_date) AND strcasecmp($maitenance_end_register_date, "")!=0){
+        $this->db->where('maitenance_end_register_date', $maitenance_end_register_date);  
+      }
+      
+      $this->db->order_by('maintenance_register_date', "DESC");
 
       $query = $this->db->get();
 

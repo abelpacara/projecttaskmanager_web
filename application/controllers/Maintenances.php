@@ -23,13 +23,23 @@ class Maintenances extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
-	function report()
-	{
+	####################################################################
+	public function report_form(){
+
+		if(isset($_REQUEST['btn_generate'])){
+			$this->report($_REQUEST['location_id'], $_REQUEST['maitenance_start_register_date'], $_REQUEST['maitenance_end_register_date']);
+		}
+
+		$view_data['list_locations'] = $this->model_maintenances->get_list_locations();
+
+
+		$this->load->view('template/header');
+		$this->load->view('maintenances/report_form', $view_data);
+		$this->load->view('template/footer');
+	}
+	####################################################################
+	private function report($location_id, $maitenance_start_register_date, $maitenance_end_register_date){
 		$this->load->library('Pdf');
-	
-
-
-
 		$obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 		$obj_pdf->SetCreator(PDF_CREATOR);
 		$title = "REPORTE GENERAL DE SOPORTE Y MANTENIMIENTO";
@@ -62,7 +72,7 @@ class Maintenances extends CI_Controller {
 		<?php
 			
 			
-		$list_maintenances = $this->model_maintenances->get_list_maintenances();
+		$list_maintenances = $this->model_maintenances->get_list_maintenances($location_id, $maitenance_start_register_date, $maitenance_end_register_date);
 
 		for($i=0; $i<count($list_maintenances); $i++){
 			$list_maintenances[$i]['list_kardexes'] = $this->model_maintenances->get_list_kardexes_by($list_maintenances[$i]['id_maintenance']);
@@ -95,14 +105,15 @@ class Maintenances extends CI_Controller {
 
 						<table border="1">
 							<tr bgcolor="#cccccc">
-								<th>ID KARDEX STATUS</th>			
+								<th>#</th>			
 								<th>Tipo</th>			
 								<th>Marca</th>
 								<th>Modelo</th>
 								<th>Codigo</th>																		
 								<th>Serial</th>																		
-								<th>Ultimo mantenimiento</th>
+								<th>Estado</th>																		
 								<th>Localidad</th>
+								<th>Ultimo cambio en</th>								
 							</tr>
 							<?php 
 							$list_maintenances_kardexes = $list_maintenances[$i]['list_kardexes'];
@@ -170,6 +181,10 @@ class Maintenances extends CI_Controller {
 			$maintenance_data['location_id'] = $_REQUEST['location_id'];
 			$maintenance_data['maintenance_description'] = $_REQUEST['maintenance_description'];
 
+			list($day, $month, $year) = explode("/",$_REQUEST['maintenance_register_date']);
+
+			$maintenance_data['maintenance_register_date'] = $year."-".$month."-".$day;
+
 			$id_maintenance = $this->model_maintenances->maintenance_add($maintenance_data);
 
 		
@@ -180,6 +195,9 @@ class Maintenances extends CI_Controller {
 				$kardex_status_data['kardex_id'] = $list_id_kardexes[$i];				
 				$kardex_status_data['maintenance_id'] = $id_maintenance;
 				$kardex_status_data['kardex_status_value'] = $_REQUEST['kardex_status_value_'.$list_id_kardexes[$i]];
+				$kardex_status_data['kardex_status_register_date'] =  $year."-".$month."-".$year;
+
+
 				$kardex_status_data['location_id'] = $_REQUEST['location_id_'.$list_id_kardexes[$i]];
 
 			   $this->model_inventories->kardex_status_add($kardex_status_data);				   
@@ -190,7 +208,7 @@ class Maintenances extends CI_Controller {
 			
 		}
 
-		$view_data['maintenance_register_date'] = date('d/m/Y', strtotime($this->model_inventories->get_system_time()) );
+		$view_data['maintenance_register_date'] = $maintenance_register_date = date('d/m/Y', strtotime($this->model_inventories->get_system_time()) );
 
 		$view_data['list_kardexes'] = array();
 

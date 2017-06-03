@@ -2,27 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 header('Access-Control-Allow-Origin: *');
 ?>
-<style>
-#logo_container #logo{
-	width: 200px;
-	
-	background-repeat: no-repeat;
-	background-size: contain;
-	border: 0px;
-	padding: 10px;
-}
-#logo_container a{
-	padding: 0px;
-}
-/* rewrite bootstrap */
-.navbar-nav > li > a{
-	padding-top: 27px !important;
-	padding-bottom: 27px !important;
-}
-
-
-</style>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +12,7 @@ header('Access-Control-Allow-Origin: *');
 	<meta charset="utf-8">
 	<title>Maintenance & Support</title>
 	<link rel="stylesheet" href="<?php echo base_url("public/css/bootstrap.css"); ?>">
+  <link rel="stylesheet" href="<?php echo base_url("public/css/ptm.css"); ?>">
 	
 
 	
@@ -60,7 +40,7 @@ header('Access-Control-Allow-Origin: *');
         <li class="dropdown">
           <a href="<?php echo site_url('/maintenances/maintenance_add')?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Soporte y Mantenimiento <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<?php echo site_url('/maintenances/maintenance_add')?>">Agregar Mantenimiento</a></li>
+            <li><a href="<?php echo site_url('/maintenances/maintenance_add')?>">Registrar Mantenimiento</a></li>
             <li><a href="<?php echo site_url('/maintenances/report')?>">Reporte de soporte y mantenimiento</a></li>            
             <li role="separator" class="divider"></li>            
           </ul>
@@ -69,8 +49,9 @@ header('Access-Control-Allow-Origin: *');
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kardex <span class="caret"></span></a>
           <ul class="dropdown-menu">          	
-          	<li><a href="<?php echo site_url('/inventories/kardex_add')?>">(2) Agregar Kardex</a></li>            
-            <li><a href="<?php echo site_url('/inventories/inventory_category_add')?>">(1) Nueva Categoria Kardex</a></li>
+          	<li><a href="<?php echo site_url('/inventories/kardex_add')?>">(2) Registrar Kardex</a></li>            
+            <li><a href="<?php echo site_url('/inventories/inventory_category_add')?>">(1) Registrar Tipo Kardex</a></li>
+            <li><a href="<?php echo site_url('/inventories/report')?>">(3) Reporte general de Kardex de equipos</a></li>
             <li role="separator" class="divider"></li>            
           </ul>
         </li>

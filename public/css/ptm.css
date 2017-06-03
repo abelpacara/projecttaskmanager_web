@@ -1,0 +1,23 @@
+#logo_container #logo{
+	width: 200px;
+	
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: 0px;
+	padding: 10px;
+}
+#logo_container a{
+	padding: 0px;
+}
+/* rewrite bootstrap */
+.navbar-nav > li > a{
+	padding-top: 27px !important;
+	padding-bottom: 27px !important;
+}
+table td{
+	padding: 5px !important;
+}
+
+.ptm_opacity_user_member{
+   opacity: .5;
+}
