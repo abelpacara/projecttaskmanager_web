@@ -14,10 +14,91 @@ class Maintenances extends CI_Controller {
 
       $this->load->helper(array('form', 'url'));
       $this->load->helper("my_views");
+      $this->load->helper("my_dates");
 		$this->load->library('form_validation');
 		$this->load->library('ciqrcode');
 	}
-	
+	####################################################################
+	public function maintenance_add2(){
+		
+		$location_id = NULL;
+		if(isset($_REQUEST['location_id']) AND strcasecmp($_REQUEST['location_id'], "")!=0){
+			$location_id = $_REQUEST['location_id'];
+		}
+		
+
+		if(isset($_REQUEST['btn_save'])){	
+
+			$list_id_kardexes = array();
+			if(isset($_REQUEST['list_id_kardexes'])){
+				$list_id_kardexes = $_REQUEST['list_id_kardexes'];	
+			}
+			
+			
+			$maintenance_data['location_id'] = $_REQUEST['location_id'];
+			$maintenance_data['maintenance_description'] = $_REQUEST['maintenance_description'];
+
+			list($day, $month, $year) = explode("/",$_REQUEST['maintenance_register_date']);
+
+			$maintenance_data['maintenance_register_date'] = $year."-".$month."-".$day;
+
+			$id_maintenance = $this->model_maintenances->maintenance_add($maintenance_data);
+
+		
+			for($i = 0; $i<count($list_id_kardexes); $i++){
+
+
+				
+				$kardex_status_data['kardex_id'] = $list_id_kardexes[$i];				
+				$kardex_status_data['maintenance_id'] = $id_maintenance;
+				$kardex_status_data['kardex_status_value'] = $_REQUEST['kardex_status_value_'.$list_id_kardexes[$i]];
+				$kardex_status_data['kardex_status_register_date'] =  $year."-".$month."-".$year;
+
+
+				$kardex_status_data['location_id'] = $_REQUEST['location_id_'.$list_id_kardexes[$i]];
+
+			   $this->model_inventories->kardex_status_add($kardex_status_data);				   
+			}
+
+			
+
+			
+		}
+
+		$view_data['maintenance_register_date'] = $maintenance_register_date = date('d/m/Y', strtotime($this->model_inventories->get_system_time()) );
+
+		$view_data['list_kardexes'] = array();
+
+		if(isset($_REQUEST['location_id']) AND strcasecmp($_REQUEST['location_id'], "")!=0){			
+			$view_data['list_kardexes'] = $this->model_inventories->get_list_kardexes_full($_REQUEST['location_id']);
+		}
+		
+
+		//$view_data['list_locations'] = $this->model_maintenances->get_list_locations();
+		$list_locations = array();
+		$this->model_inventories->generate_list_locations_tree($list_locations);
+		$view_data['list_locations'] = $list_locations;
+
+
+		$view_data['list_kardexes_status_values'] = $this->model_maintenances->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
+
+
+		
+		$list_maintenances = $this->model_maintenances->get_list_maintenances($location_id);
+
+
+		for($i=0; $i<count($list_maintenances); $i++){
+			$list_maintenances[$i]['list_kardexes'] = $this->model_maintenances->get_list_kardexes_by($list_maintenances[$i]['id_maintenance']);
+		}
+
+		$view_data['list_maintenances'] = $list_maintenances;
+
+
+
+		$this->load->view('template/header');
+		$this->load->view('maintenances/maintenance_add2', $view_data);
+		$this->load->view('template/footer');
+	}
 	####################################################################
 	public function index()
 	{
@@ -27,10 +108,12 @@ class Maintenances extends CI_Controller {
 	public function report_form(){
 
 		if(isset($_REQUEST['btn_generate'])){
-			$this->report($_REQUEST['location_id'], $_REQUEST['maitenance_start_register_date'], $_REQUEST['maitenance_end_register_date']);
+			$this->report($_REQUEST['location_id'], spanish_date_to_mysql( $_REQUEST['maintenance_start_register_date'] ), spanish_date_to_mysql($_REQUEST['maintenance_end_register_date']) );
 		}
 
-		$view_data['list_locations'] = $this->model_maintenances->get_list_locations();
+		$list_locations = array();
+		$this->model_maintenances->generate_list_locations_tree($list_locations);
+		$view_data['list_locations'] = $list_locations;
 
 
 		$this->load->view('template/header');
@@ -38,7 +121,7 @@ class Maintenances extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 	####################################################################
-	private function report($location_id, $maitenance_start_register_date, $maitenance_end_register_date){
+	private function report($location_id, $maintenance_start_register_date, $maintenance_end_register_date){
 		$this->load->library('Pdf');
 		$obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 		$obj_pdf->SetCreator(PDF_CREATOR);
@@ -71,8 +154,7 @@ class Maintenances extends CI_Controller {
 			<h1>REPORTE GENERAL DE SOPORTE Y MANTENIMIENTO</h1>
 		<?php
 			
-			
-		$list_maintenances = $this->model_maintenances->get_list_maintenances($location_id, $maitenance_start_register_date, $maitenance_end_register_date);
+		$list_maintenances =  $this->model_maintenances->get_list_maintenances($location_id, $maintenance_start_register_date, $maintenance_end_register_date);
 
 		for($i=0; $i<count($list_maintenances); $i++){
 			$list_maintenances[$i]['list_kardexes'] = $this->model_maintenances->get_list_kardexes_by($list_maintenances[$i]['id_maintenance']);
@@ -195,7 +277,7 @@ class Maintenances extends CI_Controller {
 				$kardex_status_data['kardex_id'] = $list_id_kardexes[$i];				
 				$kardex_status_data['maintenance_id'] = $id_maintenance;
 				$kardex_status_data['kardex_status_value'] = $_REQUEST['kardex_status_value_'.$list_id_kardexes[$i]];
-				$kardex_status_data['kardex_status_register_date'] =  $year."-".$month."-".$year;
+				$kardex_status_data['kardex_status_register_date'] =  $year."-".$month."-".$day;
 
 
 				$kardex_status_data['location_id'] = $_REQUEST['location_id_'.$list_id_kardexes[$i]];
@@ -220,6 +302,8 @@ class Maintenances extends CI_Controller {
 		$view_data['list_locations'] = $this->model_maintenances->get_list_locations();
 		$view_data['list_kardexes_status_values'] = $this->model_maintenances->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
 
+
+		
 
 		$list_maintenances = $this->model_maintenances->get_list_maintenances($location_id);
 

@@ -132,22 +132,17 @@ $(function(){
 				<tr>
 					<td>Seleccione Localidad</td>	
 					<td>
-						<select name="location_id" 
-						ONCHANGE="location = '<?php echo current_url(); ?>?location_id='+ this.options[this.selectedIndex].value;">
-							<option value="">Localidades...</option>
-							<?php 
-		              	//echo get_display_locations_tree($list_locations_tree,"location_id","localidad seleccionado");
-							for($i=0; $i<count($list_locations); $i++){
-							?>
-								<option value="<?php echo $list_locations[$i]['id_location']?>"
-								<?php if(isset($_REQUEST['location_id']) AND strcasecmp($list_locations[$i]['id_location'], $_REQUEST['location_id'])==0) { echo " SELECTED "; }?>
-								>
-									<?php echo $list_locations[$i]['location_name']?>
-								</option>
-							<?php
-							}
-		              	?>	
-						</select>
+
+						<?php
+						$location_id_selected = "";
+						if(isset($_REQUEST['location_id'])){
+							$location_id_selected = $_REQUEST['location_id'];
+						}
+
+						echo get_display_locations_tree($list_locations, $name="location_id", $location_id_selected, $onchange=TRUE);
+						?>
+
+						
 	              
 	         	</td>	         	
          	</tr>
@@ -323,7 +318,7 @@ $(function(){
 		<table class="table table-striped table-hover">
 			
 			<tr>
-				
+				<th width="3%"  style="text-align: center; font-weight: bold;">#</th>
 				<th width="3%"  style="text-align: center; font-weight: bold;">ID MAINTENANCE</th>
 				<th width="30%" style="text-align: center; font-weight: bold;">DESCRIPCION</th>
 				<th width="10%" style="text-align: center; font-weight: bold;">FECHA</th>
@@ -335,6 +330,7 @@ $(function(){
 			for($i=0; $i<count($list_maintenances); $i++){
 				?>
 				<tr>					
+					<td><?php echo $i+1?></td>
 					<td><?php echo $list_maintenances[$i]['id_maintenance']?></td>
 					<td><?php echo $list_maintenances[$i]['maintenance_description']?></td>
 					<td><?php echo $list_maintenances[$i]['maintenance_register_date']?></td>

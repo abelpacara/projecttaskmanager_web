@@ -148,9 +148,19 @@ $(function(){
 				<tr>
 					<td>Localidad</td>	
 					<td>
-						<?php
-						echo get_display_locations_tree($list_locations, $name="location_id", "", $onchange=FALSE);
-						?>               
+						<select name="location_id">
+							<option>Localidades...</option>
+							<?php 
+		              	//echo get_display_locations_tree($list_locations_tree,"location_id","localidad seleccionado");
+							for($i=0; $i<count($list_locations); $i++){
+							?>
+								<option value="<?php echo $list_locations[$i]['id_location']?>">
+									<?php echo $list_locations[$i]['location_name']?>
+								</option>
+							<?php
+							}
+		              	?>	
+						</select>	              
 	         	</td>
          	</tr>
          	<tr>
@@ -188,23 +198,16 @@ $(function(){
 		echo form_close();
 		?>
 		
-		<div class="table-responsive"> 
-			<div class="panel-default">
-				<div class="panel-heading">
-		       <h4>
-		         LISTA DE KARDEX DE EQUIPOS
-		       </h4>
-		     	</div>
-	     	</div>
-		<table class="table table-striped table-fixed">
+		<table border="1">
+			<CAPTION>LISTA DE KARDEX DE EQUIPOS</CAPTION>
 			<tr>
-				<th rowspan="2" class="col-md-1">#</th>
-				<th rowspan="2" class="col-md-1">Tipo</th>
-				<th rowspan="2" class="col-md-1">Marca</th>
-				<th rowspan="2" class="col-md-1">Modelo</th>
-				<th rowspan="2" class="col-md-1">Codigo</th>
-				<th rowspan="2" class="col-md-1">Serial</th>
-				<th colspan="4" class="col-md-6">Ultimo cambio en</th>				
+				<th rowspan="2">#</th>
+				<th rowspan="2">Categoria</th>
+				<th rowspan="2">Marca</th>
+				<th rowspan="2">Modelo</th>
+				<th rowspan="2">Codigo</th>
+				<th rowspan="2">Serial</th>
+				<th colspan="4">Ultimo cambio en</th>				
 			</tr>
 			<tr>
 				<th>ID KARDEX STATUS</th>				
@@ -232,7 +235,6 @@ $(function(){
 			}
 			?>
 		</table>
-		</div>
 
 	</div>
 </div>

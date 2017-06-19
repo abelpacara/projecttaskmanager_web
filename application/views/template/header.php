@@ -41,7 +41,7 @@ header('Access-Control-Allow-Origin: *');
           <a href="<?php echo site_url('/maintenances/maintenance_add')?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Soporte y Mantenimiento <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?php echo site_url('/maintenances/maintenance_add')?>">Registrar Mantenimiento</a></li>
-            <li><a href="<?php echo site_url('/maintenances/report')?>">Reporte de soporte y mantenimiento</a></li>            
+            <li><a href="<?php echo site_url('/maintenances/report_form')?>">Reporte de soporte y mantenimiento</a></li>            
             <li role="separator" class="divider"></li>            
           </ul>
         </li>
@@ -51,7 +51,8 @@ header('Access-Control-Allow-Origin: *');
           <ul class="dropdown-menu">          	
           	<li><a href="<?php echo site_url('/inventories/kardex_add')?>">(2) Registrar Kardex</a></li>            
             <li><a href="<?php echo site_url('/inventories/inventory_category_add')?>">(1) Registrar Tipo Kardex</a></li>
-            <li><a href="<?php echo site_url('/inventories/report')?>">(3) Reporte general de Kardex de equipos</a></li>
+            <li><a href="<?php echo site_url('/inventories/report_form')?>">(3) Reporte general de Kardex de equipos</a></li>
+            <li><a href="<?php echo site_url('/inventories/kardex_search')?>">(4) Buscar Kardex</a></li>
             <li role="separator" class="divider"></li>            
           </ul>
         </li>

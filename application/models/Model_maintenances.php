@@ -6,26 +6,45 @@ class Model_Maintenances extends Model_Template
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
    #######################################################   
-   function get_list_maintenances($location_id="", $maitenance_start_register_date="", $maitenance_end_register_date=""){
+   function get_list_maintenances($location_id=null, $maintenance_start_register_date="", $maintenance_end_register_date="", $level=0){
 
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      if(isset($location_id) AND strcasecmp($location_id, "")!=0){
+        $list_tree = array();
+        $this->generate_list_locations_tree($list_tree, $location_id);
+
+        $locations_ids = array();
+        for($i=0; $i<count($list_tree); $i++){
+          $locations_ids[] = $list_tree[$i]['id_location'];
+        }
+        $locations_ids[] = $location_id;
+      }
+
+
+      $this->db->trans_start();
       $this->db->select('*');
       $this->db->from('maintenances');
       $this->db->join('locations', "id_location=location_id");
-      if(isset($location_id) AND strcasecmp($location_id, "")!=0){
-        $this->db->where('location_id', $location_id);  
-      }
-      if(isset($maitenance_start_register_date) AND strcasecmp($maitenance_start_register_date, "")!=0){
-        $this->db->where('maitenance_start_register_date', $maitenance_start_register_date);  
-      }
-      if(isset($maitenance_end_register_date) AND strcasecmp($maitenance_end_register_date, "")!=0){
-        $this->db->where('maitenance_end_register_date', $maitenance_end_register_date);  
-      }
       
+      if(isset($maintenance_start_register_date) AND strcasecmp($maintenance_start_register_date, "")!=0
+      AND isset($maintenance_end_register_date) AND strcasecmp($maintenance_end_register_date, "")!=0){
+
+        $this->db->where("maintenance_register_date BETWEEN '".$maintenance_start_register_date."' AND '".$maintenance_end_register_date."'");
+      }
+            
+      if(isset($location_id) AND strcasecmp($location_id, "")!=0){
+            $this->db->where_in('location_id',$locations_ids);
+      }
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%      
       $this->db->order_by('maintenance_register_date', "DESC");
+      $query = $this->db->get();      
 
-      $query = $this->db->get();
+      $list_result = $query->result_array();
+      $this->db->trans_complete();
 
-      return $query->result_array();
+      return $list_result;
+
+      
    }
    #######################################################   
    function get_list_kardexes_by($maintenance_id){

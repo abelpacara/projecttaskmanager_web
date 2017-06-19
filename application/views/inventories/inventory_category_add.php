@@ -24,9 +24,17 @@
 		<?php
 		echo form_close();
 		?>
-		
-		<table border="1" width="100%">
-			<caption>LISTA DE TIPOS DE KARDEX</caption>
+
+		<div class="table-responsive">
+			<div class="panel-default">
+				<div class="panel-heading">
+		       <h4>
+		         LISTA DE TIPOS DE KARDEX
+		       </h4>
+		     	</div>
+	     	</div> 
+			<table class="table table-striped">
+			
 			<tr>
 				<th>
 					#
@@ -47,7 +55,7 @@
 			}
 			?>
 		</table>
-
+		</div>
 
 	</div>
 </div>

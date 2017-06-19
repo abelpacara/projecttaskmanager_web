@@ -11,16 +11,94 @@ class Inventories extends CI_Controller {
       $this->load->model('model_inventories');
       $this->load->helper(array('form', 'url'));
       $this->load->helper("my_views");
+      $this->load->helper("my_dates");
 		$this->load->library('form_validation');
 		$this->load->library('ciqrcode');
 	}
-	function report()
+	####################################################################
+	public function kardex_manager()
 	{
+		if(isset($_REQUEST['btn_save'])){
+
+			$id_inventory_category = NULL;
+			$inventory_category = $this->model_inventories->get_inventory_category_by($_REQUEST['inventory_category_name']);
+			if( count($inventory_category)>0 ){
+				$id_inventory_category = $inventory_category['id_inventory_category'];
+			}
+			else{
+				$inventory_category_data['inventory_category_name'] = $_REQUEST['inventory_category_name'];
+				$id_inventory_category = $this->model_inventories->inventory_category_add($inventory_category_data);
+			}
+
+			$id_inventory = NULL;			
+			$inventory = $this->model_inventories->get_inventory_by($_REQUEST['inventory_mark'], $_REQUEST['inventory_model']);
+			if( count($inventory)>0 ){
+				$id_inventory = $inventory['id_inventory'];
+			}
+			else{
+				$inventory_data['inventory_mark'] = $_REQUEST['inventory_mark'];
+				$inventory_data['inventory_model'] = $_REQUEST['inventory_model'];
+				$inventory_data['inventory_category_id'] = $id_inventory_category;
+				$id_inventory = $this->model_inventories->inventory_add($inventory_data);				
+			}
+
+			$kardex_data['kardex_code'] = $_REQUEST['kardex_code'];
+			$kardex_data['kardex_serial'] = $_REQUEST['kardex_serial'];
+			$kardex_data['inventory_id'] = $id_inventory;
+			$id_kardex = $this->model_inventories->kardex_add($kardex_data);
+
+			$kardex_status_data['location_id'] = $_REQUEST['location_id'];
+			$kardex_status_data['kardex_status_value'] = $_REQUEST['kardex_status_value'];
+			$kardex_status_data['kardex_status_description'] = $_REQUEST['kardex_status_description'];
+			
+
+			list($day, $month, $year) = explode("/", $_REQUEST['kardex_status_register_date']);
+
+			$kardex_status_data['kardex_status_register_date'] = $year."-".$month."-".$day;
+
+			$kardex_status_data['kardex_id'] = $id_kardex;
+			$this->model_inventories->kardex_status_add($kardex_status_data);
+		}
+
+
+		 /* $list_locations_tree = array();      
+      $this->model_inventories->generate_list_locations_tree($list_locations_tree);
+      $view_data['list_locations_tree'] = $list_locations_tree;*/
+
+      $view_data['list_locations'] = $this->model_inventories->get_list_locations();
+      $view_data['kardex_status_register_date'] = date('d/m/Y', strtotime($this->model_inventories->get_system_time()) );
+
+		$view_data['list_kardexes_status_values'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
+
+		$view_data['list_kardexes_full'] = $this->model_inventories->get_list_kardexes_full();
+
+		$this->load->view('template/header');
+		$this->load->view('inventories/kardex_manager', $view_data);
+		$this->load->view('template/footer');
+
+	}
+	####################################################################
+	public function report_form(){
+
+		if(isset($_REQUEST['btn_generate'])){
+			$this->report($_REQUEST['location_id'], 
+								isset($_REQUEST['maintenance_start_register_date'])? NULL: spanish_date_to_mysql( $_REQUEST['maintenance_start_register_date'] ), 
+								isset($_REQUEST['maintenance_end_register_date'])? NULL: spanish_date_to_mysql( $_REQUEST['maintenance_end_register_date'] ) );
+		}
+
+		$list_locations = array();
+		$this->model_inventories->generate_list_locations_tree($list_locations);
+		$view_data['list_locations'] = $list_locations;
+
+
+		$this->load->view('template/header');
+		$this->load->view('inventories/report_form', $view_data);
+		$this->load->view('template/footer');
+	}
+	####################################################################
+	function report($location_id, $maintenance_start_register_date, $maintenance_end_register_date){
 		$this->load->library('Pdf');
 	
-
-
-
 		$obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 		$obj_pdf->SetCreator(PDF_CREATOR);
 		$title = "REPORTE GENERAL DE KARDEX DE EQUIPOS";
@@ -53,7 +131,7 @@ class Inventories extends CI_Controller {
 		<?php
 			
 			
-		$list_kardexes_full = $this->model_inventories->get_list_kardexes_full();
+		$list_kardexes_full = $this->model_inventories->get_list_kardexes_full($location_id);
 		?>
 
 
@@ -161,11 +239,22 @@ class Inventories extends CI_Controller {
 		$list_found_kardexes = array();
 		$kardex_code = "";
 		$kardex_serial = "";
+		$location_id = "";
+		$kardex_status_value = "";
 		if(isset($_REQUEST['btn_search'])){
-			$kardex_code = $_REQUEST['kardex_code'];
-			$kardex_serial = $_REQUEST['kardex_serial'];
+			$view_data['kardex_code'] = $kardex_code = $_REQUEST['kardex_code'];
+			$view_data['kardex_serial'] = $kardex_serial = $_REQUEST['kardex_serial'];
+			$view_data['location_id'] = $location_id = $_REQUEST['location_id'];
+			$view_data['kardex_status_value'] = $kardex_status_value = $_REQUEST['kardex_status_value'];
 		}
-		$view_data['list_found_kardexes'] = $this->model_inventories->get_list_found_kardexes($kardex_code, $kardex_serial);
+
+		$view_data['list_kardexes_status_values'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
+		
+		$list_locations = array();
+      $this->model_inventories->generate_list_locations_tree($list_locations);
+      $view_data['list_locations'] = $list_locations;
+
+		$view_data['list_found_kardexes'] = $this->model_inventories->get_list_kardexes_full($location_id, $kardex_code, $kardex_serial, $kardex_status_value);
 		 
 
 		
@@ -185,7 +274,16 @@ class Inventories extends CI_Controller {
 		}		
 		echo json_encode($matches);
 	}
-	
+	####################################################################
+	public function list_inventories_categories(){		
+		header('Access-Control-Allow-Origin: *');
+
+		$matches = array();
+		if(isset($_REQUEST['term'])){			
+			$matches = $this->array_values_recursive( $this->model_inventories->get_list_inventories_categories_by($_REQUEST['term']) );
+		}		
+		echo json_encode($matches);
+	}
 	####################################################################
 	public function list_kardexes_status(){
 
@@ -256,9 +354,7 @@ class Inventories extends CI_Controller {
 			$kardex_status_data['kardex_status_description'] = $_REQUEST['kardex_status_description'];
 			
 
-			list($day, $month, $year) = explode("/", $_REQUEST['kardex_status_register_date']);
-
-			$kardex_status_data['kardex_status_register_date'] = $year."-".$month."-".$day;
+			$kardex_status_data['kardex_status_register_date'] = spanish_date_to_mysql($_REQUEST['kardex_status_register_date']);
 
 			$kardex_status_data['kardex_id'] = $id_kardex;
 			$this->model_inventories->kardex_status_add($kardex_status_data);
@@ -269,7 +365,10 @@ class Inventories extends CI_Controller {
       $this->model_inventories->generate_list_locations_tree($list_locations_tree);
       $view_data['list_locations_tree'] = $list_locations_tree;*/
 
-      $view_data['list_locations'] = $this->model_inventories->get_list_locations();
+      $list_locations = array();
+      $this->model_inventories->generate_list_locations_tree($list_locations);
+      $view_data['list_locations'] = $list_locations;
+
       $view_data['kardex_status_register_date'] = date('d/m/Y', strtotime($this->model_inventories->get_system_time()) );
 
 		$view_data['list_kardexes_status_values'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");

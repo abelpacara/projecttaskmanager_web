@@ -1,9 +1,16 @@
 <?php
-function get_display_locations_tree($list_locations_tree, $name="", $item_selected="")
+function get_display_locations_tree($list_locations_tree, $name="", $item_selected="",$onchange=FALSE)
 {
    ob_start();
    ?>
-   <select name="<?php echo $name?>" class="accounts_dropdown">
+   <select name="<?php echo $name?>" class="accounts_dropdown"
+    <?php
+    if($onchange==TRUE){
+      echo " ONCHANGE=\"location='".current_url()."?".$name."='+this.options[this.selectedIndex].value; \"";
+      //location = 'http://[::1]/projecttaskmanager_web/index.php/maintenances/maintenance_add?location_id='+ this.options[this.selectedIndex].value;
+    }
+    ?>
+    >
       <option value="">Localidad ....</option>
       <?php
       for($i=0;$i<count($list_locations_tree);$i++)
