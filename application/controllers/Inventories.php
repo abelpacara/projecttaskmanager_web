@@ -70,7 +70,7 @@ class Inventories extends CI_Controller {
 
 		$view_data['list_kardexes_status_values'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
 
-		$view_data['list_kardexes_full'] = $this->model_inventories->get_list_kardexes_full();
+		$view_data['list_kardexes_full'] = $this->model_inventories->get_list_kardexes_full_by_locations_tree();
 
 		$this->load->view('template/header');
 		$this->load->view('inventories/kardex_manager', $view_data);
@@ -131,7 +131,7 @@ class Inventories extends CI_Controller {
 		<?php
 			
 			
-		$list_kardexes_full = $this->model_inventories->get_list_kardexes_full($location_id);
+		$list_kardexes_full = $this->model_inventories->get_list_kardexes_full_by_locations_tree($location_id);
 		?>
 
 
@@ -254,7 +254,7 @@ class Inventories extends CI_Controller {
       $this->model_inventories->generate_list_locations_tree($list_locations);
       $view_data['list_locations'] = $list_locations;
 
-		$view_data['list_found_kardexes'] = $this->model_inventories->get_list_kardexes_full($location_id, $kardex_code, $kardex_serial, $kardex_status_value);
+		$view_data['list_found_kardexes'] = $this->model_inventories->get_list_kardexes_full_by_locations_tree($location_id, $kardex_code, $kardex_serial, $kardex_status_value);
 		 
 
 		
@@ -373,7 +373,7 @@ class Inventories extends CI_Controller {
 
 		$view_data['list_kardexes_status_values'] = $this->model_inventories->get_list_table_enum_column_values("kardexes_status","kardex_status_value");
 
-		$view_data['list_kardexes_full'] = $this->model_inventories->get_list_kardexes_full();
+		$view_data['list_kardexes_full'] = $this->model_inventories->get_list_kardexes_full_by_locations_tree();
 
 		$this->load->view('template/header');
 		$this->load->view('inventories/kardex_add', $view_data);

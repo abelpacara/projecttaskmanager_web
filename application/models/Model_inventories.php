@@ -21,6 +21,72 @@ class Model_Inventories extends Model_Template
           $sql_where .= " AND ";            
         }
 
+        $sql_where .= " id_location IN (".$location_id.") ";
+      }
+
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      if(isset($kardex_code) AND strcasecmp(trim($kardex_code),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " kardex_code LIKE '%".$kardex_code."%' ";
+      }
+
+      if(isset($kardex_serial) AND strcasecmp(trim($kardex_serial),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " kardex_serial LIKE '%".$kardex_serial."%' ";
+      }
+
+      if(isset($kardex_status_value) AND strcasecmp(trim($kardex_status_value),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " kardex_status_value='".$kardex_status_value."' ";
+      }
+      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      $sql_where_exists = "";
+      if(strcasecmp(trim($sql_where),"")!=0){
+        $sql_where_exists = " WHERE ".$sql_where;
+      }
+
+      $sql = "SELECT  *
+              FROM (SELECT m1.*
+                    FROM kardexes_status m1 LEFT JOIN kardexes_status m2
+                     ON (m1.kardex_id = m2.kardex_id AND m1.id_kardex_status < m2.id_kardex_status)
+                    WHERE m2.id_kardex_status IS NULL) AS kardexes_status_aux
+
+              JOIN kardexes ON (id_kardex = kardexes_status_aux.kardex_id)
+              JOIN inventories ON id_inventory = inventory_id
+              JOIN locations ON id_location = location_id
+              JOIN inventories_categories ON id_inventory_category = inventory_category_id
+              ".$sql_where_exists."
+              ORDER BY kardexes_status_aux.id_kardex_status DESC";
+
+
+      $query = $this->db->query($sql);
+      return $query->result_array();
+   }
+   #######################################################   
+   function get_list_kardexes_full_by_locations_tree($location_id="", $kardex_code="", $kardex_serial="", $kardex_status_value=""){
+      $sql_where=" ";
+      $sql_where_counter =0;
+
+      
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      if(isset($location_id) AND strcasecmp(trim($location_id),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
 
          $list_tree = array();
         $this->generate_list_locations_tree($list_tree, $location_id);
