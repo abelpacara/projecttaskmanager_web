@@ -1,0 +1,184 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #222;
+    font: 81.25%/1.5em Tahoma, Geneva, sans-serif;
+    background: #bdbdbd url(/img/bg_main.jpg) repeat;
+}
+
+a, a:link, a:visited {
+    color: #000;
+    text-decoration: underline;
+}
+a:hover {
+    text-decoration: none;
+}
+a.go-to-top {
+    display: block;
+    float: right;
+    clear: both;
+    width: 68px;
+    height: 20px;
+    margin-right: -45px;
+    padding: 5px 0 5px 7px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    background: url(/img/bg_gototop.png) no-repeat;
+}
+a.go-to-top:hover {
+    color: #000;
+}
+
+p { margin: 0 0 10px 0; padding: 0; }
+ul, ol { margin-top: 0; margin-bottom: 10px; }
+img { border: none; vertical-align: middle; }
+blockquote { font-style: italic; margin: 0 0 0 10px;}
+dt, cite { font-weight: bold; }
+
+h1, h2, h3, h4, h5, h6 {
+    color: #000;
+    font-weight: normal;
+}
+h1 {
+    font-size: 2.333em;
+    margin: 0 0 20px;
+    padding: 5px 0 10px 0;
+    background: url(/img/hr_divider.png) bottom repeat-x;
+}
+h2 { font-size: 1.666em; margin: 0 0 15px; padding: 0; }
+h3 { font-size: 1.5em; margin: 0 0 15px; padding: 0; }
+h4 { font-size: 1.333em; margin: 0 0 10px; padding: 0; font-family: Arial, sans-serif; font-weight: bold; }
+h5 { font-size: 1.166em; margin: 0 0 5px; padding: 0; }
+
+.cleaner { clear: both; }
+.h10 { height: 10px; }
+.h20 { height: 20px; }
+.h30 { height: 30px; }
+.h40 { height: 40px; }
+.h50 { height: 50px; }
+.h60 { height: 60px; }
+
+.image-wrapper {
+    display: inline-block;
+    position: relative;
+    margin: 3px 0 10px 0;
+    padding: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+.image-fl {
+    float: left;
+    margin: 3px 20px 20px 0;
+}
+.image-fr {
+    float: right;
+    margin: 3px 0 20px 20px;
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.container>header {
+    width: 780px;
+    height: 70px;
+    padding: 40px 10px 0 10px;
+    background: url(/img/bg_head.jpg) no-repeat;
+}
+.container>header>a, .container>header>a:link, .container>header>a:visited, .container>header>a:hover {
+    display: block;
+    float: left;
+    height: 32px;
+    font-size: 2.5em;
+    outline: none;
+    text-decoration: none;
+}
+nav {
+    float: right;
+    margin-top: 10px;
+    width: 350px;
+}
+nav ul {
+    padding: 9px 0 0 0;
+    margin: 0;
+    list-style: none;
+}
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+nav ul li a, nav ul li span {
+    float: left;
+    display: block;
+    width: 80px;
+    height: 26px;
+    font-size: 1.166em;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+}
+nav ul li a:hover, nav ul li.current span {
+    color: #fff;
+    padding-top: 3px;
+    height: 23px;
+    background: url(/img/bg_menu_hover.png) no-repeat;
+}
+
+.content-top {
+    width: 800px;
+    height: 10px;
+    background: url(/img/bg_content_top.png) no-repeat;
+}
+.content-bottom {
+    width: 800px;
+    height: 28px;
+    background: url(/img/bg_content_btm.png) no-repeat;
+}
+.content {
+    width: 700px;
+    padding: 30px 50px 0 50px;
+    background: url(/img/bg_content_main.png) repeat-y;
+}
+
+footer {
+    width: 780px;
+    padding: 0 10px 20px 10px;
+    text-align: center;
+    color: #000;
+}
+
+#common h3 {
+    padding-top: 18px;
+}
+#common dt, #common dd {
+    font-size: 1.166em;
+    font-weight: normal;
+    line-height: 25px;
+}
+#common dt {
+    display: inline-block;
+    float: left;
+    width: 100px;
+    color: #999;
+}
+#experience .subtitle, #education .subtitle {
+    font-size: 1.1em;
+    color: #999;
+    padding-bottom: 11px;
+}
+#experience .locality:before, #education .locality:before {
+    content: "|";
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.employer {
+    font-style: italic;
+    margin-left: 40px;
+    color: #555;
+    background: #eee;
+    padding: 6px 12px;
+    border-radius: 6px;
+}

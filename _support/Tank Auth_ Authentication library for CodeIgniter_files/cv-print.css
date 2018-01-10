@@ -1,0 +1,12 @@
+@import url(generic.css);
+
+body, .content {
+    background: none;
+}
+nav, h1, footer, .content-top, .content-bottom, a.go-to-top {
+    display: none;
+}
+.container>header {
+    height: 30px;
+    padding-left: 45px;
+}

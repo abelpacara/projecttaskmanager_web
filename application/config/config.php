@@ -1,6 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$config['uri_images_files'] = '/public/images';
+
+$config['uri_maintenances_files'] = '/public/uploads/maintenances';
+
+$config['uri_clients_companies_files'] = array("uri"=>'/public/images_uploads/images_clients_companies',
+                                         "thumb1_width"=>"32",
+                                         "thumb1_height"=>"32",
+                                             );
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,9 +31,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-############$config['base_url'] = 'http://boliviawebdesign.com/projecttaskmanager_web';
-//$config['base_url'] = 'http://localhost/projecttaskmanager_web';
-$config['base_url'] = '';
+###$config['base_url'] = 'http://boliviawebdesign.com/projecttaskmanager_web/';
+$config['base_url'] = 'http://192.168.132.6/projecttaskmanager_web/';
 
 
 /*
@@ -38,7 +45,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

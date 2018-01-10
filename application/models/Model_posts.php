@@ -19,11 +19,13 @@ class Model_Posts extends Model_Template
       return $query->result_array();
    }
    function get_list_discussions(){
-
-    $query = $this->db->query("SELECT * FROM posts WHERE post_type='discussion';");         
+      $query = $this->db->query("SELECT * FROM posts WHERE post_type='discussion';");         
       return $query->result_array();
    }
-
+   function get_list_tasks(){
+      $query = $this->db->query("SELECT * FROM posts WHERE post_type='task';");         
+      return $query->result_array();
+   }
    function get_list_posts(){
 
    	$query = $this->db->query("SELECT * FROM posts;");         

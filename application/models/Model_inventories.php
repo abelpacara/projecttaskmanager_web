@@ -5,7 +5,210 @@ class Model_Inventories extends Model_Template
        parent::__construct();       
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
+   #######################################################
+   function get_list_kardexes_by_location($location_id){   
+       $this->db->select('*');      
+      $this->db->from('(SELECT m1.*
+                        FROM kardexes_status m1 LEFT JOIN kardexes_status m2
+                         ON (m1.kardex_id = m2.kardex_id AND m1.id_kardex_status < m2.id_kardex_status)
+                        WHERE m2.id_kardex_status IS NULL) AS kardexes_status_aux');
+      
+      $this->db->join('kardexes', 'id_kardex = kardexes_status_aux.kardex_id');      
+      $this->db->join('inventories', 'id_inventory = inventory_id');
+      $this->db->join('locations', 'id_location = location_id');      
+      $this->db->join('inventories_categories', 'id_inventory_category = inventory_category_id');      
+      $this->db->where('kardexes_status_aux.location_id', $location_id);
+      
+      $query = $this->db->get();
+      return $query->result_array();
+   }
+   #######################################################
+   function get_list_purchases(){      
+      $this->db->select('*');      
+      $this->db->from('purchases');
+      $this->db->join('purchases_items', 'id_purchase=purchase_id');      
+      $this->db->join('inventories_categories', 'id_inventory_category=inventory_category_id');
+
+      $this->db->order_by('purchase_start_process_date','DESC');
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }
+   /**
+   *get too last kardex status 
+   */
+   #######################################################
+   function kardex_delete($kardex_id){
+      $sql = "DELETE FROM `kardexes` WHERE id_kardex=".$kardex_id.";";
+      $query = $this->db->query($sql);      
+   }
+   #######################################################
+   function kardexes_status_delete($kardex_id){
+      $sql = "DELETE FROM `kardexes_status` WHERE kardex_id=".$kardex_id.";";
+      $query = $this->db->query($sql);      
+   }
+   #######################################################
+   function get_kardex_status_first_by($kardex_id){
+      $sql = "SELECT * FROM `kardexes_status` WHERE kardex_id=".$kardex_id." ORDER BY kardexes_status.`id_kardex_status` ASC LIMIT 1";
+      $query = $this->db->query($sql);
+      return $query->row_array();
+   }
+   #######################################################
+   function kardex_status_first_update($kardex_status_data, $kardex_id){
+      $kardex_status_first = $this->get_kardex_status_first_by($kardex_id);
+
+      $query = $this->db->update('kardexes_status', $kardex_status_data, "id_kardex_status=".$kardex_status_first['id_kardex_status']);
+      return $this->db->insert_id();      
+   }
+   #######################################################   
+   function get_list_kardexes_full($location_id="", $kardex_code="", $kardex_serial="", $kardex_status_value="", $inventory_category_name="", $inventory_mark="", $inventory_model=""){
+      $sql_where=" ";
+      $sql_where_counter =0;
+
+      
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      if(isset($location_id) AND strcasecmp(trim($location_id),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+
+         $list_tree = array();
+        $this->generate_list_locations_tree($list_tree, $location_id);
+
+        $string_locations_ids = "";
+        for($i=0; $i<count($list_tree); $i++){
+          $string_locations_ids .= $list_tree[$i]['id_location'].", ";
+
+        }
+        $string_locations_ids .= $location_id;
+
+        $sql_where .= " id_location IN (".$string_locations_ids.") ";
+      }
+
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      if(isset($kardex_code) AND strcasecmp(trim($kardex_code),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " kardex_code LIKE '%".$kardex_code."%' ";
+      }
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      if(isset($kardex_serial) AND strcasecmp(trim($kardex_serial),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " kardex_serial LIKE '%".$kardex_serial."%' ";
+      }
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      if(isset($inventory_mark) AND strcasecmp(trim($inventory_mark),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " inventory_mark LIKE '%".$inventory_mark."%' ";
+      }
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%      
+      if(isset($inventory_mark) AND strcasecmp(trim($inventory_category_name),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " inventory_category_name LIKE '%".$inventory_category_name."%' ";
+      }
+      //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      
+
+
+      if(isset($kardex_status_value) AND strcasecmp(trim($kardex_status_value),"")!=0){
+        $sql_where_counter++;
+        if($sql_where_counter>1){
+          $sql_where .= " AND ";            
+        }
+
+        $sql_where .= " kardex_status_value='".$kardex_status_value."' ";
+      }
+      #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      $sql_where_exists = "";
+      if(strcasecmp(trim($sql_where),"")!=0){
+        $sql_where_exists = " WHERE ".$sql_where;
+      }
+
+      $sql = "SELECT  *
+              FROM (SELECT m1.*
+                    FROM kardexes_status m1 LEFT JOIN kardexes_status m2
+                     ON (m1.kardex_id = m2.kardex_id AND m1.id_kardex_status < m2.id_kardex_status)
+                    WHERE m2.id_kardex_status IS NULL) AS kardexes_status_aux
+
+              JOIN kardexes ON (id_kardex = kardexes_status_aux.kardex_id)
+              JOIN inventories ON id_inventory = inventory_id
+              JOIN locations ON id_location = location_id
+              JOIN inventories_categories ON id_inventory_category = inventory_category_id
+              ".$sql_where_exists."
+              ORDER BY kardexes_status_aux.id_kardex_status DESC";
+
+      
+
+      $query = $this->db->query($sql);
+      return $query->result_array();
+   }
    
+   #######################################################
+   function inventory_category_add($data){
+      $query = $this->db->insert('inventories_categories', $data);
+      return $this->db->insert_id();      
+   }
+   #######################################################   
+   function get_inventory_by($id_inventory_category, $inventory_mark, $inventory_model){
+      $this->db->select('*');      
+      $this->db->from('inventories');
+      $this->db->where('inventory_category_id', $id_inventory_category);
+      $this->db->where('inventory_mark', $inventory_mark);
+      $this->db->where('inventory_model', $inventory_model);
+
+      $query = $this->db->get();
+      return $query->row_array();
+   }
+   #######################################################   
+   function get_inventory_category_by($inventory_category){
+      $this->db->select('*');      
+      $this->db->from('inventories_categories');
+      $this->db->where('inventory_category_name', $inventory_category);
+
+      $query = $this->db->get();
+      return $query->row_array();
+   }
+   #######################################################   
+   function is_kardex_code_exists($kardex_code_search){
+      $this->db->select('*');      
+      $this->db->from('kardexes');
+      $this->db->where('kardex_code', $kardex_code_search);
+
+      $query = $this->db->get();
+      $row = $query->row_array();
+
+      if(count($row)>0){
+        return TRUE;
+      }
+      return FALSE;
+   }
+   #######################################################   
+   function get_list_inventories_categories_by($term_search){
+
+      $this->db->select('*');      
+      $this->db->from('inventories_categories');
+      $this->db->like('inventory_category_name', $term_search);
+
+      $query = $this->db->get();
+      return $query->result_array();
+   }
    #######################################################   
    function get_list_inventories(){
 
@@ -17,12 +220,15 @@ class Model_Inventories extends Model_Template
       return $query->result_array();
    }
    #######################################################   
-   function get_list_found_kardexes($kardex_code="", $kardex_serial=""){
+   function get_list_found_kardexes($kardex_code="", $kardex_serial="", $location_id){
  
 
       $this->db->select('*');
       $this->db->from('kardexes');
       $this->db->join('inventories', 'id_inventory = inventory_id');
+
+      $this->db->join('inventories', 'id_inventory = inventory_id');
+
       $this->db->join('inventories_categories', 'id_inventory_category = inventory_category_id');      
 
       if(isset($kardex_code) AND strcasecmp($kardex_code, "")!=0){
@@ -32,6 +238,11 @@ class Model_Inventories extends Model_Template
       if(isset($kardex_serial) AND strcasecmp($kardex_serial, "")!=0){
         $this->db->like('kardex_serial', $kardex_serial);
       }
+
+      if(isset($kardex_serial) AND strcasecmp($kardex_serial, "")!=0){
+        $this->db->where('location_id', $location_id);
+      }
+
       $query = $this->db->get();
 
       return $query->result_array();
@@ -80,25 +291,31 @@ class Model_Inventories extends Model_Template
    }
    
    #######################################################
-   function get_list_kardexes_status(){
+   function get_list_kardexes_status($kardex_id=""){
+
+      $sql_condition="";  
+      if(strcasecmp(trim($kardex_id), "")!=0){
+        $sql_condition =" WHERE kardex_id='".$kardex_id."' ";
+      }
+
       $sql = "SELECT kardexes_status.*, locations.* FROM kardexes 
               LEFT JOIN (inventories_categories, inventories, kardexes_status, locations)  
               ON (id_inventory_category = inventory_category_id
                 AND id_inventory = inventory_id
                 AND id_kardex = kardex_id
                 AND id_location = location_id)
+               ".$sql_condition."
               ORDER BY kardex_status_register_date DESC;";
       $query = $this->db->query($sql);
       return $query->result_array();
    }
    #######################################################
-   function add_kardex_status($data){
+   function kardex_status_add($data){
       $query = $this->db->insert('kardexes_status', $data);
-      return $this->db->insert_id();
-      
+      return $this->db->insert_id();      
    }
    #######################################################
-   function save_kardex($data, $kardex_id){
+   function kardex_update($data, $kardex_id){
       $query = $this->db->update('kardexes', $data, "id_kardex=".$kardex_id);
       return $this->db->insert_id();      
    }
@@ -122,15 +339,4 @@ class Model_Inventories extends Model_Template
       return $query->result_array();
    }
    
-   #######################################################
-   function inventory_category_add($data){
-      $query = $this->db->insert('inventories_categories', $data);
-      return $this->db->insert_id();
-   }
-   #######################################################
-   function get_list_locations(){
-      $sql = "SELECT * FROM locations;";
-      $query = $this->db->query($sql);
-      return $query->result_array();
-   }   
 }

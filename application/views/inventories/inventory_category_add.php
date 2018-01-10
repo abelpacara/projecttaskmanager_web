@@ -1,5 +1,5 @@
 <div id="container">
-	<h1>Agregar Categoria de Inventario</h1>
+	<h1>Registrar Tipo de Kardex</h1>
 
 	<div id="body">		
 		
@@ -12,12 +12,7 @@
 					<input type="text" name="inventory_category_name" placeholder="Nombre"/>
 				</th>
 			</tr>
-			<tr>
-				<th>
-					<textarea name="inventory_category_description" placeholder="Descripcion"></textarea>
-				</th>
-			</tr>
-
+			
 			<tr>
 				<th>
 					<input type="submit" name="btn_save" value="Guardar"/>
@@ -29,8 +24,17 @@
 		<?php
 		echo form_close();
 		?>
-		
-		<table border="1">
+
+		<div class="table-responsive">
+			<div class="panel-default">
+				<div class="panel-heading">
+		       <h4>
+		         LISTA DE TIPOS DE KARDEX
+		       </h4>
+		     	</div>
+	     	</div> 
+			<table class="table table-striped">
+			
 			<tr>
 				<th>
 					#
@@ -38,23 +42,20 @@
 				<th>
 					Nombre
 				</th>
-				<th>
-					Descripcion
-				</th>
+				
 			</tr>
 			<?php
 			for($i=0; $i<count($list_inventories_categories);$i++){
 				?>
 					<tr>
 						<td><?php echo $i+1?></td>
-						<td><?php echo $list_inventories_categories[$i]['inventory_category_name']?></td>
-						<td><?php echo $list_inventories_categories[$i]['inventory_category_description']?></td>
+						<td><?php echo $list_inventories_categories[$i]['inventory_category_name']?></td>						
 					</tr>
 				<?php
 			}
 			?>
 		</table>
-
+		</div>
 
 	</div>
 </div>

@@ -1,5 +1,5 @@
 <div id="container">
-	<h1>Agregar inventario</h1>
+	<h1>Registrar inventario</h1>
 
 	<div id="body">		
 		

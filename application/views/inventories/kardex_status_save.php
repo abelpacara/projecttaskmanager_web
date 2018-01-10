@@ -1,6 +1,13 @@
 <link href = "<?php echo base_url("public/css/jquery-ui.css"); ?>"    rel = "stylesheet">
-<script src = "<?php echo base_url("public/js/jquery-1.10.2.js");?>"></script>
 <script src = "<?php echo base_url("public/js/jquery-ui.js"); ?>"></script>
+<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+
+<script>
+	$(function() {
+   
+   $( "#kardex_status_register_date" ).datepicker({ dateFormat: 'dd/mm/yy',changeMonth: true,changeYear: true, firstDay: 1 });
+	});
+</script>
 
 <div id="container">
 	<h1>Guardar Estado Kardex</h1>
@@ -56,20 +63,30 @@
 				</tr>
 				<tr>
 					<td colspan="2">							
-						<select name="location_id">
-							<option value="">Localizacion ...</option>
-							<?php
-							for($i=0; $i<count($list_locations) ; $i++){
-								?>
-								<option value="<?php echo $list_locations[$i]['id_location']?>">
-									<?php echo $list_locations[$i]['location_name']?>										
-								</option>
-								<?php
-							}?>
-						</select>
+						<?php
+						echo get_display_locations_tree($list_locations, $name="location_id", NULL, $onchange=FALSE);
+						?>               
 					</td>
 				</tr>				
-				
+
+				<tr>
+					<td colspan="2">
+						<textarea name="kardex_status_description" cols="50" rows="4" placeholder="Descripcion"></textarea>
+						<script type="text/javascript">
+							jQuery(document).ready(function() {
+					
+							  CKEDITOR.replace('kardex_status_description');
+
+							 });
+			            
+			         </script>
+					</td>
+				</tr>				
+				<tr>
+					<td colspan="2">
+						<input id="kardex_status_register_date" value="<?php echo $kardex_status_register_date?>" name="kardex_status_register_date" readonly="true" id="end_date" class="arrow_drowpdown"/>
+					</td>
+				</tr>				
 				<tr>
 					<td colspan="2">
 						<input type="hidden" name="kardex_id" value="<?php echo $kardex['id_kardex']?>"/>						
@@ -85,6 +102,7 @@
 				<th>Estado</th>
 				<th>Localizacion</th>
 				<th>Fecha de registro</th>
+				<th>Descripcion</th>
 			</tr>
 			<?php
 			for($i=0; $i<count($list_kardexes_status); $i++){?>
@@ -92,6 +110,7 @@
 					<td><?php echo $list_kardexes_status[$i]['kardex_status_value'] ?></td>
 					<td><?php echo $list_kardexes_status[$i]['location_name'] ?></td>					
 					<td><?php echo $list_kardexes_status[$i]['kardex_status_register_date'] ?></td>					
+					<td><?php echo $list_kardexes_status[$i]['kardex_status_description'] ?></td>					
 				</tr>
 			<?php
 			}

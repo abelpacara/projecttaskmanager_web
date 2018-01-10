@@ -1,0 +1,619 @@
+# SQL Manager 2005 Lite for MySQL 3.7.7.1
+# ---------------------------------------
+# Host     : localhost
+# Port     : 3306
+# Database : ptm
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+CREATE DATABASE `ptm`
+    CHARACTER SET 'latin1'
+    COLLATE 'latin1_swedish_ci';
+
+USE `ptm`;
+
+#
+# Structure for the `inventories` table : 
+#
+
+CREATE TABLE `inventories` (
+  `id_inventory` int(11) NOT NULL AUTO_INCREMENT,
+  `inventory_category_id` int(11) NOT NULL,
+  `inventory_reference_code` text,
+  `inventory_mark` text NOT NULL,
+  `inventory_model` text NOT NULL,
+  `inventory_register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `inventory_quantity` int(11) DEFAULT NULL,
+  `inventory_buy_price` float DEFAULT NULL,
+  `inventory_description` text,
+  PRIMARY KEY (`id_inventory`)
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `inventories_categories` table : 
+#
+
+CREATE TABLE `inventories_categories` (
+  `id_inventory_category` int(11) NOT NULL AUTO_INCREMENT,
+  `inventory_category_name` text NOT NULL,
+  PRIMARY KEY (`id_inventory_category`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `kardexes` table : 
+#
+
+CREATE TABLE `kardexes` (
+  `id_kardex` int(11) NOT NULL AUTO_INCREMENT,
+  `inventory_id` int(11) NOT NULL,
+  `purchase_item_id` int(11) DEFAULT NULL,
+  `kardex_code` text NOT NULL,
+  `kardex_serial` text NOT NULL,
+  `kardex_register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `kardex_start_date` date NOT NULL,
+  `kardex_description` text,
+  PRIMARY KEY (`id_kardex`)
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `kardexes_status` table : 
+#
+
+CREATE TABLE `kardexes_status` (
+  `id_kardex_status` int(11) NOT NULL AUTO_INCREMENT,
+  `kardex_id` int(11) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `maintenance_id` int(11) DEFAULT NULL,
+  `kardex_status_value` enum('en funcionamiento - nuevo','en funcionamiento - bueno','en funcionamiento - regular','en funcionamiento - tiende a malo','inactivo/respaldo - bueno','inactivo/respaldo - regular','inactivo/respaldo - tiende a malo','nuevo en almacen','en reparacion - regular','en reparacion - tiende a malo',' en almacen/para reparacion','baja') NOT NULL,
+  `kardex_status_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `kardex_status_register_date` date DEFAULT NULL,
+  `kardex_status_description` text,
+  PRIMARY KEY (`id_kardex_status`)
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `locations` table : 
+#
+
+CREATE TABLE `locations` (
+  `id_location` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) DEFAULT NULL,
+  `location_name` text NOT NULL,
+  `location_description` text,
+  PRIMARY KEY (`id_location`)
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `maintenances` table : 
+#
+
+CREATE TABLE `maintenances` (
+  `id_maintenance` int(11) NOT NULL AUTO_INCREMENT,
+  `location_id` int(11) NOT NULL,
+  `maintenance_register_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `maintenance_description` text NOT NULL,
+  PRIMARY KEY (`id_maintenance`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `orders` table : 
+#
+
+CREATE TABLE `orders` (
+  `id_order` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `posts` table : 
+#
+
+CREATE TABLE `posts` (
+  `id_post` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `post_type` enum('project','discussion','task','comment') NOT NULL,
+  `post_title` text NOT NULL,
+  `post_content` text NOT NULL,
+  `post_register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_post`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `purchases` table : 
+#
+
+CREATE TABLE `purchases` (
+  `id_purchase` int(11) NOT NULL AUTO_INCREMENT,
+  `purchase_start_process_date` date DEFAULT NULL,
+  `purchase_store_dateentry` date DEFAULT NULL,
+  `purchase_name` text,
+  `purchase_description` text,
+  PRIMARY KEY (`id_purchase`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `purchases_items` table : 
+#
+
+CREATE TABLE `purchases_items` (
+  `id_purchase_item` int(11) NOT NULL AUTO_INCREMENT,
+  `purchase_id` int(11) DEFAULT NULL,
+  `inventory_category_id` int(11) DEFAULT NULL,
+  `purchase_item_quantity` int(11) DEFAULT NULL,
+  `purchase_item_description` text,
+  PRIMARY KEY (`id_purchase_item`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+
+#
+# Data for the `inventories` table  (LIMIT 0,500)
+#
+
+INSERT INTO `inventories` (`id_inventory`, `inventory_category_id`, `inventory_reference_code`, `inventory_mark`, `inventory_model`, `inventory_register_date`, `inventory_quantity`, `inventory_buy_price`, `inventory_description`) VALUES 
+  (6,6,NULL,'HEWLETT PACKARD','PROLIANT ML 350 G6','2017-05-19 20:23:51',NULL,NULL,NULL),
+  (7,7,NULL,'DAHUA','S/R','2017-05-19 20:37:55',NULL,NULL,NULL),
+  (8,8,NULL,'CISCO','SF100-24V2','2017-05-19 20:39:31',NULL,NULL,NULL),
+  (9,6,NULL,'DELL','POWER EDGE 2900','2017-05-19 20:42:59',NULL,NULL,NULL),
+  (10,9,NULL,'ACER','  V173','2017-05-19 20:49:28',NULL,NULL,NULL),
+  (11,8,NULL,'CISCO','PSZ20171A93','2017-11-10 10:36:13',NULL,NULL,NULL),
+  (12,10,NULL,'DELTA','GES1-13R202035','2017-05-22 13:07:29',NULL,NULL,NULL),
+  (13,10,NULL,'DELTA','S/R','2017-05-22 13:24:49',NULL,NULL,NULL),
+  (14,11,NULL,'LG','32LK330','2017-05-22 14:50:06',NULL,NULL,NULL),
+  (15,12,NULL,'HEWLETT PACKARD','L1710','2017-05-22 15:06:24',NULL,NULL,NULL),
+  (16,13,NULL,'NUMBER PLATE','S/R','2017-05-22 15:08:56',NULL,NULL,NULL),
+  (17,6,NULL,'DELL','QUAD CORE 3.2 GHZ. T20','2017-05-22 15:41:34',NULL,NULL,NULL),
+  (18,14,NULL,'HEWLETT PACKARD','COMPAQ DC5700','2017-05-22 15:46:16',NULL,NULL,NULL),
+  (19,15,NULL,'EPSON','TM-T88V M244A','2017-05-22 15:57:01',NULL,NULL,NULL),
+  (20,8,NULL,'CISCO','CISSF110-24-NA','2017-05-22 16:01:07',NULL,NULL,NULL),
+  (21,16,NULL,'FOXCONN','','2017-05-22 16:24:08',NULL,NULL,NULL),
+  (22,14,NULL,'ACER','VERITON','2017-05-24 15:01:22',NULL,NULL,NULL),
+  (23,7,NULL,'HIKVISION','DS-7208HQHI-F1/N','2017-06-01 23:18:28',NULL,NULL,NULL),
+  (24,19,NULL,'HIKVISION','DS-2CE16C0T-IT5','2017-11-10 10:23:16',NULL,NULL,NULL),
+  (25,19,NULL,'VICOM','VIR-30NG-4N1-1MP','2017-11-10 10:23:26',NULL,NULL,NULL),
+  (27,6,NULL,'DELL','T130','2017-06-04 23:36:18',NULL,NULL,NULL),
+  (28,16,NULL,'FOXCONN','NT-IBT19-A','2017-11-07 21:14:41',NULL,NULL,NULL),
+  (29,14,NULL,'HEWLETT PACKARD','HP PRO 3130 MT','2017-11-07 21:19:19',NULL,NULL,NULL),
+  (30,14,NULL,'DELL','VOSTRO 3250','2017-11-08 09:07:14',NULL,NULL,NULL),
+  (31,14,NULL,'HEWLETT PACKARD','Pavilion A1514N','2017-11-08 10:34:08',NULL,NULL,NULL),
+  (32,18,NULL,'HEWLETT PACKARD','HP COMPAQ DX2400 MICROTOWER','2017-11-08 11:06:07',NULL,NULL,NULL),
+  (38,8,NULL,'D-LINK','','2017-11-10 15:40:43',NULL,NULL,NULL),
+  (39,20,NULL,'','','2017-11-10 15:42:22',NULL,NULL,NULL),
+  (40,6,NULL,'DELL','','2017-11-10 16:08:58',NULL,NULL,NULL),
+  (41,22,NULL,'FORZA','SL-1012LCD-U','2017-11-10 16:26:21',NULL,NULL,NULL),
+  (42,9,NULL,'SURE','','2017-11-10 16:27:38',NULL,NULL,NULL),
+  (43,15,NULL,'EPSON','TM-T88V','2017-11-10 16:28:46',NULL,NULL,NULL),
+  (44,23,NULL,'EBOX','D300','2017-11-10 16:35:56',NULL,NULL,NULL),
+  (45,24,NULL,'ARGOX','AS-8020CL','2017-11-10 16:41:11',NULL,NULL,NULL),
+  (46,18,NULL,'','','2017-11-10 17:03:43',NULL,NULL,NULL),
+  (47,9,NULL,'','','2017-11-10 17:08:20',NULL,NULL,NULL),
+  (48,25,NULL,'HEWLETT PACKARD','P1102w','2017-11-10 17:10:47',NULL,NULL,NULL),
+  (49,23,NULL,'EBOX','','2017-11-10 18:39:07',NULL,NULL,NULL),
+  (50,23,NULL,'EBOX','C800','2017-11-10 18:40:38',NULL,NULL,NULL),
+  (51,9,NULL,'ACER','V173','2017-11-10 18:44:35',NULL,NULL,NULL),
+  (52,22,NULL,'FORZA','FX1500LCD-U','2017-11-13 08:29:29',NULL,NULL,NULL),
+  (53,9,NULL,'LENOVO','D186WA','2017-11-13 15:05:28',NULL,NULL,NULL),
+  (54,13,'','','','2017-11-13 15:48:11',NULL,NULL,NULL),
+  (55,14,'','','','2017-11-13 16:39:58',NULL,NULL,NULL),
+  (56,8,'','CISCO','CISSF110-24','2017-11-13 18:00:41',NULL,NULL,NULL),
+  (57,9,'','HEWLETT PACKARD','L1710','2017-11-14 19:55:47',NULL,NULL,NULL),
+  (58,20,'','VICOM','GS738E','2017-11-14 20:01:44',NULL,NULL,NULL),
+  (59,20,'','','EN-DVJ30-70','2017-11-14 20:05:33',NULL,NULL,NULL),
+  (60,26,'','LENOVO','M700','2017-11-15 17:09:19',NULL,NULL,NULL),
+  (61,9,NULL,'HEWLETT PACKARD','TS-17SV','2017-11-15 18:54:20',NULL,NULL,NULL),
+  (62,25,NULL,'HEWLETT PACKARD','LASER JET P2015 dn','2017-11-24 12:17:44',NULL,NULL,NULL);
+
+COMMIT;
+
+#
+# Data for the `inventories_categories` table  (LIMIT 0,500)
+#
+
+INSERT INTO `inventories_categories` (`id_inventory_category`, `inventory_category_name`) VALUES 
+  (6,'SERVIDOR'),
+  (7,'DVR'),
+  (8,'SWITCH'),
+  (9,'MONITOR'),
+  (10,'BANCO DE BATERIAS'),
+  (11,'Monitor TV'),
+  (12,'MONITOR LCD 17'''''),
+  (13,'CAMARA DE RECONOCIMIENTO'),
+  (14,'Equipo PC torre'),
+  (15,'IMPRESORA TERMICA'),
+  (16,'NANO PC'),
+  (18,'CPU torre'),
+  (19,'CAMARA EXTERNA HD'),
+  (20,'CAMARA INTERNA'),
+  (22,'UPS'),
+  (23,'MINI PC'),
+  (24,'LECTOR DE CODIGO DE BARRAS'),
+  (25,'IMPRESORA LASER'),
+  (26,'SMALL FACTOR PC'),
+  (27,'MONITOR LED 19'),
+  (28,'MONITOR TOUCH 15'),
+  (29,'DVR 8 puertos, HD, full HD'),
+  (30,'CAMARA EXTERNA FULL HD'),
+  (31,'TELEVISOR LED 40'),
+  (32,'ESCANER DE ALTO TRAFICO'),
+  (33,'IMPRESORA DE ETIQUETAS AUTOHADESIVAS');
+
+COMMIT;
+
+#
+# Data for the `kardexes` table  (LIMIT 0,500)
+#
+
+INSERT INTO `kardexes` (`id_kardex`, `inventory_id`, `purchase_item_id`, `kardex_code`, `kardex_serial`, `kardex_register_date`, `kardex_start_date`, `kardex_description`) VALUES 
+  (14,6,NULL,'24312000233','MXQ9370678','2017-05-19 20:23:51','0000-00-00',NULL),
+  (15,7,NULL,'24350000026','S/R','2017-05-19 20:37:55','0000-00-00',NULL),
+  (16,8,NULL,'24350000075','PSZ185119VL','2017-05-19 20:39:31','0000-00-00',NULL),
+  (17,9,NULL,'24312000232','BLXWKH1','2017-05-19 20:42:59','0000-00-00',NULL),
+  (18,10,NULL,'24312000119','ETLE10D0929260D8078602','2017-05-19 20:49:28','0000-00-00',NULL),
+  (19,11,NULL,'24350000106','CISSF110-24-NA','2017-05-19 20:50:52','0000-00-00',NULL),
+  (20,12,NULL,'24312000235','A0Y09700131WE','2017-05-22 13:07:29','0000-00-00',NULL),
+  (21,13,NULL,'24312000236','S/R','2017-05-22 13:24:49','0000-00-00',NULL),
+  (22,14,NULL,'24350000002','107RMWV0X929','2017-05-22 14:50:06','0000-00-00',NULL),
+  (23,15,NULL,'24312000137','3CQ9343G2T','2017-05-22 15:06:24','0000-00-00',NULL),
+  (24,16,NULL,'24370000101','S/R','2017-05-22 15:08:56','0000-00-00',NULL),
+  (25,16,NULL,'24370000102','S/R','2017-05-22 15:09:28','0000-00-00',NULL),
+  (26,17,NULL,'24312000305','8SFQ772','2017-05-22 15:41:34','0000-00-00',NULL),
+  (27,18,NULL,'24312000038','MXJ81604R1','2017-05-22 15:46:16','0000-00-00',NULL),
+  (28,19,NULL,'24312000312','MXDF726046','2017-05-22 15:57:01','0000-00-00',NULL),
+  (29,20,NULL,'24350000101','PSZ19071B57','2017-05-22 16:01:07','0000-00-00',NULL),
+  (30,21,NULL,'','THF11F020550900484','2017-05-22 16:24:08','0000-00-00',NULL),
+  (31,22,NULL,'24312000017','PS00819669936000310100','2017-05-24 15:01:22','0000-00-00',NULL),
+  (32,17,NULL,'24312000303','J9FQ772','2017-05-24 16:03:44','0000-00-00',NULL),
+  (33,23,NULL,'','696005196','2017-06-04 23:18:28','0000-00-00',NULL),
+  (34,24,NULL,'','636473875','2017-06-04 23:22:28','0000-00-00',NULL),
+  (36,20,NULL,'24350000100','','2017-06-04 23:34:24','0000-00-00',NULL),
+  (37,27,NULL,'4312000229','','2017-06-04 23:36:18','0000-00-00',NULL),
+  (38,21,NULL,'24312000293','','2017-06-04 23:55:25','0000-00-00',NULL),
+  (39,21,NULL,'24312000289','34344fff','2017-06-04 23:56:33','2017-11-09',NULL),
+  (41,28,NULL,'04312000698','','2017-11-07 21:15:31','0000-00-00',NULL),
+  (42,29,NULL,'2431200025','','2017-11-07 21:19:19','0000-00-00',NULL),
+  (43,30,NULL,'24312000298','','2017-11-08 09:07:15','0000-00-00',NULL),
+  (44,28,NULL,'24312000290','','2017-11-08 09:40:12','0000-00-00',NULL),
+  (45,31,NULL,'24312000028','','2017-11-08 10:34:09','0000-00-00',NULL),
+  (46,22,NULL,'24312000018','PS008158668410008D0100 ','2017-11-08 10:46:16','0000-00-00',NULL),
+  (47,32,NULL,'24312000021','','2017-11-08 11:06:07','0000-00-00',NULL),
+  (48,30,NULL,'24312000296','','2017-11-08 12:05:18','0000-00-00',NULL),
+  (49,25,NULL,'','22MAR16003823','2017-11-10 10:21:24','0000-00-00',NULL),
+  (50,23,NULL,'','696005222','2017-11-10 11:25:05','0000-00-00',NULL),
+  (51,24,NULL,'','636473871','2017-11-10 11:31:37','0000-00-00',NULL),
+  (72,38,NULL,'','','2017-11-10 15:40:43','0000-00-00',NULL),
+  (73,39,NULL,'','','2017-11-10 15:42:22','0000-00-00',NULL),
+  (74,40,NULL,'','','2017-11-10 16:08:58','0000-00-00',NULL),
+  (75,41,NULL,'','','2017-11-10 16:26:21','0000-00-00',NULL),
+  (76,21,NULL,'','','2017-11-10 16:27:11','0000-00-00',NULL),
+  (77,42,NULL,'','','2017-11-10 16:27:38','0000-00-00',NULL),
+  (78,43,NULL,'','','2017-11-10 16:28:46','0000-00-00',NULL),
+  (79,44,NULL,'','','2017-11-10 16:35:56','0000-00-00',NULL),
+  (80,42,NULL,'','','2017-11-10 16:36:33','0000-00-00',NULL),
+  (81,43,NULL,'','','2017-11-10 16:39:23','0000-00-00',NULL),
+  (82,45,NULL,'','','2017-11-10 16:41:11','0000-00-00',NULL),
+  (83,39,NULL,'','','2017-11-10 16:52:39','0000-00-00',NULL),
+  (84,41,NULL,'','','2017-11-10 16:53:37','0000-00-00',NULL),
+  (85,41,NULL,'','','2017-11-10 16:59:39','0000-00-00',NULL),
+  (86,41,NULL,'','','2017-11-10 17:02:35','0000-00-00',NULL),
+  (87,46,NULL,'','','2017-11-10 17:03:43','0000-00-00',NULL),
+  (88,47,NULL,'','','2017-11-10 17:08:20','0000-00-00',NULL),
+  (89,48,NULL,'','','2017-11-10 17:10:47','0000-00-00',NULL),
+  (91,50,NULL,'24312000326','','2017-11-10 18:40:38','0000-00-00',NULL),
+  (92,41,NULL,'24312000278','','2017-11-10 18:42:15','0000-00-00',NULL),
+  (93,51,NULL,'04312000037','','2017-11-10 18:44:35','0000-00-00',NULL),
+  (94,43,NULL,'','MXDF417599','2017-11-10 19:05:57','0000-00-00',NULL),
+  (95,45,NULL,'VIAS-1-LCB-0005','30752124','2017-11-10 19:10:55','0000-00-00',NULL),
+  (96,39,NULL,'24370000158','','2017-11-13 08:21:26','0000-00-00',NULL),
+  (97,39,NULL,'24370000125','PI130410DVJ014','2017-11-13 08:25:13','0000-00-00',NULL),
+  (98,52,NULL,'04312000521','63131130161','2017-11-13 08:29:29','0000-00-00',NULL),
+  (99,43,NULL,'24312000244','MXDF606897','2017-11-13 08:31:06','0000-00-00',NULL),
+  (100,45,NULL,'24312000261','50367181','2017-11-13 08:34:49','0000-00-00',NULL),
+  (101,50,NULL,'24312000329','10D3D77020B17160205M','2017-11-13 14:57:33','0000-00-00',NULL),
+  (103,53,NULL,'44312000133','V264599','2017-11-13 15:08:03','0000-00-00',NULL),
+  (104,24,NULL,'','636473888','2017-11-13 15:47:22','2017-07-26',NULL),
+  (105,54,NULL,'','','2017-11-13 15:48:11','0000-00-00',NULL),
+  (107,23,NULL,'','696005221','2017-11-13 16:34:52','2017-07-25',NULL),
+  (108,55,NULL,'','','2017-11-13 16:39:58','0000-00-00',NULL),
+  (109,40,NULL,'','','2017-11-13 17:59:17','0000-00-00',NULL),
+  (110,56,NULL,'','','2017-11-13 18:00:41','0000-00-00',NULL),
+  (111,47,NULL,'','','2017-11-13 18:02:37','0000-00-00',NULL),
+  (112,48,NULL,'','','2017-11-13 18:03:21','0000-00-00',NULL),
+  (113,41,NULL,'','','2017-11-13 18:04:11','2017-01-01',NULL),
+  (114,41,NULL,'24312000277','431605301006','2017-11-13 18:08:01','2017-01-01',NULL),
+  (115,50,NULL,'24312000324','10D3D77020B1716026FM','2017-11-14 19:53:25','2017-10-30',NULL),
+  (116,57,NULL,'24312000103','3CQ9331H2N','2017-11-14 19:55:47','2017-01-01',NULL),
+  (117,45,NULL,'24312000258','50367180','2017-11-14 19:59:03','2017-01-01',NULL),
+  (118,58,NULL,'24370000043','01CX321A8120157','2017-11-14 20:01:44','2014-08-05',NULL),
+  (119,59,NULL,'24370000129','PI130410DVJ029','2017-11-14 20:05:33','2014-08-05',NULL),
+  (120,43,NULL,'04312000762','MXDF534564','2017-11-14 20:09:34','2015-12-22',NULL),
+  (121,60,NULL,'','','2017-11-15 17:09:19','2017-09-01',NULL),
+  (122,50,1,'24312000393','','2017-11-15 18:20:13','2017-09-22','<strong>CAMBIAR CODIGO PORQUE PERTENE A UN small factor pc</strong>\r\n'),
+  (123,61,0,'24312000182','TS17028769','2017-11-15 18:54:20','2014-08-05',''),
+  (124,41,0,'24312000283','431603301471','2017-11-15 18:58:39','2017-11-11',''),
+  (125,43,0,'04312000761','MXDF534586','2017-11-15 19:00:27','2015-12-08',''),
+  (126,18,0,'24312000038','MXJ81604R1','2017-11-15 19:05:46','2014-08-05',''),
+  (127,57,0,'24312000099','3CQ9331FXT','2017-11-15 19:07:11','2014-08-05',''),
+  (128,45,7,'24312000318','60853443','2017-11-15 19:10:29','2017-09-22','<p>VERIFICAR FECHA DE COMPRA</p>\r\n'),
+  (129,39,0,'24370000040','','2017-11-17 08:30:12','2014-05-08',''),
+  (130,62,0,'24312000010','JPCFS00105','2017-11-24 12:17:44','2017-10-15','');
+
+COMMIT;
+
+#
+# Data for the `kardexes_status` table  (LIMIT 0,500)
+#
+
+INSERT INTO `kardexes_status` (`id_kardex_status`, `kardex_id`, `location_id`, `maintenance_id`, `kardex_status_value`, `kardex_status_timestamp`, `kardex_status_register_date`, `kardex_status_description`) VALUES 
+  (25,14,2,NULL,'en funcionamiento - regular','2017-05-19 20:23:51','2017-05-19',''),
+  (26,15,2,NULL,'en funcionamiento - regular','2017-05-19 20:37:55','2017-05-19',''),
+  (27,16,2,NULL,'en funcionamiento - regular','2017-05-19 20:39:31','2017-05-19',''),
+  (28,17,2,NULL,'en funcionamiento - regular','2017-05-19 20:42:59','2017-05-19',''),
+  (29,17,2,29,'inactivo/respaldo - regular','2017-05-19 20:45:57','2017-05-19',''),
+  (30,14,2,29,'inactivo/respaldo - regular','2017-05-19 20:45:57','2017-05-19',''),
+  (31,18,1,NULL,'en funcionamiento - regular','2017-05-19 20:49:28','2017-05-19',''),
+  (32,19,1,NULL,'en funcionamiento - nuevo','2017-05-19 20:50:52','2017-05-19',''),
+  (33,19,1,30,'en funcionamiento - bueno','2017-05-19 20:51:33','2017-05-19',''),
+  (34,19,1,31,'en funcionamiento - bueno','2017-05-19 20:56:17','2017-05-19',''),
+  (35,18,1,31,'en funcionamiento - regular','2017-05-19 20:56:17','2017-05-19',''),
+  (36,16,2,32,'en funcionamiento - regular','2017-05-19 20:58:09','2017-05-19',''),
+  (37,18,1,33,'en funcionamiento - regular','2017-05-19 21:19:42','2017-05-19',''),
+  (38,20,2,NULL,'en funcionamiento - regular','2017-05-22 13:07:29','2017-05-22',''),
+  (39,21,2,NULL,'en funcionamiento - regular','2017-05-22 13:24:49','2017-05-22',''),
+  (40,22,2,NULL,'en funcionamiento - regular','2017-05-22 14:50:06','2017-05-22',''),
+  (41,23,2,NULL,'en funcionamiento - regular','2017-05-22 15:06:24','2017-05-22',''),
+  (42,24,2,NULL,'en funcionamiento - regular','2017-05-22 15:08:56','2017-05-22',''),
+  (43,25,2,NULL,'en funcionamiento - regular','2017-05-22 15:09:28','2017-05-22',''),
+  (44,26,3,NULL,'en funcionamiento - regular','2017-05-22 15:41:34','2017-05-22',''),
+  (45,27,25,NULL,'en funcionamiento - regular','2017-05-22 15:46:16','2017-05-22',''),
+  (46,28,25,NULL,'en funcionamiento - regular','2017-05-22 15:57:01','2017-09-22',''),
+  (47,29,3,NULL,'en funcionamiento - regular','2017-05-22 16:01:07','2017-05-22',''),
+  (48,29,3,34,'en funcionamiento - regular','2017-05-22 16:04:27','2017-04-06',''),
+  (49,26,3,34,'en funcionamiento - regular','2017-05-22 16:04:27','2017-04-06',''),
+  (50,30,13,NULL,'en funcionamiento - regular','2017-05-22 16:24:08','2017-05-20',''),
+  (51,30,13,35,'en funcionamiento - regular','2017-05-22 16:25:47','2017-05-20',''),
+  (52,31,2,NULL,'en funcionamiento - regular','2017-05-23 15:01:22','2017-05-23',''),
+  (53,31,58,36,'en funcionamiento - regular','2017-05-23 15:23:38','2017-05-23',''),
+  (54,32,2,NULL,'en funcionamiento - nuevo','2017-05-24 16:03:44','2017-05-16',''),
+  (55,32,2,29,'en funcionamiento - bueno','2017-05-19 02:00:00','2017-05-19',''),
+  (57,33,53,NULL,'en funcionamiento - nuevo','2017-06-01 23:18:28','2017-06-01',''),
+  (58,34,50,NULL,'en funcionamiento - nuevo','2017-06-01 23:22:28','2017-06-01',''),
+  (59,35,50,NULL,'en funcionamiento - nuevo','2017-06-01 23:26:15','2017-06-01',''),
+  (60,36,53,NULL,'en funcionamiento - nuevo','2017-06-04 23:34:24','2017-06-01',''),
+  (61,37,53,NULL,'en funcionamiento - nuevo','2017-06-04 23:36:18','2017-06-01',''),
+  (63,34,50,39,'en funcionamiento - nuevo','2017-06-01 23:45:40','2017-06-01',''),
+  (64,37,53,40,'en funcionamiento - nuevo','2017-06-01 23:49:04','2017-06-01',''),
+  (65,36,53,40,'en funcionamiento - nuevo','2017-06-01 23:49:04','2017-06-01',''),
+  (66,33,53,40,'en funcionamiento - nuevo','2017-06-01 23:49:04','2017-06-01',''),
+  (67,38,12,NULL,'en funcionamiento - nuevo','2017-06-04 23:55:25','2017-05-29',''),
+  (68,39,61,NULL,'en funcionamiento - nuevo','2017-06-04 23:56:33','2017-01-09',''),
+  (69,38,12,41,'en funcionamiento - nuevo','2017-05-28 23:58:03','2017-05-28',''),
+  (70,39,23,42,'en funcionamiento - nuevo','2017-05-29 00:00:19','2017-05-28',''),
+  (71,41,16,NULL,'en funcionamiento - regular','2017-11-07 21:15:31','2017-01-12',''),
+  (72,42,66,NULL,'en funcionamiento - regular','2017-11-07 21:19:19','2017-01-18',''),
+  (73,43,64,NULL,'en funcionamiento - bueno','2017-11-08 09:07:15','2017-11-08',''),
+  (74,44,61,NULL,'en funcionamiento - regular','2017-11-08 09:40:13','2017-01-10',''),
+  (75,45,62,NULL,'en funcionamiento - tiende a malo','2017-11-08 10:34:09','2017-11-08',''),
+  (76,46,15,NULL,'en funcionamiento - regular','2017-11-08 10:46:16','2017-01-12',''),
+  (77,47,63,NULL,'en funcionamiento - regular','2017-11-08 11:06:07','2017-01-06',''),
+  (78,48,65,NULL,'en funcionamiento - nuevo','2017-11-08 12:05:18','2017-01-09',''),
+  (79,49,6,NULL,'en funcionamiento - nuevo','2017-11-10 10:21:24','2017-06-01',''),
+  (80,50,55,NULL,'en funcionamiento - nuevo','2017-11-10 11:25:05','2017-07-04',''),
+  (81,51,69,NULL,'en funcionamiento - nuevo','2017-11-10 11:31:37','2017-07-04',''),
+  (102,72,55,NULL,'en funcionamiento - regular','2017-11-10 15:40:44','2017-01-01',''),
+  (103,73,69,NULL,'en funcionamiento - regular','2017-11-10 15:42:22','2017-01-01',''),
+  (104,74,55,NULL,'en funcionamiento - nuevo','2017-07-04 16:08:59','2017-07-04',''),
+  (105,75,69,NULL,'en funcionamiento - bueno','2017-11-10 16:26:21','2017-01-01',''),
+  (106,76,69,NULL,'en funcionamiento - regular','2017-11-10 16:27:11','2017-01-01',''),
+  (107,77,69,NULL,'en funcionamiento - regular','2017-11-10 16:27:38','2017-01-01',''),
+  (108,78,69,NULL,'en funcionamiento - regular','2017-11-10 16:28:46','2017-01-01',''),
+  (109,79,28,NULL,'en funcionamiento - regular','2017-11-10 16:35:56','2017-01-01',''),
+  (110,80,28,NULL,'en funcionamiento - regular','2017-11-10 16:36:33','2017-01-01',''),
+  (111,81,28,NULL,'en funcionamiento - regular','2017-11-10 16:39:23','2017-01-01',''),
+  (112,82,28,NULL,'','2017-11-10 16:41:11','2017-01-01',''),
+  (113,83,28,NULL,'en funcionamiento - regular','2017-11-10 16:52:39','2017-01-01',''),
+  (114,84,28,NULL,'en funcionamiento - regular','2017-11-10 16:53:37','2017-01-01',''),
+  (115,85,55,NULL,'en funcionamiento - bueno','2017-11-10 16:59:39','2017-01-01',''),
+  (116,86,55,NULL,'inactivo/respaldo - regular','2017-11-10 17:02:35','2017-01-04',''),
+  (117,87,55,NULL,'en funcionamiento - regular','2017-11-10 17:03:43','2017-01-03',''),
+  (118,88,55,NULL,'en funcionamiento - regular','2017-11-10 17:08:20','2017-01-03',''),
+  (119,89,55,NULL,'en funcionamiento - nuevo','2017-11-10 17:10:47','2017-07-04',''),
+  (121,91,36,NULL,'en funcionamiento - nuevo','2017-11-10 18:40:38','2017-09-17',''),
+  (122,92,36,NULL,'en funcionamiento - bueno','2017-11-10 18:42:15','2017-01-04',''),
+  (123,93,36,NULL,'en funcionamiento - regular','2017-11-10 18:44:35','2017-01-04',''),
+  (124,94,36,NULL,'en funcionamiento - bueno','2017-11-10 19:05:57','2017-10-01',''),
+  (125,95,36,NULL,'en funcionamiento - regular','2017-11-10 19:10:55','2017-01-01',''),
+  (126,96,36,NULL,'en funcionamiento - regular','2017-11-13 08:21:26','2017-01-01',''),
+  (127,97,39,NULL,'en funcionamiento - regular','2017-11-13 08:25:13','2017-01-01',''),
+  (128,98,39,NULL,'en funcionamiento - regular','2017-11-13 08:29:29','2017-01-01',''),
+  (129,99,39,NULL,'en funcionamiento - regular','2017-11-13 08:31:06','2017-11-13',''),
+  (130,100,39,NULL,'en funcionamiento - regular','2017-11-13 08:34:49','2017-01-01',''),
+  (131,101,39,NULL,'en funcionamiento - nuevo','2017-11-13 14:57:33','2017-09-15',''),
+  (133,103,39,NULL,'en funcionamiento - regular','2017-11-13 15:08:03','2017-01-01',''),
+  (134,104,39,NULL,'en funcionamiento - nuevo','2017-11-13 15:47:22','2017-07-26',''),
+  (135,105,39,NULL,'en funcionamiento - tiende a malo','2017-11-13 15:48:11','2017-01-01',''),
+  (137,107,54,NULL,'en funcionamiento - nuevo','2017-11-13 16:34:52','2017-07-25',''),
+  (138,108,54,NULL,'en funcionamiento - regular','2017-11-13 16:39:58','2017-01-01',''),
+  (139,109,54,NULL,'en funcionamiento - nuevo','2017-11-13 17:59:17','2017-05-10',''),
+  (140,110,54,NULL,'en funcionamiento - nuevo','2017-11-13 18:00:41','2017-05-10',''),
+  (141,111,54,NULL,'en funcionamiento - nuevo','2017-11-13 18:02:38','2017-01-01',''),
+  (142,112,54,NULL,'en funcionamiento - regular','2017-11-13 18:03:21','2017-01-01',''),
+  (143,113,54,NULL,'en funcionamiento - nuevo','2017-11-13 18:04:11','2017-01-01',''),
+  (144,114,25,NULL,'en funcionamiento - regular','2017-11-13 18:08:01','2017-01-01',''),
+  (145,115,25,NULL,'en funcionamiento - nuevo','2017-11-14 19:53:26','2017-10-30',''),
+  (146,116,25,NULL,'en funcionamiento - regular','2017-11-14 19:55:47','2017-01-01',''),
+  (147,117,25,NULL,'en funcionamiento - regular','2017-11-14 19:59:03','2017-01-01',''),
+  (148,118,25,NULL,'en funcionamiento - regular','2017-11-14 20:01:44','2014-08-05',''),
+  (149,119,13,NULL,'en funcionamiento - regular','2017-11-14 20:05:33','2014-08-05',''),
+  (150,120,13,NULL,'en funcionamiento - regular','2017-11-14 20:09:34','2015-12-22',''),
+  (151,121,72,NULL,'en funcionamiento - nuevo','2017-11-15 17:09:19','2017-09-01',''),
+  (152,122,13,NULL,'en funcionamiento - nuevo','2017-11-15 18:20:13','2017-09-22',''),
+  (153,123,13,NULL,'en funcionamiento - regular','2017-11-15 18:54:20','2014-08-05',''),
+  (154,124,24,NULL,'en funcionamiento - bueno','2017-11-15 18:58:39','2017-11-11',''),
+  (155,125,24,NULL,'en funcionamiento - regular','2017-11-15 19:00:27','2015-12-08',''),
+  (156,126,24,NULL,'en funcionamiento - regular','2017-11-15 19:05:46','2014-08-05',''),
+  (157,127,24,NULL,'en funcionamiento - regular','2017-11-15 19:07:11','2014-08-05',''),
+  (158,128,24,NULL,'en funcionamiento - nuevo','2017-11-15 19:10:29','2017-09-22',''),
+  (159,129,24,NULL,'en funcionamiento - tiende a malo','2017-11-17 08:30:12','2014-05-08',''),
+  (160,130,15,NULL,'en funcionamiento - tiende a malo','2017-11-24 12:17:44','2017-10-15',NULL),
+  (161,130,74,44,' en almacen/para reparacion','2017-11-24 12:32:50','0000-00-00',NULL);
+
+COMMIT;
+
+#
+# Data for the `locations` table  (LIMIT 0,500)
+#
+
+INSERT INTO `locations` (`id_location`, `parent_id`, `location_name`, `location_description`) VALUES 
+  (1,NULL,'ORLP',''),
+  (2,1,'Autopista',''),
+  (3,1,'Achica Arriba',''),
+  (4,1,'Patacamaya A',''),
+  (5,1,'Patacamaya B',''),
+  (6,1,'Sica Sica',''),
+  (7,1,'Urujara',''),
+  (8,1,'Corapata',''),
+  (9,1,'Laja',''),
+  (10,2,'Autopista, carril1',NULL),
+  (11,2,'Autopista, carril2',NULL),
+  (12,2,'Autopista, carril3',NULL),
+  (13,3,'Achica Arriba, carril1',NULL),
+  (14,2,'Autopista, Dormitorio',NULL),
+  (15,70,'Oficina Regional, Profesional en RRHH',NULL),
+  (16,70,'Oficina Regional, Profesional en Servicios General',NULL),
+  (17,2,'Autopista, carril4',NULL),
+  (18,2,'Autopista, carril5',NULL),
+  (19,2,'Autopista, carril4',NULL),
+  (20,2,'Autopista, carril5',NULL),
+  (21,2,'Autopista, carril6',NULL),
+  (22,2,'Autopista, carril7',NULL),
+  (23,2,'Autopista, carril8',NULL),
+  (24,3,'Achica Arriba, carril2',NULL),
+  (25,3,'Achica Arriba, carril3',NULL),
+  (28,4,'Patacamaya A, Carril2',NULL),
+  (30,7,'Urujara, Carril1',NULL),
+  (33,7,'Urujara, Carril2',NULL),
+  (34,8,'Corapata, Carril1',NULL),
+  (36,5,'Patacamaya B, Carril1',NULL),
+  (39,5,'Patacamaya B, Carril2',NULL),
+  (40,5,'Patacamaya B, Carril3',NULL),
+  (42,8,'Corapata, carril2',NULL),
+  (44,9,'Laja, Carril1',NULL),
+  (47,9,'Laja, Carril2',NULL),
+  (48,9,'Laja, Carril3',NULL),
+  (50,6,'Sica Sica, carril1',NULL),
+  (51,6,'Sica Sica, carril2',NULL),
+  (52,7,'Urujara, Oficina',NULL),
+  (53,6,'Sica Sica, Oficina',NULL),
+  (54,5,'Patacamaya B, Oficina',NULL),
+  (55,4,'Patacamaya A, oficina',NULL),
+  (56,9,'Laja, oficina',NULL),
+  (57,8,'Corapata, oficina',NULL),
+  (58,2,'Autopista, oficina',NULL),
+  (59,3,'Achica Arriba, oficina',NULL),
+  (60,70,'Oficina Regional, Profesional en presupuestos',NULL),
+  (61,70,'Oficina Regional, Asistente tecnico',NULL),
+  (62,70,'Oficina Regional, Asistente de RRHH',NULL),
+  (63,70,'Oficina Regional, Asistente de Almacenes y servicios generales',NULL),
+  (64,70,'Oficina Regional, Responsable administrativo financiero',NULL),
+  (65,70,'Oficina Regional, Jefe Regional',NULL),
+  (66,70,'Oficina Regional, Gestores',NULL),
+  (67,70,'Oficina Regional, Cajeros',NULL),
+  (69,4,'Patacamaya A, carril 1',NULL),
+  (70,1,'Oficina Regional',NULL),
+  (71,1,'Viacha',NULL),
+  (72,71,'Viacha, oficina',NULL),
+  (73,71,'Viacha, carril 1',NULL),
+  (74,2,'Autopista, Almacen',NULL);
+
+COMMIT;
+
+#
+# Data for the `maintenances` table  (LIMIT 0,500)
+#
+
+INSERT INTO `maintenances` (`id_maintenance`, `location_id`, `maintenance_register_date`, `maintenance_description`) VALUES 
+  (29,2,'2017-05-19 20:45:57','Reemplazo por equipo Nuevo'),
+  (30,1,'2017-05-19 20:51:33','Se instalo en reemplado de equipo antiguo'),
+  (31,1,'2017-05-19 20:56:17','Limpieza de equipos'),
+  (32,2,'2017-05-19 20:58:09','Cambio de Patch Cores'),
+  (33,1,'2017-05-19 21:19:42','Limpieza general'),
+  (34,3,'2017-04-06 16:04:27','Instalacion y/o recambio de equipo SERVIDOR y SWITCH CISCO'),
+  (35,13,'2017-05-20 16:25:47','correccion de falla de rosetas por version atigua de WIN_SISCAP en carril 1, reten de Achica Arriba'),
+  (36,58,'2017-05-23 16:00:00','En equipo SUPERVISOR Se reinstalo sistema operativo Ubuntu con windows7 virtualizado y paquetes ofimanticos'),
+  (38,6,'2017-06-01','Cambio de cableado de red de Oficina y los 2 Carriles'),
+  (39,50,'2017-06-02','Instalacion de 2 camaras Externas\r\n'),
+  (40,53,'2017-06-02','Cambio/Instalacion de SERVIDOR, SWITCH\r\n DVR de equipos Viejos por equipos NUEVOS'),
+  (41,12,'2017-05-29','Instalacion de NANO PC en Carril'),
+  (42,23,'2017-05-29','Instalacion de NANO PC en Carril'),
+  (43,59,'2017-05-29','En equipo SUPERVISOR Se reinstalo sistema operativo Ubuntu con windows7 virtualizado y paquetes ofimanticos'),
+  (44,15,'2017-11-24','Se ha determinado que requiere de una reparacion, por tecnicos especialistas, imprimi con varias manchas incluso con tonner nuevo y varias ocasiones se atasca papel');
+
+COMMIT;
+
+#
+# Data for the `posts` table  (LIMIT 0,500)
+#
+
+INSERT INTO `posts` (`id_post`, `parent_id`, `post_type`, `post_title`, `post_content`, `post_register_date`) VALUES 
+  (1,0,'project','project1','lorem ipsum','2016-10-24 11:26:44'),
+  (2,0,'comment','HELLO 207','','2017-04-13 21:46:55'),
+  (3,1,'discussion','FORO 2','ADFADS','2017-04-13 21:58:52'),
+  (4,1,'discussion','FORO 2','ADFADS','2017-04-13 22:12:15'),
+  (5,1,'discussion','FORO 2','ADFADS','2017-04-13 22:13:43'),
+  (6,1,'discussion','FORO 2','ADFADS','2017-04-13 22:14:00'),
+  (7,1,'discussion','FORO 2','ADFADS','2017-04-13 22:16:00'),
+  (8,1,'discussion','FORO 2','ADFADS','2017-04-13 22:17:18'),
+  (9,1,'discussion','FORO 2','ADFADS','2017-04-13 22:18:42'),
+  (10,1,'discussion','FORO 2','ADFADS','2017-04-13 22:21:09'),
+  (11,1,'discussion','FORO 2','ADFADS','2017-04-13 22:21:32'),
+  (12,5,'comment','COMMENT 2','ASDF','2017-04-13 22:41:22'),
+  (13,5,'comment','COMMENT 2','ASDF','2017-04-13 22:43:06'),
+  (14,5,'comment','COMMENT 2','ASDF','2017-04-13 22:44:15'),
+  (15,10,'task','DSSD','SDDS','2017-04-13 22:44:52');
+
+COMMIT;
+
+#
+# Data for the `purchases` table  (LIMIT 0,500)
+#
+
+INSERT INTO `purchases` (`id_purchase`, `purchase_start_process_date`, `purchase_store_dateentry`, `purchase_name`, `purchase_description`) VALUES 
+  (1,'2017-04-17',NULL,'ADQUISICION DE EQUIPOS DE COMPUTACION PARA LOS RETENES DE LA REGIONAL LA PAZ, modalidad ANPE ','Solicitud de compra de EQUIPOS DE COMPUTACION, modalidad ANPE'),
+  (2,'2017-04-26',NULL,'CAMARAS EXTERNAS y GRABADORES, modalidad COMPRA MENOR','ADQUISICION DE CAMARAS EXTERNAS y GRABADORES, PARA LA REGIONAL LA PAZ'),
+  (3,'2017-09-21',NULL,'Solicitud de compra de EQUIPOS DE COMPUTACION, modalidad ANPE','ADQUISICION DE EQUIPOS DE COMPUTACION PARA LOS RETENES DE LA REGIONAL'),
+  (4,'2017-10-16',NULL,'Solicitud de compra de EQUIPOS DE COMUNICACION, modalidad COMPRA MENOR ','ADQUISICION DE EQUIPOS DE COMUNICACIÓN PARA LOS RETENES DE LA REGIONAL LA PAZ'),
+  (5,'2017-09-07',NULL,'Solicitud de compra de SERVIDORES, modalidad COMPRA MENOR ','ADQUISICION DE EQUIPOS DE SERVIDORES PARA RETENES DE LA REGIONAL LA PAZ '),
+  (6,'2017-02-06','2017-03-29','COMPRA DE IMPRESORAS TERMICAS, LECTORES DE CODIGO DE BARRAS, HERRAMIENTAS Y ACCESORIOS','COMPRA DE IMPRESORAS TERMICAS, LECTORES DE CODIGO DE BARRAS, HERRAMIENTAS Y ACCESORIOS'),
+  (7,'2016-12-31','2016-12-31','Compra anterior a 2017',NULL);
+
+COMMIT;
+
+#
+# Data for the `purchases_items` table  (LIMIT 0,500)
+#
+
+INSERT INTO `purchases_items` (`id_purchase_item`, `purchase_id`, `inventory_category_id`, `purchase_item_quantity`, `purchase_item_description`) VALUES 
+  (1,1,23,11,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000320 \tMINI-PC EBOX THIN CLIENT, PROCEDADOR: INTEL CELERON N2807 2.16 GH2, ALAMCENAMIENTO: 16GB EL MMC; MEMORIA RAM: 2GB TIPO DDR3L; TARJETA DE RED LOCAL:10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB:4 FUENTE DE ALIMENTACION 12V/2A \t1.450,00\r\n2 \t24312000321 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n3 \t24312000322 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n4 \t24312000323 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n5 \t24312000324 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n6 \t24312000325 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n7 \t24312000326 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n8 \t24312000327 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n9 \t24312000328 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n10 \t24312000329 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00\r\n11 \t24312000330 \tMINI-PC EBOX THIN CLEINT, PROCESADOR; INTEL CELERON NO 2807 2.16 GH2 ALMACENAMIENTO; 16 GB EL MMC; MEMORIA RAM; 2 GB TIPO DDR3L; TARJETA DE RED LOCAL; 10/100/1000 GBIT LAN; CANTIDAD DE PUERTOS USB;4 \t1.450,00'),
+  (2,1,26,6,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000388 \tSMALL FACTOR PC \t5.470,00\r\n2 \t24312000389 \tSMALL FACTOR PC \t5.470,00\r\n3 \t24312000390 \tSMALL FACTOR PC \t5.470,00\r\n4 \t24312000391 \tSMALL FACTOR PC \t5.470,00\r\n5 \t24312000392 \tSMALL FACTOR PC \t5.470,00\r\n6 \t24312000393 \tSMALL FACTOR PC \t5.470,00'),
+  (3,1,25,9,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000331 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n2 \t24312000332 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n3 \t24312000333 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n4 \t24312000334 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n5 \t24312000335 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n6 \t24312000336 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n7 \t24312000337 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n8 \t24312000338 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00\r\n9 \t24312000339 \tIMPRESORA LASER HEWLETT PACKARD LASERJET P1102W-MONOCROMO SALIDA EFECTIVA 1200 DPI; VELOCIDAD DEL PROCESADOR 266 MH2, BANDEJA DE ENTRADA 150 HOJAS \t1.050,00'),
+  (4,1,22,15,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000340 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n2 \t24312000341 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n3 \t24312000342 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n4 \t24312000343 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n5 \t24312000344 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n6 \t24312000346 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n7 \t24312000347 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n8 \t24312000348 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n9 \t24312000349 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n10 \t24312000350 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n11 \t24312000351 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n12 \t24312000352 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n13 \t24312000353 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00\r\n14 \t24312000345 \tUPS CAPACIDAD VIA: 1000;WATTS 600, ENTRADA VOLTAJE NOMINAL; 110/220V, NUMERO DE TOMAS 8(NEMA) \t900,00'),
+  (5,1,27,11,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000360 \tMONITOR LED 19 PULGADAS \t810,00\r\n2 \t24312000361 \tMONITOR LED 19 PULGADAS \t810,00\r\n3 \t24312000362 \tMONITOR LED 19 PULGADAS \t810,00\r\n4 \t24312000364 \tMONITOR LED 19 PULGADAS \t810,00\r\n5 \t24312000365 \tMONITOR LED 19 PULGADAS \t810,00\r\n6 \t24312000366 \tMONITOR LED 19 PULGADAS \t810,00\r\n7 \t24312000367 \tMONITOR LED 19 PULGADAS \t810,00\r\n8 \t24312000368 \tMONITOR LED 19 PULGADAS \t810,00\r\n9 \t24312000369 \tMONITOR LED 19 PULGADAS \t810,00\r\n10 \t24312000370 \tMONITOR LED 19 PULGADAS \t810,00\r\n11 \t24312000363 \tMONITOR LED 19 PULGADAS \t810,00'),
+  (6,1,28,6,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000354 \tMONITOR TOUCH 15 PULGADAS PANTALLA TFT LCD DE 15.1 CON RESOLUCION XGA DE 1024X 768 PANEL TACTIL DE ALTA RESISTENCIA Y SENCIBILIDAD, CON 2 MM DE VIDRIO 1 PUERTO. \t3.600,00\r\n2 \t24312000355 \tMONITOR TOUCH 15 PULGADAS PANTALLA TFT LCD DE 15.1 CON RESOLUCION XGA DE 1024X 768 PANEL TACTIL DE ALTA RESISTENCIA Y SENCIBILIDAD, CON 2 MM DE VIDRIO 1 PUERTO. \t3.600,00\r\n3 \t24312000356 \tMONITOR TOUCH 15 PULGADAS PANTALLA TFT LCD DE 15.1 CON RESOLUCION XGA DE 1024X 768 PANEL TACTIL DE ALTA RESISTENCIA Y SENCIBILIDAD, CON 2 MM DE VIDRIO 1 PUERTO. \t3.600,00\r\n4 \t24312000357 \tMONITOR TOUCH 15 PULGADAS PANTALLA TFT LCD DE 15.1 CON RESOLUCION XGA DE 1024X 768 PANEL TACTIL DE ALTA RESISTENCIA Y SENCIBILIDAD, CON 2 MM DE VIDRIO 1 PUERTO. \t3.600,00\r\n5 \t24312000358 \tMONITOR TOUCH 15 PULGADAS PANTALLA TFT LCD DE 15.1 CON RESOLUCION XGA DE 1024X 768 PANEL TACTIL DE ALTA RESISTENCIA Y SENCIBILIDAD, CON 2 MM DE VIDRIO 1 PUERTO. \t3.600,00\r\n6 \t24312000359 \tMONITOR TOUCH 15 PULGADAS PANTALLA TFT LCD DE 15.1 CON RESOLUCION XGA DE 1024X 768 PANEL TACTIL DE ALTA RESISTENCIA Y SENCIBILIDAD, CON 2 MM DE VIDRIO 1 PUERTO. \t3.600,00'),
+  (7,1,24,9,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000380 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00\r\n2 \t24312000381 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00\r\n3 \t24312000382 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00\r\n4 \t24312000383 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00\r\n5 \t24312000384 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00\r\n6 \t24312000385 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00\r\n7 \t24312000386 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00\r\n8 \t24312000387 \tLECTOR DE CODIGO DE BARRAS INALAMBRICAS \t2.749,00'),
+  (8,2,29,9,'13 \t24350000122 \tGRABADORES 9 CH \t2.140,00\r\n14 \t24350000123 \tGRABADORES 9 CH \t2.140,00\r\n15 \t24350000124 \tGRABADORES 9 CH \t2.140,00\r\n16 \t24350000125 \tGRABADORES 9 CH \t2.140,00\r\n17 \t24350000126 \tGRABADORES 9 CH \t2.140,00\r\n18 \t24350000127 \tGRABADORES 9 CH \t2.140,00\r\n19 \t24350000128 \tGRABADORES 9 CH \t2.140,00\r\n20 \t24350000129 \tGRABADORES 9 CH \t2.140,00\r\n21 \t24350000130 \tGRABADORES 9 CH \t2.140,00'),
+  (9,2,30,3,'1 \t24350000109 \tCAMARAS TIPO TUBO POLICARBONATO FULL HD \t466,00\r\n2 \t24350000110 \tCAMARAS TIPO TUBO POLICARBONATO FULL HD \t466,00\r\n3 \t24350000111 \tCAMARAS TIPO TUBO POLICARBONATO FULL HD \t466,00'),
+  (10,2,19,10,'4 \t24350000112 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n5 \t24350000113 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n6 \t24350000115 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n7 \t24350000116 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n8 \t24350000117 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n9 \t24350000118 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n10 \t24350000119 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n11 \t24350000120 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00\r\n12 \t24350000121 \tCAMARA TIPO TUBO POLICARBONATO HD \t346,00'),
+  (11,5,6,5,'1 \t24312000394 \tSERVIDORES MARCA DELL \t7.650,00\r\n2 \t24312000395 \tSERVIDORES MARCA DELL \t7.650,00\r\n3 \t24312000396 \tSERVIDORES MARCA DELL \t7.650,00\r\n4 \t24312000397 \tSERVIDORES MARCA DELL \t7.650,00\r\n5 \t24312000398 \tSERVIDORES MARCA DELL \t7.650,00'),
+  (12,3,23,9,NULL),
+  (13,3,15,8,NULL),
+  (14,3,24,5,NULL),
+  (15,3,22,10,NULL),
+  (16,3,27,5,NULL),
+  (17,3,31,1,NULL),
+  (18,3,32,1,NULL),
+  (19,3,33,1,NULL),
+  (20,4,29,5,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24350000132 \tGRABADORES DIGITAL HIBRIDO \t2.195,00\r\n2 \t24350000131 \tGRABADORES DIGITAL HIBRIDO \t2.195,00\r\n3 \t24350000133 \tGRABADORES DIGITAL HIBRIDO \t2.195,00\r\n4 \t24350000134 \tGRABADORES DIGITAL HIBRIDO \t2.195,00\r\n5 \t24350000135 \tGRABADORES DIGITAL HIBRIDO \t2.195,00'),
+  (21,4,19,13,'6 \t24350000136 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n7 \t24350000137 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n8 \t24350000138 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n9 \t24350000139 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n10 \t24350000140 \tCAMARAS TIPO TUBO POLICARBONATO FULL HD \t365,00\r\n11 \t24350000141 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n12 \t24350000142 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n13 \t24350000143 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n14 \t24350000144 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n15 \t24350000145 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n16 \t24350000146 \tCAMARA TIPO TUBO POLICARBONARTO HD \t365,00\r\n17 \t24350000147 \tCAMARA DE BALA EXTERIOR HD \t365,00\r\n18 \t24350000148 \tCAMARA DE BALA EXTERIOR HD \t365,00'),
+  (22,6,15,7,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000308 \tIMPRESORA TÉRMICA TM-T88V \t2.990,00\r\n2 \t24312000309 \tIMPRESORA TÉRMICA \t2.990,00\r\n3 \t24312000310 \tIMPRESORA TÉRMICA \t2.990,00\r\n4 \t24312000311 \tIMPRESORA TÉRMICA \t2.990,00\r\n5 \t24312000312 \tIMPRESORA TÉRMICA \t2.990,00\r\n6 \t24312000313 \tIMPRESORA TÉRMICA \t2.990,00\r\n7 \t24312000314 \tIMPRESORA TÉRMICA \t2.990,00'),
+  (23,6,24,5,'N° \tCodigo Activo \tDescripcion \tCosto\r\n1 \t24312000315 \tLECTOR DE CODIGO DE BARRAS \t2.672,00\r\n2 \t24312000316 \tLECTOR DE CODIGO DE BARRA \t2.672,00\r\n3 \t24312000317 \tLECTOR DE CODIGO DE BARRA \t2.672,00\r\n4 \t24312000318 \tLECTOR DE CODIGO DE BARRA \t2.672,00\r\n5 \t24312000319 \tLECTOR DE CODIGO DE BARRA \t2.672,00');
+
+COMMIT;
+

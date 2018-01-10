@@ -1,0 +1,3113 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class=" is-copy-enabled is-u2f-enabled">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'>
+
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-62a6d02dada4aac61edd8b6a2c2c47d0ae2b4cddce82ec1d00f0da0e77dc2a15.css" integrity="sha256-YqbQLa2kqsYe3YtqLCxH0K4rTN3OguwdAPDaDnfcKhU=" media="all" rel="stylesheet" />
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-d5d3b67876d4d9e77fb201434be4cce77789231e537cff0a8ed3de22e91bb900.css" integrity="sha256-1dO2eHbU2ed/sgFDS+TM53eJIx5TfP8KjtPeIukbuQA=" media="all" rel="stylesheet" />
+    
+    
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/site-c4b4365da282e51c06e107368db8502a2ecf82e64094d29d791b797372212de2.css" integrity="sha256-xLQ2XaKC5RwG4Qc2jbhQKi7PguZAlNKdeRt5c3IhLeI=" media="all" rel="stylesheet" />
+    
+
+    <link as="script" href="https://assets-cdn.github.com/assets/frameworks-a99faa9adb5b4c35c3eefd4255860c62ef4f2e3e1a41ee81bdb79c44bc778d0b.js" rel="preload" />
+    
+    <link as="script" href="https://assets-cdn.github.com/assets/github-4b81b749fc206d713be4b1b572d9dd641826e5af81f13ec8a2b5f565eaa417c3.js" rel="preload" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width">
+    
+    
+    <title>Libraries · bcit-ci/CodeIgniter Wiki · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta content="https://avatars0.githubusercontent.com/u/8863432?v=3&amp;s=400" name="twitter:image:src" /><meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="bcit-ci/CodeIgniter" name="twitter:title" /><meta content="CodeIgniter - Open Source PHP Framework (originally from EllisLab)" name="twitter:description" />
+      <meta content="https://avatars0.githubusercontent.com/u/8863432?v=3&amp;s=400" property="og:image" /><meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="bcit-ci/CodeIgniter" property="og:title" /><meta content="https://github.com/bcit-ci/CodeIgniter" property="og:url" /><meta content="CodeIgniter - Open Source PHP Framework (originally from EllisLab)" property="og:description" />
+      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    
+    <meta name="pjax-timeout" content="1000">
+    
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_wiki" data-pjax-transient>
+
+    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="BA1B50FD:55E4:1853F9C:573D38BA" name="octolytics-dimension-request_id" />
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/wiki/show" data-pjax-transient="true" name="analytics-location" />
+
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+
+
+
+        <meta name="hostname" content="github.com">
+    <meta name="user-login" content="">
+
+        <meta name="expected-hostname" content="github.com">
+      <meta name="js-proxy-site-detection-payload" content="NDk1Y2Q4M2Q5ZGQ5OTBiYzRmY2Y2MGUzYmViZWFlNDgxOGYzMzlmZGNlMTZmMzM5NjUyYmZiODczNzQ2NTE4Nnx7InJlbW90ZV9hZGRyZXNzIjoiMTg2LjI3LjgwLjI1MyIsInJlcXVlc3RfaWQiOiJCQTFCNTBGRDo1NUU0OjE4NTNGOUM6NTczRDM4QkEiLCJ0aW1lc3RhbXAiOjE0NjM2MzAwMTF9">
+
+
+      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#4078c0">
+      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+    <meta content="7ff8fad59658955a264fa03e80f535eea23b1b31" name="form-nonce" />
+
+    <meta http-equiv="x-pjax-version" content="496ceabd4dbacf7880abd6df024021e4">
+    
+
+      
+  <meta name="description" content="CodeIgniter - Open Source PHP Framework (originally from EllisLab)">
+  <meta name="go-import" content="github.com/bcit-ci/CodeIgniter git https://github.com/bcit-ci/CodeIgniter.git">
+
+  <meta content="8863432" name="octolytics-dimension-user_id" /><meta content="bcit-ci" name="octolytics-dimension-user_login" /><meta content="2234102" name="octolytics-dimension-repository_id" /><meta content="bcit-ci/CodeIgniter" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="2234102" name="octolytics-dimension-repository_network_root_id" /><meta content="bcit-ci/CodeIgniter" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/bcit-ci/CodeIgniter/commits/develop.atom" rel="alternate" title="Recent Commits to CodeIgniter:develop" type="application/atom+xml">
+
+
+  </head>
+
+
+  <body class="logged-out   env-production linux vis-public">
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"></div>
+    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+
+    
+    
+    
+
+
+
+          <header class="site-header js-details-container" role="banner">
+  <div class="container-responsive">
+    <a class="header-logo-invertocat" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>
+    </a>
+
+    <button class="btn-link right site-header-toggle js-details-target" type="button" aria-label="Toggle navigation">
+      <svg aria-hidden="true" class="octicon octicon-three-bars" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H0.59c-0.59 0-0.59-0.41-0.59-1s0-1 0.59-1h10.81c0.59 0 0.59 0.41 0.59 1s0 1-0.59 1z m0-4H0.59c-0.59 0-0.59-0.41-0.59-1s0-1 0.59-1h10.81c0.59 0 0.59 0.41 0.59 1s0 1-0.59 1zM0.59 11h10.81c0.59 0 0.59 0.41 0.59 1s0 1-0.59 1H0.59c-0.59 0-0.59-0.41-0.59-1s0-1 0.59-1z"></path></svg>
+    </button>
+
+    <div class="site-header-menu">
+      <nav class="site-header-nav site-header-nav-main">
+        <a href="/personal" class="js-selected-navigation-item nav-item nav-item-personal" data-ga-click="Header, click, Nav menu - item:personal" data-selected-links="/personal /personal">
+          Personal
+</a>        <a href="/open-source" class="js-selected-navigation-item nav-item nav-item-opensource" data-ga-click="Header, click, Nav menu - item:opensource" data-selected-links="/open-source /open-source">
+          Open source
+</a>        <a href="/business" class="js-selected-navigation-item nav-item nav-item-business" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/features /business/customers /business">
+          Business
+</a>        <a href="/explore" class="js-selected-navigation-item nav-item nav-item-explore" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /explore">
+          Explore
+</a>      </nav>
+
+      <div class="site-header-actions">
+            <a class="btn btn-primary site-header-actions-btn" href="/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+          <a class="btn site-header-actions-btn mr-2" href="/login?return_to=%2Fbcit-ci%2FCodeIgniter%2Fwiki%2FLibraries" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+      </div>
+
+        <nav class="site-header-nav site-header-nav-secondary">
+          <a class="nav-item" href="/pricing">Pricing</a>
+          <a class="nav-item" href="/blog">Blog</a>
+          <a class="nav-item" href="https://help.github.com">Support</a>
+          <a class="nav-item header-search-link" href="https://github.com/search">Search GitHub</a>
+              <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
+  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="/bcit-ci/CodeIgniter/search" class="js-site-search-form" data-scoped-search-url="/bcit-ci/CodeIgniter/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <label class="form-control header-search-wrapper js-chromeless-input-container">
+      <div class="header-search-scope">This repository</div>
+      <input type="text"
+        class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
+        data-hotkey="s"
+        name="q"
+        placeholder="Search"
+        aria-label="Search this repository"
+        data-unscoped-placeholder="Search GitHub"
+        data-scoped-placeholder="Search"
+        tabindex="1"
+        autocapitalize="off">
+    </label>
+</form></div>
+
+        </nav>
+    </div>
+  </div>
+</header>
+
+
+
+    <div id="start-of-content" class="accessibility-aid"></div>
+
+      <div id="js-flash-container">
+</div>
+
+
+    <div role="main" class="main-content">
+        <div itemscope itemtype="http://schema.org/SoftwareSourceCode">
+    <div id="js-repo-pjax-container" data-pjax-container>
+      
+<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+  <div class="container repohead-details-container">
+
+    
+
+<ul class="pagehead-actions">
+
+  <li>
+      <a href="/login?return_to=%2Fbcit-ci%2FCodeIgniter"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6c4.94 0 7.94-6 7.94-6S13 2 8.06 2z m-0.06 10c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4z m2-4c0 1.11-0.89 2-2 2s-2-0.89-2-2 0.89-2 2-2 2 0.89 2 2z"></path></svg>
+    Watch
+  </a>
+  <a class="social-count" href="/bcit-ci/CodeIgniter/watchers">
+    1,611
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fbcit-ci%2FCodeIgniter"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/bcit-ci/CodeIgniter/stargazers">
+      12,335
+    </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fbcit-ci%2FCodeIgniter"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path d="M8 1c-1.11 0-2 0.89-2 2 0 0.73 0.41 1.38 1 1.72v1.28L5 8 3 6v-1.28c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72v1.78l3 3v1.78c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V9.5l3-3V4.72c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2zM2 4.2c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3 10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3-10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z"></path></svg>
+        Fork
+      </a>
+
+    <a href="/bcit-ci/CodeIgniter/network" class="social-count">
+      6,190
+    </a>
+  </li>
+</ul>
+
+    <h1 class="entry-title public ">
+  <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M4 9h-1v-1h1v1z m0-3h-1v1h1v-1z m0-2h-1v1h1v-1z m0-2h-1v1h1v-1z m8-1v12c0 0.55-0.45 1-1 1H6v2l-1.5-1.5-1.5 1.5V14H1c-0.55 0-1-0.45-1-1V1C0 0.45 0.45 0 1 0h10c0.55 0 1 0.45 1 1z m-1 10H1v2h2v-1h3v1h5V11z m0-10H2v9h9V1z"></path></svg>
+  <span class="author" itemprop="author"><a href="/bcit-ci" class="url fn" rel="author">bcit-ci</a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong itemprop="name"><a href="/bcit-ci/CodeIgniter" data-pjax="#js-repo-pjax-container">CodeIgniter</a></strong>
+
+</h1>
+
+  </div>
+  <div class="container">
+    
+<nav class="reponav js-repo-nav js-sidenav-container-pjax"
+     itemscope
+     itemtype="http://schema.org/BreadcrumbList"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container">
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/bcit-ci/CodeIgniter" class="js-selected-navigation-item reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /bcit-ci/CodeIgniter" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M9.5 3l-1.5 1.5 3.5 3.5L8 11.5l1.5 1.5 4.5-5L9.5 3zM4.5 3L0 8l4.5 5 1.5-1.5L2.5 8l3.5-3.5L4.5 3z"></path></svg>
+      <span itemprop="name">Code</span>
+      <meta itemprop="position" content="1">
+</a>  </span>
+
+    <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+      <a href="/bcit-ci/CodeIgniter/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /bcit-ci/CodeIgniter/issues" itemprop="url">
+        <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7S10.14 13.7 7 13.7 1.3 11.14 1.3 8s2.56-5.7 5.7-5.7m0-1.3C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7S10.86 1 7 1z m1 3H6v5h2V4z m0 6H6v2h2V10z"></path></svg>
+        <span itemprop="name">Issues</span>
+        <span class="counter">42</span>
+        <meta itemprop="position" content="2">
+</a>    </span>
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/bcit-ci/CodeIgniter/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /bcit-ci/CodeIgniter/pulls" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M11 11.28c0-1.73 0-6.28 0-6.28-0.03-0.78-0.34-1.47-0.94-2.06s-1.28-0.91-2.06-0.94c0 0-1.02 0-1 0V0L4 3l3 3V4h1c0.27 0.02 0.48 0.11 0.69 0.31s0.3 0.42 0.31 0.69v6.28c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72z m-1 2.92c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2zM4 3c0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72 0 1.55 0 5.56 0 6.56-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V4.72c0.59-0.34 1-0.98 1-1.72z m-0.8 10c0 0.66-0.55 1.2-1.2 1.2s-1.2-0.55-1.2-1.2 0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2z m-1.2-8.8c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z"></path></svg>
+      <span itemprop="name">Pull requests</span>
+      <span class="counter">27</span>
+      <meta itemprop="position" content="3">
+</a>  </span>
+
+    <a href="/bcit-ci/CodeIgniter/wiki" aria-selected="true" class="js-selected-navigation-item selected reponav-item" data-hotkey="g w" data-selected-links="repo_wiki /bcit-ci/CodeIgniter/wiki">
+      <svg aria-hidden="true" class="octicon octicon-book" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M2 5h4v1H2v-1z m0 3h4v-1H2v1z m0 2h4v-1H2v1z m11-5H9v1h4v-1z m0 2H9v1h4v-1z m0 2H9v1h4v-1z m2-6v9c0 0.55-0.45 1-1 1H8.5l-1 1-1-1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h5.5l1 1 1-1h5.5c0.55 0 1 0.45 1 1z m-8 0.5l-0.5-0.5H1v9h6V3.5z m7-0.5H8.5l-0.5 0.5v8.5h6V3z"></path></svg>
+      Wiki
+</a>
+
+  <a href="/bcit-ci/CodeIgniter/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /bcit-ci/CodeIgniter/pulse">
+    <svg aria-hidden="true" class="octicon octicon-pulse" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0V10h3.6L4.5 8.2l0.9 5.4L9 8.5l1.6 1.5H14V8H11.5z"></path></svg>
+    Pulse
+</a>
+  <a href="/bcit-ci/CodeIgniter/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /bcit-ci/CodeIgniter/graphs">
+    <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M16 14v1H0V0h1v14h15z m-11-1H3V8h2v5z m4 0H7V3h2v10z m4 0H11V6h2v7z"></path></svg>
+    Graphs
+</a>
+
+</nav>
+
+  </div>
+</div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+
+<div id="wiki-wrapper" class="wiki-wrapper page">
+<div class="gh-header">
+  <div class="gh-header-show">
+    <h1 class="gh-header-title instapaper_title">Libraries</h1>
+      <div class="gh-header-meta">
+        malaycake edited this page <relative-time datetime="2014-12-12T06:59:49Z">Dec 11, 2014</relative-time>
+        &middot;
+        <a href="/bcit-ci/CodeIgniter/wiki/Libraries/_history" class="history">
+          2 revisions
+        </a>
+      </div>
+  </div>
+</div>
+<div id="wiki-content" class="wiki-content">
+  <div class="has-rightbar">
+
+  <div id="wiki-rightbar" class="wiki-rightbar">
+    <div class="wiki-pages-box readability-sidebar boxed-group flush js-wiki-pages-box collapsed" role="navigation">
+      
+<h3 class="js-wiki-toggle-collapse wiki-auxiliary-content">
+  <svg aria-hidden="true" class="octicon octicon-triangle-down caret-expanded" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M0 5l6 6 6-6H0z"></path></svg>
+  <svg aria-hidden="true" class="octicon octicon-triangle-right caret-collapsed" height="16" version="1.1" viewBox="0 0 6 16" width="6"><path d="M0 14l6-6L0 2v12z"></path></svg>
+  Pages <span class="counter">880</span>
+</h3>
+<div class="boxed-group-inner wiki-auxiliary-content wiki-auxiliary-content-no-bg">
+    <div class="filter-bar">
+      <input type="text" id="wiki-pages-filter" class="form-control input-sm input-block js-filterable-field" placeholder="Find a Page…" aria-label="Find a Page…" tabindex="2">
+    </div>
+
+  <ul class="wiki-pages" data-filterable-for="wiki-pages-filter" data-filterable-type="substring">
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki" class="wiki-page-link">Home</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/A-CodeCMS" class="wiki-page-link">A CodeCMS</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/A3M-Account-Authentication-and-Authorization" class="wiki-page-link">A3M Account Authentication and Authorization</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Aauth-User-Authorization-and-Authentication-Library" class="wiki-page-link">Aauth User Authorization and Authentication Library</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Aauth-User-Authorization-and-Authentication-Library-for-CodeIgniter-2.x-(version-2)" class="wiki-page-link">Aauth User Authorization and Authentication Library for CodeIgniter 2.x (version 2)</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/AB-Testing-With-CodeIgniter" class="wiki-page-link">AB Testing With CodeIgniter</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/About" class="wiki-page-link">About</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Acicrud-library" class="wiki-page-link">Acicrud library</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Active-Record-parallel-queries" class="wiki-page-link">Active Record parallel queries</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Active-User-library" class="wiki-page-link">Active User library</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ActiveRecord-Class" class="wiki-page-link">ActiveRecord Class</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ActiveRecord-Class-Mod" class="wiki-page-link">ActiveRecord Class Mod</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Add-Edit-Views" class="wiki-page-link">Add Edit Views</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Add-events-to-Specific-date-Calendar-Class" class="wiki-page-link">Add events to Specific date Calendar Class</a></strong>
+    </li>
+    <li>
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Adding-Layouts-c.q.-data-format-to-CI" class="wiki-page-link">Adding Layouts c.q. data format to CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ADODB" class="wiki-page-link">ADODB</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/adsf" class="wiki-page-link">adsf</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Advanced-Layout-Library" class="wiki-page-link">Advanced Layout Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/AG-Auth" class="wiki-page-link">AG Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ajax-Autocomplete" class="wiki-page-link">Ajax Autocomplete</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/AJAX-for-CodeIgniter" class="wiki-page-link">AJAX for CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ajax-Framework-For-CodeIgniter" class="wiki-page-link">Ajax Framework For CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/AJAX-Pagination-with-CI-Pagination-Library" class="wiki-page-link">AJAX Pagination with CI Pagination Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/AJAX-Pagination-with-CI-Pagination-Library" class="wiki-page-link">AJAX Pagination with CI Pagination Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ajax-Todo-List-system-with-Codeigniter" class="wiki-page-link">Ajax Todo List system with Codeigniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ajax-Uploader" class="wiki-page-link">Ajax Uploader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/allowing-search-engines-to-spider-all-your-langages" class="wiki-page-link">allowing search engines to spider all your langages</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Alternate-Pagination-class" class="wiki-page-link">Alternate Pagination class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/alternative-to-GET" class="wiki-page-link">alternative to GET</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Amazon-Services-API-Integration" class="wiki-page-link">Amazon Services API Integration</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/AMF-Codeigniter-Library-No-Zend-No-Hooks-Etc." class="wiki-page-link">AMF Codeigniter Library No Zend No Hooks Etc.</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/AMF-Flash-Remoting-with-Zend-and-CI" class="wiki-page-link">AMF Flash Remoting with Zend and CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Amfphp-and-CI" class="wiki-page-link">Amfphp and CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Analytics" class="wiki-page-link">Analytics</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Analytics-w-Ecommerce" class="wiki-page-link">Analytics w Ecommerce</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Another-AJAX-approach-from-CI" class="wiki-page-link">Another AJAX approach from CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Another-BBCode-Helper" class="wiki-page-link">Another BBCode Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/another-Excel-Reader" class="wiki-page-link">another Excel Reader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/APNs-library" class="wiki-page-link">APNs library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Application-Variables" class="wiki-page-link">Application Variables</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Applications-Using-Code-Igniter" class="wiki-page-link">Applications Using Code Igniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Approaches" class="wiki-page-link">Approaches</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Arabic" class="wiki-page-link">Arabic</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Asset-Gzip-cache-serve" class="wiki-page-link">Asset Gzip cache serve</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Asset-Helper" class="wiki-page-link">Asset Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Asset-Library" class="wiki-page-link">Asset Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Asset-Linker" class="wiki-page-link">Asset Linker</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Asset-Manager" class="wiki-page-link">Asset Manager</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Assosiative-Arrays-via-POST" class="wiki-page-link">Assosiative Arrays via POST</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Australian-Date-Helper" class="wiki-page-link">Australian Date Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/auth" class="wiki-page-link">auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Authorize.net-AIM-Integration" class="wiki-page-link">Authorize.net AIM Integration</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Authorize.net-CIM" class="wiki-page-link">Authorize.net CIM</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Auto-Form-Fields" class="wiki-page-link">Auto Form Fields</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/auto-link" class="wiki-page-link">auto link</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Autoloading-with-Classmapper" class="wiki-page-link">Autoloading with Classmapper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Automatic-base-url" class="wiki-page-link">Automatic base url</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Automatic-configbase-url" class="wiki-page-link">Automatic configbase url</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/BackendPro" class="wiki-page-link">BackendPro</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Bamboo-Invoice" class="wiki-page-link">Bamboo Invoice</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Barlcays-ePDQ-CPI-library" class="wiki-page-link">Barlcays ePDQ CPI library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Bashkir" class="wiki-page-link">Bashkir</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Bashkirian" class="wiki-page-link">Bashkirian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Basque" class="wiki-page-link">Basque</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/BBCode-Helper" class="wiki-page-link">BBCode Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/BBCode-Helper-2" class="wiki-page-link">BBCode Helper 2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/BBedit-Clippings" class="wiki-page-link">BBedit Clippings</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/BBQQ-Calendar" class="wiki-page-link">BBQQ Calendar</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Better-Server-Setup-for-CI" class="wiki-page-link">Better Server Setup for CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/bit.ly-Library" class="wiki-page-link">bit.ly Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/bizLoader" class="wiki-page-link">bizLoader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Bulgarian" class="wiki-page-link">Bulgarian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/button-to" class="wiki-page-link">button to</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Cache-headers" class="wiki-page-link">Cache headers</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/cake:-Codeigniter-mAKE" class="wiki-page-link">cake: Codeigniter mAKE</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Calendar" class="wiki-page-link">Calendar</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Calling-CI-models-from-outside-script" class="wiki-page-link">Calling CI models from outside script</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Calling-page-chunks-from-SSI" class="wiki-page-link">Calling page chunks from SSI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/cant-download-ajax-for-codeigniter" class="wiki-page-link">cant download ajax for codeigniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/captcha" class="wiki-page-link">captcha</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Captcha-simple-maths-for-HMVC-4.1.x" class="wiki-page-link">Captcha simple maths for HMVC 4.1.x</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Carabiner" class="wiki-page-link">Carabiner</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Cart-Class-Tax-and-Discount" class="wiki-page-link">Cart Class Tax and Discount</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Cart-Library-Update" class="wiki-page-link">Cart Library Update</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:Contributions::Applications::Forums" class="wiki-page-link">Category:Contributions::Applications::Forums</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:Contributions::Libraries::Google-Maps" class="wiki-page-link">Category:Contributions::Libraries::Google Maps</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:contributions::libraries::miscallenous" class="wiki-page-link">Category:contributions::libraries::miscallenous</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:Core::URL" class="wiki-page-link">Category:Core::URL</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:internationalization::gettext" class="wiki-page-link">Category:internationalization::gettext</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:libraries::ajax" class="wiki-page-link">Category:libraries::ajax</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:libraries::authentication" class="wiki-page-link">Category:libraries::authentication</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:Libraries::CRUD" class="wiki-page-link">Category:Libraries::CRUD</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:Libraries::Tests" class="wiki-page-link">Category:Libraries::Tests</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Category:wiki" class="wiki-page-link">Category:wiki</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Centralized-Cache-URI" class="wiki-page-link">Centralized Cache URI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Changing-form-repopulation-behaviour" class="wiki-page-link">Changing form repopulation behaviour</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Charting" class="wiki-page-link">Charting</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Check-Sessions-with-One-Function" class="wiki-page-link">Check Sessions with One Function</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Chinese" class="wiki-page-link">Chinese</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Chuck-Son&#39;s-take" class="wiki-page-link">Chuck Son&#39;s take</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-Base---CodeIgniter-Repository" class="wiki-page-link">CI Base   CodeIgniter Repository</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-Factory-Model" class="wiki-page-link">CI Factory Model</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-Language-Extended" class="wiki-page-link">CI Language Extended</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-Minify" class="wiki-page-link">CI Minify</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-Neo4j" class="wiki-page-link">CI Neo4j</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-Nusoap-Library" class="wiki-page-link">CI Nusoap Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-on-the-command-line" class="wiki-page-link">CI on the command line</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ci-session-specific-database" class="wiki-page-link">ci session specific database</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-SWIFT-MAILER" class="wiki-page-link">CI SWIFT MAILER</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CI-Template-Library-for-ZendStudio" class="wiki-page-link">CI Template Library for ZendStudio</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/cicrud" class="wiki-page-link">cicrud</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CIEXtended---New-PHP-ORM-Framework" class="wiki-page-link">CIEXtended   New PHP ORM Framework</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/cigenerator" class="wiki-page-link">cigenerator</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CIMyAdmin" class="wiki-page-link">CIMyAdmin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CIUnit-Framework----Unit-Testing-for-CodeIgniter" class="wiki-page-link">CIUnit Framework    Unit Testing for CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CKEditor" class="wiki-page-link">CKEditor</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/cl-auth" class="wiki-page-link">cl auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CL-Auth-Integration-with-Vanilla-Forum-Engine" class="wiki-page-link">CL Auth Integration with Vanilla Forum Engine</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CLE---Controller-Loader-Extension" class="wiki-page-link">CLE   Controller Loader Extension</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Clear-Cache-by-POST" class="wiki-page-link">Clear Cache by POST</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Clear-Page-Cache" class="wiki-page-link">Clear Page Cache</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ClientServer-Validation" class="wiki-page-link">ClientServer Validation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Code-Igniter-1.7.1-Quick-Reference-Cheatsheet-Release" class="wiki-page-link">Code Igniter 1.7.1 Quick Reference Cheatsheet Release</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-1.7" class="wiki-page-link">CodeIgniter 1.7</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-1.7-Professional-Development" class="wiki-page-link">CodeIgniter 1.7 Professional Development</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-2.1-internationalization-i18n" class="wiki-page-link">CodeIgniter 2.1 internationalization i18n</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-and-Dojo-CRM" class="wiki-page-link">CodeIgniter and Dojo CRM</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-and-ExtJS" class="wiki-page-link">CodeIgniter and ExtJS</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-Flashdata-Highlighting-with-jQuery-and-jGrowl" class="wiki-page-link">CodeIgniter Flashdata Highlighting with jQuery and jGrowl</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-for-Rapid-PHP-Application-Development" class="wiki-page-link">CodeIgniter for Rapid PHP Application Development</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-HTML-Table-Extension" class="wiki-page-link">CodeIgniter HTML Table Extension</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-Image-Manipulation-Class" class="wiki-page-link">CodeIgniter Image Manipulation Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-Sample-Applications" class="wiki-page-link">CodeIgniter Sample Applications</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/codeigniter-template" class="wiki-page-link">codeigniter template</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/codeigniter-turkish" class="wiki-page-link">codeigniter turkish</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CodeIgniter-Twitter-Library" class="wiki-page-link">CodeIgniter Twitter Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/common-auth-API-for-CI" class="wiki-page-link">common auth API for CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Community-Auth" class="wiki-page-link">Community Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Community-Cart" class="wiki-page-link">Community Cart</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Compress-HTML-output" class="wiki-page-link">Compress HTML output</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Config-Extend-to-Database" class="wiki-page-link">Config Extend to Database</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ConfigLoadPatch" class="wiki-page-link">ConfigLoadPatch</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ConfigSectionsPatch" class="wiki-page-link">ConfigSectionsPatch</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Contact" class="wiki-page-link">Contact</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Contributions" class="wiki-page-link">Contributions</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/convert-to-gmt" class="wiki-page-link">convert to gmt</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/cool-configs" class="wiki-page-link">cool configs</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/copy-directory" class="wiki-page-link">copy directory</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Copyrights-and-Content-License" class="wiki-page-link">Copyrights and Content License</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Course-Schedule-and-Booking-System" class="wiki-page-link">Course Schedule and Booking System</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Create-an-Event-calendar-using-Codeigniter-and-jQuery" class="wiki-page-link">Create an Event calendar using Codeigniter and jQuery</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Create-Scripts-Automatically" class="wiki-page-link">Create Scripts Automatically</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Credit-Card-Helper" class="wiki-page-link">Credit Card Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Croatian" class="wiki-page-link">Croatian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Cron-job-bootstrapper" class="wiki-page-link">Cron job bootstrapper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CRUD-Buster" class="wiki-page-link">CRUD Buster</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/css" class="wiki-page-link">css</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CSS-Library" class="wiki-page-link">CSS Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/CSVReader" class="wiki-page-link">CSVReader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Curl-library" class="wiki-page-link">Curl library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Custom-404-error-pages" class="wiki-page-link">Custom 404 error pages</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Custom-front-controller" class="wiki-page-link">Custom front controller</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Custom-Logging-Threshold" class="wiki-page-link">Custom Logging Threshold</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Custom-markup-language" class="wiki-page-link">Custom markup language</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Custom-profiler-overdiv" class="wiki-page-link">Custom profiler overdiv</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Custom-Validation-Errors-per-Field" class="wiki-page-link">Custom Validation Errors per Field</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Customer-Support-Time-Tracking-Application:-Daikon" class="wiki-page-link">Customer Support Time Tracking Application: Daikon</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Customizing-the-Profiler" class="wiki-page-link">Customizing the Profiler</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Czech" class="wiki-page-link">Czech</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Danish" class="wiki-page-link">Danish</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Danish:Getting-Started" class="wiki-page-link">Danish:Getting Started</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dariusz-Debowczyk&#39;s-Session-Class" class="wiki-page-link">Dariusz Debowczyk&#39;s Session Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dariusz-Debowczyks-Session-Class" class="wiki-page-link">Dariusz Debowczyks Session Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Database" class="wiki-page-link">Database</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Database-Config" class="wiki-page-link">Database Config</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Database-Views" class="wiki-page-link">Database Views</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DataMapper" class="wiki-page-link">DataMapper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DataMapper-ORM" class="wiki-page-link">DataMapper ORM</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Date-Helper" class="wiki-page-link">Date Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DB-Session" class="wiki-page-link">DB Session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/db-to-table" class="wiki-page-link">db to table</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DB2-Database-Driver" class="wiki-page-link">DB2 Database Driver</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DB2-Session" class="wiki-page-link">DB2 Session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DBForge-MySQL-FULLTEXT-Key-Support" class="wiki-page-link">DBForge MySQL FULLTEXT Key Support</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dbhelper-Library" class="wiki-page-link">Dbhelper Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/dbug" class="wiki-page-link">dbug</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DBVersion" class="wiki-page-link">DBVersion</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ddauth---Dragonfly-Development-Auth-System" class="wiki-page-link">ddauth   Dragonfly Development Auth System</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ddauth---Dragonfly-Development&#39;s-Auth-System" class="wiki-page-link">ddauth   Dragonfly Development&#39;s Auth System</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Debug-toolbar" class="wiki-page-link">Debug toolbar</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Defaults" class="wiki-page-link">Defaults</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/definition-list-helper" class="wiki-page-link">definition list helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Digg-Style-Pagination" class="wiki-page-link">Digg Style Pagination</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Digg-Style-Pagination---Non-evasive-aproach" class="wiki-page-link">Digg Style Pagination   Non evasive aproach</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/dip-into-CI" class="wiki-page-link">dip into CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Discussion-Lists" class="wiki-page-link">Discussion Lists</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Display-helper" class="wiki-page-link">Display helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Displaying-Multiple-Templates" class="wiki-page-link">Displaying Multiple Templates</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Displaying-Multiple-Views" class="wiki-page-link">Displaying Multiple Views</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DMZ" class="wiki-page-link">DMZ</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DMZ-Extensions:-How-To-Add-Yours" class="wiki-page-link">DMZ Extensions: How To Add Yours</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DMZ:Array" class="wiki-page-link">DMZ:Array</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DMZ:CSV" class="wiki-page-link">DMZ:CSV</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DMZ:JSON" class="wiki-page-link">DMZ:JSON</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DMZ:RowIndex" class="wiki-page-link">DMZ:RowIndex</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DMZ:SimpleCache" class="wiki-page-link">DMZ:SimpleCache</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Document-templates-with-odtPHP" class="wiki-page-link">Document templates with odtPHP</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dojo-together-with-CI" class="wiki-page-link">Dojo together with CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DOM-library" class="wiki-page-link">DOM library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DoSeven" class="wiki-page-link">DoSeven</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Download" class="wiki-page-link">Download</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Download-helper-for-large-files" class="wiki-page-link">Download helper for large files</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dreamhost-.htaccess" class="wiki-page-link">Dreamhost .htaccess</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DrF-Reverse-Routing" class="wiki-page-link">DrF Reverse Routing</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dropbox-API-Library" class="wiki-page-link">Dropbox API Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dutch" class="wiki-page-link">Dutch</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DX-Auth" class="wiki-page-link">DX Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dynamic-Base-Url" class="wiki-page-link">Dynamic Base Url</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Dynamic-Hooking" class="wiki-page-link">Dynamic Hooking</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/DynamicMenu" class="wiki-page-link">DynamicMenu</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/EasyAuth" class="wiki-page-link">EasyAuth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/EckoSession" class="wiki-page-link">EckoSession</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Email-ASCII-encode-helper" class="wiki-page-link">Email ASCII encode helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Email-Attachment-Name" class="wiki-page-link">Email Attachment Name</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Encryption-Class-with-Cast-128" class="wiki-page-link">Encryption Class with Cast 128</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/enhanced-CI-pagination" class="wiki-page-link">enhanced CI pagination</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Erkana" class="wiki-page-link">Erkana</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/European-Vat-Checker" class="wiki-page-link">European Vat Checker</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Excel-CSV-helper" class="wiki-page-link">Excel CSV helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Excel-Plugin" class="wiki-page-link">Excel Plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Excel-Reader-Class" class="wiki-page-link">Excel Reader Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Export-to-Excel-2013" class="wiki-page-link">Export to Excel 2013</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Extended-Input-for-Files" class="wiki-page-link">Extended Input for Files</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Extending-Controller-with-masterpage-template-funtionality" class="wiki-page-link">Extending Controller with masterpage template funtionality</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Extending-Database-Drivers" class="wiki-page-link">Extending Database Drivers</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/External-View---Plugin" class="wiki-page-link">External View   Plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Facebook-Apps" class="wiki-page-link">Facebook Apps</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Factory-Model" class="wiki-page-link">Factory Model</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FAQ" class="wiki-page-link">FAQ</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FCKeditor" class="wiki-page-link">FCKeditor</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FeedBurner-Library" class="wiki-page-link">FeedBurner Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:123ajax-uploading123.zip" class="wiki-page-link">File:123ajax uploading123.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ajax-for-codeigniter-v2.zip" class="wiki-page-link">File:ajax for codeigniter v2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ajax-for-codeigniter.zip" class="wiki-page-link">File:ajax for codeigniter.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ajax-uploading.zip" class="wiki-page-link">File:ajax uploading.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ajax_uploading.zip" class="wiki-page-link">File:ajax_uploading.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:asset-helper.zip" class="wiki-page-link">File:asset helper.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:asset-helper.zip-cannot-download" class="wiki-page-link">File:asset helper.zip cannot download</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:asset-helper1.zip" class="wiki-page-link">File:asset helper1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:asset-lib.zip" class="wiki-page-link">File:asset lib.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:asset-manager.zip" class="wiki-page-link">File:asset manager.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:asset_helper.zip" class="wiki-page-link">File:asset_helper.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:asset_manager.zip" class="wiki-page-link">File:asset_manager.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:au.zip" class="wiki-page-link">File:au.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:auth.zip" class="wiki-page-link">File:auth.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:catalan-1.7.2.zip" class="wiki-page-link">File:catalan 1.7.2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:chinese-traditional-1.7.2.zip" class="wiki-page-link">File:chinese traditional 1.7.2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ci-1.5.1-with-session.zip" class="wiki-page-link">File:ci 1.5.1 with session.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ci-1.7.2-language-indonesian.zip" class="wiki-page-link">File:ci 1.7.2 language indonesian.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ci-debug-v0.1.zip" class="wiki-page-link">File:ci debug v0.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ci-nested-sets-0-9.zip" class="wiki-page-link">File:ci nested sets 0 9.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:CI_1.5.1_with_Session.zip" class="wiki-page-link">File:CI_1.5.1_with_Session.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ci_1.7.2_language_indonesian.zip" class="wiki-page-link">File:ci_1.7.2_language_indonesian.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:CI_Nested_Sets-0_9.zip" class="wiki-page-link">File:CI_Nested_Sets 0_9.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ci_sfyaml.zip" class="wiki-page-link">File:ci_sfyaml.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:db-active-rec.zip" class="wiki-page-link">File:db active rec.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:db-sessions.zip" class="wiki-page-link">File:db sessions.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:db2c.zip" class="wiki-page-link">File:db2c.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:db2u-v3.zip" class="wiki-page-link">File:db2u v3.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:db2u-v3db2.zip" class="wiki-page-link">File:db2u v3db2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:db2u-v3f.zip" class="wiki-page-link">File:db2u v3f.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:db_sessions.zip" class="wiki-page-link">File:db_sessions.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:DbhelperLibrary_v1.0.2-rev.zip" class="wiki-page-link">File:DbhelperLibrary_v1.0.2 rev.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:drf-reverse-routing.20090331.zip" class="wiki-page-link">File:drf reverse routing.20090331.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:eckosession-1.0.2.zip" class="wiki-page-link">File:eckosession 1.0.2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:encryption-class-cast128.zip" class="wiki-page-link">File:encryption class cast128.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:Encryption_Class_Cast128.zip" class="wiki-page-link">File:Encryption_Class_Cast128.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:filters-hook-v2.1b.zip" class="wiki-page-link">File:filters hook v2.1b.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:form-generation.zip" class="wiki-page-link">File:form generation.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:fpdf.zip" class="wiki-page-link">File:fpdf.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:google-sitemap-pi.zip" class="wiki-page-link">File:google sitemap pi.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:google_sitemap_pi.zip" class="wiki-page-link">File:google_sitemap_pi.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:googleanalytics-helper.php.zip" class="wiki-page-link">File:googleanalytics helper.php.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:gvis-0.6.zip" class="wiki-page-link">File:gvis 0.6.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:imap-pop-text.php.zip" class="wiki-page-link">File:imap pop text.php.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:JanrainEngage.zip" class="wiki-page-link">File:JanrainEngage.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:jquery-helper-0.3.zip" class="wiki-page-link">File:jquery helper 0.3.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:json-helper-pengekcs.zip" class="wiki-page-link">File:json helper pengekcs.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:json-helper.php" class="wiki-page-link">File:json helper.php</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:kcs-captcha-module-fix-for-4.1.11up.zip" class="wiki-page-link">File:kcs captcha module fix for 4.1.11up.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:kcs_captcha_module_fix_for_4.1.11up.zip" class="wiki-page-link">File:kcs_captcha_module_fix_for_4.1.11up.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:lang-select-2-20090604.zip" class="wiki-page-link">File:lang select 2 20090604.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:lang-select-20090326.zip" class="wiki-page-link">File:lang select 20090326.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:migrations.1.0.zip" class="wiki-page-link">File:migrations.1.0.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:mpttree--1-6-fix.zip" class="wiki-page-link">File:mpttree  1 6 fix.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:mpttree-0-1-6-fix.zip" class="wiki-page-link">File:mpttree 0 1 6 fix.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:MPTtree_0_1_6-fix.zip" class="wiki-page-link">File:MPTtree_0_1_6 fix.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:MPTtree_admin_0_1.zip" class="wiki-page-link">File:MPTtree_admin_0_1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:multi-calendar.zip" class="wiki-page-link">File:multi calendar.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:multi_calendar.zip" class="wiki-page-link">File:multi_calendar.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:my-payment.php.zip" class="wiki-page-link">File:my payment.php.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:MY_Email.zip" class="wiki-page-link">File:MY_Email.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:myforum.zip" class="wiki-page-link">File:myforum.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:nusoap.zip" class="wiki-page-link">File:nusoap.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:OnlineUsers0.2.zip" class="wiki-page-link">File:OnlineUsers0.2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:openid-library.zip" class="wiki-page-link">File:openid library.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:paypal-lib.zip" class="wiki-page-link">File:paypal lib.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:paypal_lib.zip" class="wiki-page-link">File:paypal_lib.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:paypall-lib.zip" class="wiki-page-link">File:paypall lib.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:pdo-sqlite-driver.zip" class="wiki-page-link">File:pdo sqlite driver.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:photobox2-ci.zip" class="wiki-page-link">File:photobox2 ci.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:phpbb-library-1.1.zip" class="wiki-page-link">File:phpbb library 1.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:phplistgrabber.zip" class="wiki-page-link">File:phplistgrabber.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:piechart.zip" class="wiki-page-link">File:piechart.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:proxylibrary-v1.0.6.zip" class="wiki-page-link">File:proxylibrary v1.0.6.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:ProxyLibrary_v1.0.7.zip" class="wiki-page-link">File:ProxyLibrary_v1.0.7.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:pt-br-1.7.0.zip" class="wiki-page-link">File:pt br 1.7.0.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:pt-br_1.7.0.zip" class="wiki-page-link">File:pt br_1.7.0.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:pt-pt-1.7.0.zip" class="wiki-page-link">File:pt pt 1.7.0.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:rb-menu-20120417.zip" class="wiki-page-link">File:rb menu 20120417.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:rb_menu_demo_20120417.zip" class="wiki-page-link">File:rb_menu_demo_20120417.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:recaptcha-2.0.0.zip" class="wiki-page-link">File:recaptcha 2.0.0.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:recaptcha-2.0.0.zip." class="wiki-page-link">File:recaptcha 2.0.0.zip.</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:recaptcha_2.0.0.zip" class="wiki-page-link">File:recaptcha_2.0.0.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:simplelogin-0.1.zip" class="wiki-page-link">File:simplelogin 0.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:simplelogin_0.1.zip" class="wiki-page-link">File:simplelogin_0.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:simpleloginsecure-1.0.1.zip" class="wiki-page-link">File:simpleloginsecure 1.0.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:simpletester1.1.zip" class="wiki-page-link">File:simpletester1.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:sinhala.zip" class="wiki-page-link">File:sinhala.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:spanish-1.7.2.zip" class="wiki-page-link">File:spanish 1.7.2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:spaw2.zip" class="wiki-page-link">File:spaw2.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:spreadsheet-excel-reader.zip" class="wiki-page-link">File:spreadsheet excel reader.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:spreadsheet-excel-reader_RP.zip" class="wiki-page-link">File:spreadsheet excel reader_RP.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:swedish-1.7.x-utf8.zip" class="wiki-page-link">File:swedish 1.7.x utf8.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:taggly-1.1.zip" class="wiki-page-link">File:taggly 1.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:taggly.zip" class="wiki-page-link">File:taggly.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:teechartandcodeigniter.zip" class="wiki-page-link">File:teechartandcodeigniter.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:tellafriend---v1.1.zip" class="wiki-page-link">File:tellafriend   v1.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:tellafriend-v1.2.1.zip" class="wiki-page-link">File:tellafriend v1.2.1.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:userlib.zip" class="wiki-page-link">File:userlib.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:users-0.5.zip" class="wiki-page-link">File:users 0.5.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/File:validate-0.7.zip" class="wiki-page-link">File:validate 0.7.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Fileaasset-helper.zip" class="wiki-page-link">Fileaasset helper.zip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FilemakerPro-Database-Integration" class="wiki-page-link">FilemakerPro Database Integration</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Filters-system" class="wiki-page-link">Filters system</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Fire-Ignition" class="wiki-page-link">Fire Ignition</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Firefox-Extension" class="wiki-page-link">Firefox Extension</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FirePHP-4-CI" class="wiki-page-link">FirePHP 4 CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FirePHP-class" class="wiki-page-link">FirePHP class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FirePHP-Log" class="wiki-page-link">FirePHP Log</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FlashNotice-Helper" class="wiki-page-link">FlashNotice Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/flexi-auth-%7C-User-Authentication-Library" class="wiki-page-link">flexi auth | User Authentication Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/flexi-cart-%7C-Ecommerce-Shopping-Cart-Library" class="wiki-page-link">flexi cart | Ecommerce Shopping Cart Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Flexible-Paging-Plugin" class="wiki-page-link">Flexible Paging Plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FLV-Player-Library" class="wiki-page-link">FLV Player Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Form-Generation" class="wiki-page-link">Form Generation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Form-helper-with-Smarty" class="wiki-page-link">Form helper with Smarty</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Form-Library" class="wiki-page-link">Form Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Form-to-Table" class="wiki-page-link">Form to Table</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Form-validation-helpers-support-prepopulation" class="wiki-page-link">Form validation helpers support prepopulation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Format-US-Phone-Number" class="wiki-page-link">Format US Phone Number</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FormDate" class="wiki-page-link">FormDate</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FormIgniter" class="wiki-page-link">FormIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Forward" class="wiki-page-link">Forward</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/fpdf-CIed" class="wiki-page-link">fpdf CIed</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Fragment-Caching" class="wiki-page-link">Fragment Caching</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Fragment-Caching-Library" class="wiki-page-link">Fragment Caching Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FreakAuth" class="wiki-page-link">FreakAuth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FreakAuth-Vanilla-integration--an-auth-lib-and-a-forum-engine-" class="wiki-page-link">FreakAuth Vanilla integration  an auth lib and a forum engine</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Freakuth-light-authentication-API" class="wiki-page-link">Freakuth light authentication API</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/FreeBSD-Installation-Tips" class="wiki-page-link">FreeBSD Installation Tips</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Freetag" class="wiki-page-link">Freetag</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/French" class="wiki-page-link">French</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/French-3.0-dev" class="wiki-page-link">French 3.0 dev</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Fresh-Powered---Auth-Library" class="wiki-page-link">Fresh Powered   Auth Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Freshbooks-API-Parser" class="wiki-page-link">Freshbooks API Parser</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Fuzzy-time" class="wiki-page-link">Fuzzy time</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Galician" class="wiki-page-link">Galician</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/GasORM" class="wiki-page-link">GasORM</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/gchart" class="wiki-page-link">gchart</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Gearman" class="wiki-page-link">Gearman</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Generate-a-form-from-a-DB-table" class="wiki-page-link">Generate a form from a DB table</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Generatic-List-Generator" class="wiki-page-link">Generatic List Generator</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Geo-Locater" class="wiki-page-link">Geo Locater</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Geo-Location-By-IP" class="wiki-page-link">Geo Location By IP</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Geo-Location-Plugin-for-Local-DB" class="wiki-page-link">Geo Location Plugin for Local DB</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/GeoCalc" class="wiki-page-link">GeoCalc</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/GeoIP-plugin-for-CI" class="wiki-page-link">GeoIP plugin for CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/German" class="wiki-page-link">German</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/GeSHi-Syntax-Highlighter-Plugin" class="wiki-page-link">GeSHi Syntax Highlighter Plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Get-Cache-File-Contents" class="wiki-page-link">Get Cache File Contents</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Get-domain-name" class="wiki-page-link">Get domain name</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/get-previous-date-(MY_date_helper.php)" class="wiki-page-link">get previous date (MY_date_helper.php)</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Gettext" class="wiki-page-link">Gettext</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Getting-Started" class="wiki-page-link">Getting Started</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/GitHub-Project-to-Explain-CI-3--Source-Code" class="wiki-page-link">GitHub Project to Explain CI 3  Source Code</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/GitHub-Updater" class="wiki-page-link">GitHub Updater</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Godaddy-Installation-Tips" class="wiki-page-link">Godaddy Installation Tips</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Analytics-Helper" class="wiki-page-link">Google Analytics Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Cloud-Messaging-(GCM)-library" class="wiki-page-link">Google Cloud Messaging (GCM) library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Load" class="wiki-page-link">Google Load</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Maps" class="wiki-page-link">Google Maps</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Maps-API-V3-Library" class="wiki-page-link">Google Maps API V3 Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Maps-JavaScript-API-v3-Library" class="wiki-page-link">Google Maps JavaScript API v3 Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Maps-Markers-Class" class="wiki-page-link">Google Maps Markers Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-Sitemaps" class="wiki-page-link">Google Sitemaps</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Google-URL-Shortener" class="wiki-page-link">Google URL Shortener</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Gravatars" class="wiki-page-link">Gravatars</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Greek" class="wiki-page-link">Greek</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/gvim-editor" class="wiki-page-link">gvim editor</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/gVis---Google-Visualization-Library" class="wiki-page-link">gVis   Google Visualization Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/gVis-Google-Visualization" class="wiki-page-link">gVis Google Visualization</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Header-and-Footer-and-Menu-on-every-page" class="wiki-page-link">Header and Footer and Menu on every page</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Header-and-Footer-and-Menu-on-every-page---BrianDHall" class="wiki-page-link">Header and Footer and Menu on every page   BrianDHall</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Header-and-Footer-and-Menu-on-every-page---haloace" class="wiki-page-link">Header and Footer and Menu on every page   haloace</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Header-and-Footer-and-Menu-on-every-page---jedd" class="wiki-page-link">Header and Footer and Menu on every page   jedd</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/helper-dropdown-country-code" class="wiki-page-link">helper dropdown country code</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/hexadecimal-validation" class="wiki-page-link">hexadecimal validation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/HierarchicalMVC" class="wiki-page-link">HierarchicalMVC</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/HMVC-for-DMZ-Modular-Separation" class="wiki-page-link">HMVC for DMZ Modular Separation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Hot-Scaffolding" class="wiki-page-link">Hot Scaffolding</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-do-I-handle-images-and-thumbnails" class="wiki-page-link">How do I handle images and thumbnails</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-do-I-handle-images-and-thumbnails---jedd" class="wiki-page-link">How do I handle images and thumbnails   jedd</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-to-ask-a-good-question" class="wiki-page-link">How to ask a good question</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-to-implement-Zend-Framework-with-Codeigniter-on-Windows" class="wiki-page-link">How to implement Zend Framework with Codeigniter on Windows</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-to-load-form-validation-rules-from-a-database" class="wiki-page-link">How to load form validation rules from a database</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-to-use-Codeigniter-captcha-plug-in-Part-1" class="wiki-page-link">How to use Codeigniter captcha plug in Part 1</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-to-use-Codeigniter-captcha-plug-in-Part-2" class="wiki-page-link">How to use Codeigniter captcha plug in Part 2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/How-to-use-FusionCharts-Free-with-CodeIgniter" class="wiki-page-link">How to use FusionCharts Free with CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/htaccess.txt" class="wiki-page-link">htaccess.txt</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/HTML-auto-indenting-view-loader" class="wiki-page-link">HTML auto indenting view loader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/HTML-Table-ext-for-DMZ" class="wiki-page-link">HTML Table ext for DMZ</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/HTML-Table-Library-helper-extension" class="wiki-page-link">HTML Table Library helper extension</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/htmlpurifier" class="wiki-page-link">htmlpurifier</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/HtmlTable" class="wiki-page-link">HtmlTable</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Hungarian" class="wiki-page-link">Hungarian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/I-have-the-welcome-page---but-now-what" class="wiki-page-link">I have the welcome page   but now what</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/I-have-the-welcome-page---but-now-what---jedd" class="wiki-page-link">I have the welcome page   but now what   jedd</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/I-want-to-take-my-site-offline-for-maintenance" class="wiki-page-link">I want to take my site offline for maintenance</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/I-want-to-take-my-site-offline-for-maintenance---jedd" class="wiki-page-link">I want to take my site offline for maintenance   jedd</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/I-want-to-take-my-site-offline-for-maintenance---natebot" class="wiki-page-link">I want to take my site offline for maintenance   natebot</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/I-want-to-take-my-site-offline-for-maintenance---rogierb" class="wiki-page-link">I want to take my site offline for maintenance   rogierb</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/I18N-Library" class="wiki-page-link">I18N Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/i18n-Multi-language-Library-Helper" class="wiki-page-link">i18n Multi language Library Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/IgnitedRecord" class="wiki-page-link">IgnitedRecord</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/IgnitedRecord-with-HMVC" class="wiki-page-link">IgnitedRecord with HMVC</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/IgnitionKeys" class="wiki-page-link">IgnitionKeys</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/iHook" class="wiki-page-link">iHook</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Image:chart.png" class="wiki-page-link">Image:chart.png</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Image:xinha.jpg" class="wiki-page-link">Image:xinha.jpg</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/IMAP" class="wiki-page-link">IMAP</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/imap-pop-class" class="wiki-page-link">imap pop class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/IMAP-POP3-Wrapper-Class" class="wiki-page-link">IMAP POP3 Wrapper Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Improved-Query-Caching" class="wiki-page-link">Improved Query Caching</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/index" class="wiki-page-link">index</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Indonesian-for-CI-2.1.4" class="wiki-page-link">Indonesian for CI 2.1.4</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Inflector" class="wiki-page-link">Inflector</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Inserting-Multiple-Records-Into-a-Table" class="wiki-page-link">Inserting Multiple Records Into a Table</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Installation" class="wiki-page-link">Installation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Internationalization-and-the-Template-Parser-Class" class="wiki-page-link">Internationalization and the Template Parser Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Internationalizing-the-Language-class" class="wiki-page-link">Internationalizing the Language class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ion-Auth---Lightweight-Auth-System" class="wiki-page-link">Ion Auth   Lightweight Auth System</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/IP-Bouncer" class="wiki-page-link">IP Bouncer</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/IRC" class="wiki-page-link">IRC</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/isgdURL" class="wiki-page-link">isgdURL</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Italian" class="wiki-page-link">Italian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Janrain-Engage" class="wiki-page-link">Janrain Engage</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Japanese" class="wiki-page-link">Japanese</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Java-Like-Import" class="wiki-page-link">Java Like Import</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Jaw-Crusher" class="wiki-page-link">Jaw Crusher</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Jimmy" class="wiki-page-link">Jimmy</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Jp-graph" class="wiki-page-link">Jp graph</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/JP-Graph" class="wiki-page-link">JP Graph</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/jQuery" class="wiki-page-link">jQuery</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/jQuery-Ajax-Helper" class="wiki-page-link">jQuery Ajax Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/js-insert-smiley-replacement" class="wiki-page-link">js insert smiley replacement</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/JSON-Helper" class="wiki-page-link">JSON Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/JTaby-CRUD-System" class="wiki-page-link">JTaby CRUD System</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Kaimonokago-shopping-cart" class="wiki-page-link">Kaimonokago shopping cart</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/KNDB-Session" class="wiki-page-link">KNDB Session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Korean" class="wiki-page-link">Korean</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Lang-Uri" class="wiki-page-link">Lang Uri</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/LangBuilder" class="wiki-page-link">LangBuilder</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Article-Blueprint" class="wiki-page-link">Language Article Blueprint</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Changes" class="wiki-page-link">Language Changes</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Class-Extended-DB" class="wiki-page-link">Language Class Extended DB</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-file-editor" class="wiki-page-link">Language file editor</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Library-Extension" class="wiki-page-link">Language Library Extension</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Parser-Helper" class="wiki-page-link">Language Parser Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Selection" class="wiki-page-link">Language Selection</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Selection-2" class="wiki-page-link">Language Selection 2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-string-validation" class="wiki-page-link">Language string validation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language-Translation" class="wiki-page-link">Language Translation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Language_Changes" class="wiki-page-link">Language_Changes</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Latvian" class="wiki-page-link">Latvian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Libraries" class="wiki-page-link">Libraries</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Library:-Ajudante" class="wiki-page-link">Library: Ajudante</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Library:-Online-Users" class="wiki-page-link">Library: Online Users</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Library:-Validar" class="wiki-page-link">Library: Validar</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Lightwindow-with-CI" class="wiki-page-link">Lightwindow with CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Linkster" class="wiki-page-link">Linkster</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Listfiles" class="wiki-page-link">Listfiles</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Loading-servers-variables-to-the-javascripts-files-in-CodeIgniter" class="wiki-page-link">Loading servers variables to the javascripts files in CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Localized-404s" class="wiki-page-link">Localized 404s</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Lorem-Ipsum-Genrator" class="wiki-page-link">Lorem Ipsum Genrator</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Mailchimp-API-V1.2-Library" class="wiki-page-link">Mailchimp API V1.2 Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MailChimp-API-v1.3-Library" class="wiki-page-link">MailChimp API v1.3 Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Making-POST-array-persistent" class="wiki-page-link">Making POST array persistent</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Masterpages-for-CodeIgniter" class="wiki-page-link">Masterpages for CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Matchbox" class="wiki-page-link">Matchbox</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Media-Temple-Installaton-Tips" class="wiki-page-link">Media Temple Installaton Tips</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MeNeedz-Auth" class="wiki-page-link">MeNeedz Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Menu-helper-for-Twitter-Bootstrap" class="wiki-page-link">Menu helper for Twitter Bootstrap</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Menu-Library-Current-Page-Check" class="wiki-page-link">Menu Library Current Page Check</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Message" class="wiki-page-link">Message</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Messages" class="wiki-page-link">Messages</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Meta-tags" class="wiki-page-link">Meta tags</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/microformats" class="wiki-page-link">microformats</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Migrations" class="wiki-page-link">Migrations</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Miscellaneous" class="wiki-page-link">Miscellaneous</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Mod-rewrite" class="wiki-page-link">Mod rewrite</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Model-library" class="wiki-page-link">Model library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modified-Router" class="wiki-page-link">Modified Router</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modular-CI" class="wiki-page-link">Modular CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modular-Extensions---FAQ" class="wiki-page-link">Modular Extensions   FAQ</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modular-Extensions---HMVC" class="wiki-page-link">Modular Extensions   HMVC</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modular-Extensions---Notices-and-errors" class="wiki-page-link">Modular Extensions   Notices and errors</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modular-Extensions---Parser-Module" class="wiki-page-link">Modular Extensions   Parser Module</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modular-Separation" class="wiki-page-link">Modular Separation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/modular-seperation" class="wiki-page-link">modular seperation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Modularity-in-CodeIgniter-PHP5" class="wiki-page-link">Modularity in CodeIgniter PHP5</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Mollom" class="wiki-page-link">Mollom</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Mootools" class="wiki-page-link">Mootools</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Most-Simple-Template-Library" class="wiki-page-link">Most Simple Template Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Moving-your-app-out-of-DOCROOT" class="wiki-page-link">Moving your app out of DOCROOT</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MP-Cache:-Simple-flexible-Caching-of-parts-of-code" class="wiki-page-link">MP Cache: Simple flexible Caching of parts of code</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/mpage" class="wiki-page-link">mpage</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/mPDF-with-Codeigniter" class="wiki-page-link">mPDF with Codeigniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Msn-contact-grabber" class="wiki-page-link">Msn contact grabber</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Multilingual-CI-:-i18n-package-for-CI-2.x" class="wiki-page-link">Multilingual CI : i18n package for CI 2.x</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/multilingual-supported-CI-Calendar" class="wiki-page-link">multilingual supported CI Calendar</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Multiple-Applications" class="wiki-page-link">Multiple Applications</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Multiple-Applications-via-Symlinks" class="wiki-page-link">Multiple Applications via Symlinks</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Multiple-File-Import-By-Zip-File" class="wiki-page-link">Multiple File Import By Zip File</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Multiple-Sitessubdomains-for-Single-CI-system" class="wiki-page-link">Multiple Sitessubdomains for Single CI system</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MVC" class="wiki-page-link">MVC</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Controller" class="wiki-page-link">MY Controller</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Controller---how-to-extend-the-CI-Controller" class="wiki-page-link">MY Controller   how to extend the CI Controller</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-form-helper" class="wiki-page-link">MY form helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Form-validation---Callbacks-into-Models" class="wiki-page-link">MY Form validation   Callbacks into Models</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Form-validation---Simple-Callbacks-into-Models" class="wiki-page-link">MY Form validation   Simple Callbacks into Models</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/my-helper" class="wiki-page-link">my helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Image-lib-Extension" class="wiki-page-link">MY Image lib Extension</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Input" class="wiki-page-link">MY Input</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Language" class="wiki-page-link">MY Language</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Loader" class="wiki-page-link">MY Loader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Log" class="wiki-page-link">MY Log</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Model-library" class="wiki-page-link">MY Model library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Table" class="wiki-page-link">MY Table</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-User-agent" class="wiki-page-link">MY User agent</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Validadion" class="wiki-page-link">MY Validadion</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Validation" class="wiki-page-link">MY Validation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Validation---Callbacks-into-Models" class="wiki-page-link">MY Validation   Callbacks into Models</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MY-Xmlrpc" class="wiki-page-link">MY Xmlrpc</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/myCI" class="wiki-page-link">myCI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MyClientBase" class="wiki-page-link">MyClientBase</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MyForum" class="wiki-page-link">MyForum</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/mypage" class="wiki-page-link">mypage</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MySQL-4.0" class="wiki-page-link">MySQL 4.0</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/MySQL-DATETIME-Helper" class="wiki-page-link">MySQL DATETIME Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Nabila-CRUD" class="wiki-page-link">Nabila CRUD</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Native-session" class="wiki-page-link">Native session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/NBBC-Library-Wrapper" class="wiki-page-link">NBBC Library Wrapper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/NDB-Session-Class" class="wiki-page-link">NDB Session Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Nested-sets" class="wiki-page-link">Nested sets</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Netflix-API-Library" class="wiki-page-link">Netflix API Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/NG-Session" class="wiki-page-link">NG Session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/NinjaEditor" class="wiki-page-link">NinjaEditor</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/No-Flash-Cache" class="wiki-page-link">No Flash Cache</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Norwegian" class="wiki-page-link">Norwegian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Notepad-Theme-for-NetBeans-6.7.x" class="wiki-page-link">Notepad Theme for NetBeans 6.7.x</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Now-Use-CI-for-Joomla-development" class="wiki-page-link">Now Use CI for Joomla development</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/OAuth-for-Google" class="wiki-page-link">OAuth for Google</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/OAuth-for-Twitter" class="wiki-page-link">OAuth for Twitter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/OAuth-Helper" class="wiki-page-link">OAuth Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Oauthr" class="wiki-page-link">Oauthr</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/OB-Session" class="wiki-page-link">OB Session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ObjectForm" class="wiki-page-link">ObjectForm</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ocular-Layout-Library" class="wiki-page-link">Ocular Layout Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/OOCalendar" class="wiki-page-link">OOCalendar</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Open-Flash-Chart-2" class="wiki-page-link">Open Flash Chart 2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/OpenID" class="wiki-page-link">OpenID</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/OpenIDRpx" class="wiki-page-link">OpenIDRpx</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Optimizations" class="wiki-page-link">Optimizations</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Oracle" class="wiki-page-link">Oracle</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Oracle:Known-Issues" class="wiki-page-link">Oracle:Known Issues</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ORM" class="wiki-page-link">ORM</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Overview" class="wiki-page-link">Overview</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/p12-Templates" class="wiki-page-link">p12 Templates</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Pages---HMVC-Module---Modular-Extensions" class="wiki-page-link">Pages   HMVC Module   Modular Extensions</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Pagination-automated" class="wiki-page-link">Pagination automated</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Pagination-Automated-a-Little-More" class="wiki-page-link">Pagination Automated a Little More</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Pagination-Mod" class="wiki-page-link">Pagination Mod</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Paging-Simplified" class="wiki-page-link">Paging Simplified</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Parser-Variable-Modifiers" class="wiki-page-link">Parser Variable Modifiers</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/patob2000" class="wiki-page-link">patob2000</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PayPal-IPN-Lib" class="wiki-page-link">PayPal IPN Lib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Paypal-lib" class="wiki-page-link">Paypal lib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PayPal-Lib" class="wiki-page-link">PayPal Lib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PayPal-NVP-API-Lib" class="wiki-page-link">PayPal NVP API Lib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PDF-generation-using-dompdf" class="wiki-page-link">PDF generation using dompdf</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PDF-of-CI-Documentation" class="wiki-page-link">PDF of CI Documentation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PDO-SQLite3" class="wiki-page-link">PDO SQLite3</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PEAR-integration" class="wiki-page-link">PEAR integration</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PEAR-MDB2-In-Codeignitor" class="wiki-page-link">PEAR MDB2 In Codeignitor</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/peeker" class="wiki-page-link">peeker</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Permission-Class" class="wiki-page-link">Permission Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Persian" class="wiki-page-link">Persian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Persistent-Content-Across-Views" class="wiki-page-link">Persistent Content Across Views</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Persona-Login" class="wiki-page-link">Persona Login</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Phil-Sturgeon&#39;s-Template-Library" class="wiki-page-link">Phil Sturgeon&#39;s Template Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PhotoBox---HMVC-Module---Modular-Extensions" class="wiki-page-link">PhotoBox   HMVC Module   Modular Extensions</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PhotoBox2" class="wiki-page-link">PhotoBox2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHP-Excel-Class" class="wiki-page-link">PHP Excel Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHP-for-beginners" class="wiki-page-link">PHP for beginners</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHP-Markdown-for-CI-1.5.x" class="wiki-page-link">PHP Markdown for CI 1.5.x</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHP-Quick-Profiler" class="wiki-page-link">PHP Quick Profiler</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Php5-magic-Autoloader" class="wiki-page-link">Php5 magic Autoloader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Php5.x-Loader-Plugin" class="wiki-page-link">Php5.x Loader Plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/phpBB3-library" class="wiki-page-link">phpBB3 library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHPEd-&amp;-CodeIgniter" class="wiki-page-link">PHPEd &amp; CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHPExcel" class="wiki-page-link">PHPExcel</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Phplot" class="wiki-page-link">Phplot</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHPMailer" class="wiki-page-link">PHPMailer</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHPSession" class="wiki-page-link">PHPSession</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PHXView-View-Engine" class="wiki-page-link">PHXView View Engine</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PK-Session" class="wiki-page-link">PK Session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Placeholders-substitution-in-language-strings" class="wiki-page-link">Placeholders substitution in language strings</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Plugin-System" class="wiki-page-link">Plugin System</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Plurious-Auth" class="wiki-page-link">Plurious Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/pMCode-Reference" class="wiki-page-link">pMCode Reference</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Polish" class="wiki-page-link">Polish</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Portfolio-CMS" class="wiki-page-link">Portfolio CMS</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Portuguese" class="wiki-page-link">Portuguese</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Portugu%C3%AAs-do-Brasil" class="wiki-page-link">Português do Brasil</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Postmark" class="wiki-page-link">Postmark</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Price-helper" class="wiki-page-link">Price helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Problems-with-Code-Igniter" class="wiki-page-link">Problems with Code Igniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Professional-CodeIgniter" class="wiki-page-link">Professional CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Profiler" class="wiki-page-link">Profiler</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Profiler-anywhere" class="wiki-page-link">Profiler anywhere</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/project" class="wiki-page-link">project</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Projex" class="wiki-page-link">Projex</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Proxy-Library" class="wiki-page-link">Proxy Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/PseudoVariables" class="wiki-page-link">PseudoVariables</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/QCode-Generator" class="wiki-page-link">QCode Generator</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/QQ" class="wiki-page-link">QQ</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Quality-Assurance-in-PHP-Projects" class="wiki-page-link">Quality Assurance in PHP Projects</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/QUERY-STRING-GET" class="wiki-page-link">QUERY STRING GET</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Quick-n-Simple-Query-Browser" class="wiki-page-link">Quick n Simple Query Browser</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/QuickAuth" class="wiki-page-link">QuickAuth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/RA-Auth" class="wiki-page-link">RA Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/RA-session" class="wiki-page-link">RA session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Random-Password-Generator" class="wiki-page-link">Random Password Generator</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/random-plugin" class="wiki-page-link">random plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Rant" class="wiki-page-link">Rant</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Rapyd-Components" class="wiki-page-link">Rapyd Components</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/RB-Menu" class="wiki-page-link">RB Menu</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Re-Authenticate" class="wiki-page-link">Re Authenticate</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Realex-Payments-RealAuth-Library" class="wiki-page-link">Realex Payments RealAuth Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ReCAPTCHA" class="wiki-page-link">ReCAPTCHA</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/reCAPTCHA-2" class="wiki-page-link">reCAPTCHA 2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Redux-Auth" class="wiki-page-link">Redux Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Regex-Optimization" class="wiki-page-link">Regex Optimization</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Registry" class="wiki-page-link">Registry</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Removing-index.php-from-a-URL-path-in-XAMPP-for-Windows" class="wiki-page-link">Removing index.php from a URL path in XAMPP for Windows</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/render" class="wiki-page-link">render</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Rewrite-with-lighttpd" class="wiki-page-link">Rewrite with lighttpd</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Richmail" class="wiki-page-link">Richmail</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Romanian" class="wiki-page-link">Romanian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/RPX-Login" class="wiki-page-link">RPX Login</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/RSSLib" class="wiki-page-link">RSSLib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/RSSParser" class="wiki-page-link">RSSParser</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Russian" class="wiki-page-link">Russian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SagePay-Form" class="wiki-page-link">SagePay Form</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SagePay-Form-library" class="wiki-page-link">SagePay Form library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SagePay-Server-Library" class="wiki-page-link">SagePay Server Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Sample-Apache-Setup-for-Windows" class="wiki-page-link">Sample Apache Setup for Windows</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Sandbox" class="wiki-page-link">Sandbox</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SatSun-Studio" class="wiki-page-link">SatSun Studio</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Scheme-Model" class="wiki-page-link">Scheme Model</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SCITE-Abbreviations" class="wiki-page-link">SCITE Abbreviations</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Screencasts" class="wiki-page-link">Screencasts</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/script---html-helper" class="wiki-page-link">script   html helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Search-with-query-sent-via-GET-parameters-like-wordpress" class="wiki-page-link">Search with query sent via GET parameters like wordpress</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SEAuth---Session-Extension-for-Authorization" class="wiki-page-link">SEAuth   Session Extension for Authorization</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Secure-Native-Session" class="wiki-page-link">Secure Native Session</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Sentence-Normalizer" class="wiki-page-link">Sentence Normalizer</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/sentry" class="wiki-page-link">sentry</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Server-URL-problems" class="wiki-page-link">Server URL problems</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-air-panas-082122541663" class="wiki-page-link">service air panas 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-082122541663" class="wiki-page-link">service solahart 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-bekasi-082122541663-%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87-%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A9" class="wiki-page-link">service solahart bekasi 082122541663 المياه الخدمة</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-bogor-s-082122541663" class="wiki-page-link">service solahart bogor s 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-cilandak-082122541663" class="wiki-page-link">service solahart cilandak 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-ciputat-082122541663" class="wiki-page-link">service solahart ciputat 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-jakarta-barat-082122541663" class="wiki-page-link">service solahart jakarta barat 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-jakarta-barat-d-082122541663" class="wiki-page-link">service solahart jakarta barat d 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-jakarta-selatan-082122541663" class="wiki-page-link">service solahart jakarta selatan 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-jakarta-selatan-s-082122541663" class="wiki-page-link">service solahart jakarta selatan s 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-jakarta-timur--082122541663" class="wiki-page-link">service solahart jakarta timur  082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-jakarta-utara-082122541663" class="wiki-page-link">service solahart jakarta utara 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-kelapa-gading-082122541663" class="wiki-page-link">service solahart kelapa gading 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-pamulang-082122541663" class="wiki-page-link">service solahart pamulang 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-pamulang-s-082122541663" class="wiki-page-link">service solahart pamulang s 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-s-082122541663" class="wiki-page-link">service solahart s 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-serpong-082122541663" class="wiki-page-link">service solahart serpong 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-serpong-s-082122541663" class="wiki-page-link">service solahart serpong s 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-tangerang-082122541663" class="wiki-page-link">service solahart tangerang 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-solahart-tangerang-s-082122541663" class="wiki-page-link">service solahart tangerang s 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Service-water-heater-solahart-082122541663" class="wiki-page-link">Service water heater solahart 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Service-wika-bekasi-082122541663" class="wiki-page-link">Service wika bekasi 082122541663</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/service-wika-jakarta-timur-02124003751" class="wiki-page-link">service wika jakarta timur 02124003751</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Session-Hybrid" class="wiki-page-link">Session Hybrid</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Session-Profiler" class="wiki-page-link">Session Profiler</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Set-Value-supports-Indexes" class="wiki-page-link">Set Value supports Indexes</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Setting-CLASS-for-TR-tag-(HTML-table-body)" class="wiki-page-link">Setting CLASS for TR tag (HTML table body)</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Share-helper" class="wiki-page-link">Share helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Show-Output-and-Redirect-No-JS" class="wiki-page-link">Show Output and Redirect No JS</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/sIFR-helper" class="wiki-page-link">sIFR helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-Authorization-Lib" class="wiki-page-link">Simple Authorization Lib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-Captcha" class="wiki-page-link">Simple Captcha</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-Excel-Plugin" class="wiki-page-link">Simple Excel Plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/simple-file-browser" class="wiki-page-link">simple file browser</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-FlashNotice-helper" class="wiki-page-link">Simple FlashNotice helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-Stats" class="wiki-page-link">Simple Stats</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-Template-Library" class="wiki-page-link">Simple Template Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-Template-Library" class="wiki-page-link">Simple Template Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simple-view" class="wiki-page-link">Simple view</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/simplecaptcha" class="wiki-page-link">simplecaptcha</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Simplelogin" class="wiki-page-link">Simplelogin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SimpleLoginSecure" class="wiki-page-link">SimpleLoginSecure</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SimpleTester---Unit-testing-library" class="wiki-page-link">SimpleTester   Unit testing library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/site-migrate" class="wiki-page-link">site migrate</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Site5-.htaccess" class="wiki-page-link">Site5 .htaccess</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Sitemap" class="wiki-page-link">Sitemap</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Sitemap-123xem" class="wiki-page-link">Sitemap 123xem</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Slightly-better-caching" class="wiki-page-link">Slightly better caching</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Slightly-Better-Caching:-The-Suite" class="wiki-page-link">Slightly Better Caching: The Suite</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Slovak" class="wiki-page-link">Slovak</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Slovenian" class="wiki-page-link">Slovenian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Smarty" class="wiki-page-link">Smarty</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Smarty-HMVC-Environment-Variables-Lib" class="wiki-page-link">Smarty HMVC Environment Variables Lib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Smarty-plugin---URL-Helper" class="wiki-page-link">Smarty plugin   URL Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Snappy-Source" class="wiki-page-link">Snappy Source</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Social-Networking" class="wiki-page-link">Social Networking</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Spanish" class="wiki-page-link">Spanish</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Sparks" class="wiki-page-link">Sparks</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SPAW" class="wiki-page-link">SPAW</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SQL" class="wiki-page-link">SQL</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SQLite" class="wiki-page-link">SQLite</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SQLite3" class="wiki-page-link">SQLite3</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SSL-Handling" class="wiki-page-link">SSL Handling</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Storing-variables-config-in-database" class="wiki-page-link">Storing variables config in database</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/string-helper-suggestions" class="wiki-page-link">string helper suggestions</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/String-Parsing-Test-Code" class="wiki-page-link">String Parsing Test Code</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Subqueries" class="wiki-page-link">Subqueries</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Suffix-cache" class="wiki-page-link">Suffix cache</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Summary-of-Resources-Libraries-Helpers-Plugins" class="wiki-page-link">Summary of Resources Libraries Helpers Plugins</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Summary-of-Resources-Libraries-Helpers-Plugins..." class="wiki-page-link">Summary of Resources Libraries Helpers Plugins...</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SuperModel" class="wiki-page-link">SuperModel</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SuperModel::Fields" class="wiki-page-link">SuperModel::Fields</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SuperModel::Html-Output" class="wiki-page-link">SuperModel::Html Output</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SuperModel::Types" class="wiki-page-link">SuperModel::Types</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Swedish" class="wiki-page-link">Swedish</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/SWFUpload" class="wiki-page-link">SWFUpload</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Table" class="wiki-page-link">Table</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TableEditor" class="wiki-page-link">TableEditor</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TableTemplates" class="wiki-page-link">TableTemplates</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Taco-Class---The-power-of-jQuery-all-wrapped-up-in-a-Codeigniter-Library" class="wiki-page-link">Taco Class   The power of jQuery all wrapped up in a Codeigniter Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/tagcloud" class="wiki-page-link">tagcloud</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Taggly" class="wiki-page-link">Taggly</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Tank-Auth" class="wiki-page-link">Tank Auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TCPDF-CodeIgniter-Integration" class="wiki-page-link">TCPDF CodeIgniter Integration</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TCPDF-Integration" class="wiki-page-link">TCPDF Integration</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TeeChart-and-CodeIgniter" class="wiki-page-link">TeeChart and CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/tellafriend" class="wiki-page-link">tellafriend</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Template-Inheritance-Helper" class="wiki-page-link">Template Inheritance Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Template-Library" class="wiki-page-link">Template Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Template-Parser-for-CI-2.0" class="wiki-page-link">Template Parser for CI 2.0</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Terbilang-Helper" class="wiki-page-link">Terbilang Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Teste" class="wiki-page-link">Teste</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Textile-Markup" class="wiki-page-link">Textile Markup</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/The-Auth-Library" class="wiki-page-link">The Auth Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TinyAjax" class="wiki-page-link">TinyAjax</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TinyButStrong-Template-Engine" class="wiki-page-link">TinyButStrong Template Engine</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TinyMCE" class="wiki-page-link">TinyMCE</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/tinymce-helper" class="wiki-page-link">tinymce helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Total-Shop-UK" class="wiki-page-link">Total Shop UK</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Total-Shop-UK-Codeigniter-2.1.2" class="wiki-page-link">Total Shop UK Codeigniter 2.1.2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Trees" class="wiki-page-link">Trees</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/TTemplate" class="wiki-page-link">TTemplate</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Turkish" class="wiki-page-link">Turkish</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Tutorials" class="wiki-page-link">Tutorials</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Twig-PHP-Template-Engine-Implementation" class="wiki-page-link">Twig PHP Template Engine Implementation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Twitter-Tweet-Parser" class="wiki-page-link">Twitter Tweet Parser</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Typography-class-revisited" class="wiki-page-link">Typography class revisited</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ubuntu-enable-mod-rewrite" class="wiki-page-link">Ubuntu enable mod rewrite</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/ui-library" class="wiki-page-link">ui library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Ukrainian" class="wiki-page-link">Ukrainian</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Unbuffered-Queries-in-CI" class="wiki-page-link">Unbuffered Queries in CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/unicode2iso-plugin" class="wiki-page-link">unicode2iso plugin</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Unobtrusive-XHR" class="wiki-page-link">Unobtrusive XHR</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Unstable-Updates" class="wiki-page-link">Unstable Updates</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Unzip" class="wiki-page-link">Unzip</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Uploader" class="wiki-page-link">Uploader</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Uploader-Class" class="wiki-page-link">Uploader Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Uploadify-Upload-Class-CSRF-Tokens-Session-data---The-right-way-." class="wiki-page-link">Uploadify Upload Class CSRF Tokens Session data   The right way .</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/UPS-Rate-Tool" class="wiki-page-link">UPS Rate Tool</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/URI-helper" class="wiki-page-link">URI helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/URI-Language-Identifier" class="wiki-page-link">URI Language Identifier</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/URL-Redirectors" class="wiki-page-link">URL Redirectors</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Use-URL-helper-from-Smarty" class="wiki-page-link">Use URL helper from Smarty</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Userlib" class="wiki-page-link">Userlib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Users-Library" class="wiki-page-link">Users Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Using-CI-yuiyui-ext-and-MySQL-for-Ajax-Development" class="wiki-page-link">Using CI yuiyui ext and MySQL for Ajax Development</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Using-Doctrine-with-Code-Igniter" class="wiki-page-link">Using Doctrine with Code Igniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Using-Doctrine-with-Code-Igniter-Conventions" class="wiki-page-link">Using Doctrine with Code Igniter Conventions</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Using-MongoDB-in-Codeigniter" class="wiki-page-link">Using MongoDB in Codeigniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Using-nusoap-with-CI" class="wiki-page-link">Using nusoap with CI</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Using-Propel-as-Model" class="wiki-page-link">Using Propel as Model</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Validate" class="wiki-page-link">Validate</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Validation" class="wiki-page-link">Validation</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Validation-and-multiple-forms" class="wiki-page-link">Validation and multiple forms</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Validation-Class" class="wiki-page-link">Validation Class</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Var-Cache" class="wiki-page-link">Var Cache</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Vb-auth" class="wiki-page-link">Vb auth</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/vBuser---vBulletin-based-Auth-Library" class="wiki-page-link">vBuser   vBulletin based Auth Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/vCard-Library" class="wiki-page-link">vCard Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/vCard-Library-revised" class="wiki-page-link">vCard Library revised</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Version-1.6.3" class="wiki-page-link">Version 1.6.3</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Version-1.7.2" class="wiki-page-link">Version 1.7.2</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Versioned-Libraries" class="wiki-page-link">Versioned Libraries</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Vietnamese" class="wiki-page-link">Vietnamese</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/View-Object" class="wiki-page-link">View Object</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/View-Object-PHP5" class="wiki-page-link">View Object PHP5</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/View-Registry" class="wiki-page-link">View Registry</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/viewlib" class="wiki-page-link">viewlib</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Views" class="wiki-page-link">Views</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Virtual-file-extensions-hook-for-CodeIgniter" class="wiki-page-link">Virtual file extensions hook for CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Vunsy-REVOLUTIONARY-CMS" class="wiki-page-link">Vunsy REVOLUTIONARY CMS</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/weather.com" class="wiki-page-link">weather.com</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Webber" class="wiki-page-link">Webber</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Webber-blog-module" class="wiki-page-link">Webber blog module</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Webber-HTML2PDF" class="wiki-page-link">Webber HTML2PDF</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Webber-Ticket-system" class="wiki-page-link">Webber Ticket system</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Webber-user-notes" class="wiki-page-link">Webber user notes</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Why-codeigniter-don&#39;t-work-in-linux-when-I--used-My_controller%3F" class="wiki-page-link">Why codeigniter don&#39;t work in linux when I  used My_controller?</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Wick" class="wiki-page-link">Wick</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Wiki-Syntax" class="wiki-page-link">Wiki Syntax</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/WikiOrganise" class="wiki-page-link">WikiOrganise</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/word-limiter-closing-tags" class="wiki-page-link">word limiter closing tags</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/WYSIWYG" class="wiki-page-link">WYSIWYG</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/XAJAX" class="wiki-page-link">XAJAX</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Xajax-Pagination" class="wiki-page-link">Xajax Pagination</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Xajax-perfect-setup" class="wiki-page-link">Xajax perfect setup</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/xHTML-Helper" class="wiki-page-link">xHTML Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/XML-generator-library" class="wiki-page-link">XML generator library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/XML-helper" class="wiki-page-link">XML helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Xml-Library" class="wiki-page-link">Xml Library</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Yaml-with-Symfony-Yaml" class="wiki-page-link">Yaml with Symfony Yaml</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/YAYparser" class="wiki-page-link">YAYparser</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Yet-Another-alternative-to-GET" class="wiki-page-link">Yet Another alternative to GET</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Yet-Another-Template-System" class="wiki-page-link">Yet Another Template System</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Your-CI-login-name-goes-here&#39;s-take" class="wiki-page-link">Your CI login name goes here&#39;s take</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/YouTube-API-for-CodeIgniter" class="wiki-page-link">YouTube API for CodeIgniter</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/YUI-Ajax-Helper" class="wiki-page-link">YUI Ajax Helper</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Zebra-Tables" class="wiki-page-link">Zebra Tables</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Zebra-Tables" class="wiki-page-link">Zebra Tables</a></strong>
+    </li>
+    <li class="wiki-more-pages">
+      <strong><a href="/bcit-ci/CodeIgniter/wiki/Zend-Framework-on-Codeigniter:-Showing-Youtube-videos" class="wiki-page-link">Zend Framework on Codeigniter: Showing Youtube videos</a></strong>
+    </li>
+    <li class="wiki-more-pages-link">
+      <a href="#" class="js-wiki-more-pages-link">
+        Show 865 more pages…
+      </a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+
+      <div class="gollum-markdown-content readability-sidebar box box-small">
+        <div class="wiki-custom-sidebar  markdown-body">
+          <h2>
+<a id="user-content-getting-started" class="anchor" href="#getting-started" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Getting-Started">Getting started</a>»</h2>
+
+<ul>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Getting-Started#wiki-faq">FAQ</a></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Getting-Started#wiki-tutorials">Tutorials</a></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Getting-Started#wiki-user-guide">User Guide</a></li>
+</ul>
+
+<h2>
+<a id="user-content-contributions" class="anchor" href="#contributions" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Contributions»</h2>
+
+<ul>
+<li><img src="/bcit-ci/CodeIgniter/wiki/Applications"></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Contributions#controllers">Controllers</a></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Contributions#helpers">Helpers</a></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Contributions#languages">Languages</a></li>
+<li><img src="/bcit-ci/CodeIgniter/wiki/Libraries"></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Contributions#modifications">Modifications</a></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Contributions#plugins">Plugins</a></li>
+</ul>
+
+<h2>
+<a id="user-content-tutorials" class="anchor" href="#tutorials" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Tutorials»</h2>
+
+<ul>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/Installation">Installation</a></li>
+<li><a class="internal absent" href="/bcit-ci/CodeIgniter/wiki/Helps">Helps</a></li>
+</ul>
+
+<h2>
+<a id="user-content-community" class="anchor" href="#community" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Community»</h2>
+
+<ul>
+<li><img src="/bcit-ci/CodeIgniter/wiki/Approaches"></li>
+<li><a class="internal present" href="/bcit-ci/CodeIgniter/wiki/How-to-ask-a-good-question">How to ask a good question</a></li>
+<li><a href="http://forum.codeigniter.com/">Forums</a></li>
+<li><a href="http://webchat.freenode.net/?channels=%23codeigniter&amp;uio=d4%22">IRC</a></li>
+</ul>
+
+        </div>
+      </div>
+
+    <div class="clone-url">
+      <h5>Clone this wiki locally</h5>
+      <div class="input-group js-zeroclipboard-container">
+        <input type="text" class="form-control input-sm text-small text-muted input-monospace js-url-field js-zeroclipboard-target"
+               value="https://github.com/bcit-ci/CodeIgniter.wiki.git" readonly="readonly">
+        <span class="input-group-button">
+          <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><svg aria-hidden="true" class="octicon octicon-clippy" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M2 12h4v1H2v-1z m5-6H2v1h5v-1z m2 3V7L6 10l3 3V11h5V9H9z m-4.5-1H2v1h2.5v-1zM2 11h2.5v-1H2v1z m9 1h1v2c-0.02 0.28-0.11 0.52-0.3 0.7s-0.42 0.28-0.7 0.3H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h3C4 0.89 4.89 0 6 0s2 0.89 2 2h3c0.55 0 1 0.45 1 1v5h-1V5H1v9h10V12zM2 4h8c0-0.55-0.45-1-1-1h-1c-0.55 0-1-0.45-1-1s-0.45-1-1-1-1 0.45-1 1-0.45 1-1 1h-1c-0.55 0-1 0.45-1 1z"></path></svg></button>
+        </span>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div id="wiki-body" class="wiki-body gollum-markdown-content instapaper_body">
+      <div class="markdown-body">
+        <h3>
+<a id="user-content-subcategory" class="anchor" href="#subcategory" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Subcategory:</h3>
+
+<ul>
+<li><a class="internal absent" href="/bcit-ci/CodeIgniter/wiki/Authentication-Library">Authentication Library</a></li>
+</ul>
+
+      </div>
+
+  </div>
+  </div>
+</div>
+</div>
+
+
+  </div>
+  <div class="modal-backdrop"></div>
+</div>
+
+
+    </div>
+  </div>
+
+    </div>
+
+        <div class="container site-footer-container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links right">
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+
+    </ul>
+
+    <a href="https://github.com" aria-label="Homepage" class="site-footer-mark" title="GitHub">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>
+</a>
+    <ul class="site-footer-links">
+      <li>&copy; 2016 <span title="0.41223s from github-fe156-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</a></li>
+        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+    
+
+    <div id="ajax-error-message" class="ajax-error-message flash flash-error">
+      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z"></path></svg>
+      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+        <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+      </button>
+      Something went wrong with that request. Please try again.
+    </div>
+
+
+      
+      <script crossorigin="anonymous" integrity="sha256-qZ+qmttbTDXD7v1CVYYMYu9PLj4aQe6BvbecRLx3jQs=" src="https://assets-cdn.github.com/assets/frameworks-a99faa9adb5b4c35c3eefd4255860c62ef4f2e3e1a41ee81bdb79c44bc778d0b.js"></script>
+      <script async="async" crossorigin="anonymous" integrity="sha256-S4G3SfwgbXE75LG1ctndZBgm5a+B8T7IorX1ZeqkF8M=" src="https://assets-cdn.github.com/assets/github-4b81b749fc206d713be4b1b572d9dd641826e5af81f13ec8a2b5f565eaa417c3.js"></script>
+      
+      
+      
+        <script crossorigin="anonymous" integrity="sha256-+hT/zU5SrG2yMrotlR8HgWqwetd69FfwPka2rCeP2PI=" src="https://assets-cdn.github.com/assets/wiki-fa14ffcd4e52ac6db232ba2d951f07816ab07ad77af457f03e46b6ac278fd8f2.js"></script>
+
+      
+      
+    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
+      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z"></path></svg>
+      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    </div>
+    <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+    </button>
+  </div>
+</div>
+
+  </body>
+</html>
+
