@@ -1,5 +1,5 @@
 <div>
- Designed by boliviawebdesign.com (abel.pacara@gmail.com)
+ Designed by Vias Bolivia, 2018
 </div>
 <div>
 

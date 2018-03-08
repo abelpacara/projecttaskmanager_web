@@ -32,7 +32,7 @@ $config['uri_clients_companies_files'] = array("uri"=>'/public/images_uploads/im
 |
 */
 ###$config['base_url'] = 'http://boliviawebdesign.com/projecttaskmanager_web/';
-$config['base_url'] = 'http://192.168.132.6/projecttaskmanager_web/';
+$config['base_url'] = 'http://192.168.131.48/kardexes_web/';
 
 
 /*

@@ -7,10 +7,11 @@ class Model_Template extends CI_Model
        $this->db->query("SET SESSION time_zone='-4:00'");
    }
    ###############################################################
-   function generate_list_locations_tree(&$list_tree, $parent_id=null, $level=0)
+   function generate_list_locations_tree(&$list_tree, &$office_id, $parent_id=null, $level=0)
    {
       $this->db->select("*");        
       $this->db->from("locations");     
+      $this->db->where("office_id", $office_id);
       $this->db->where("parent_id", $parent_id);                  
       $query = $this->db->get();
       
@@ -18,13 +19,12 @@ class Model_Template extends CI_Model
             
       if(count($list_result)>0)
       {
-         for($i=0;$i<count($list_result);$i++)
-         {
+         for($i=0;$i<count($list_result);$i++){
             $row = $list_result[$i];
             $row['level']=$level;
             $list_tree[] = $row;
 
-            $this->generate_list_locations_tree($list_tree, $list_result[$i]['id_location'], $level+1);
+            $this->generate_list_locations_tree($list_tree, $office_id, $list_result[$i]['id_location'], $level+1);
          }
       }
    }

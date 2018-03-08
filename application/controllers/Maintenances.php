@@ -6,15 +6,15 @@ class Maintenances extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-                $this->load->library('session');
-                $this->load->model('model_template');
+	    $this->load->library('session');
+	    $this->load->model('model_template');
 
-                $this->load->model('model_maintenances');
-                $this->load->model('model_inventories');
+	    $this->load->model('model_maintenances');
+	    $this->load->model('model_kardexes');
 
-                $this->load->helper(array('form', 'url'));
-                $this->load->helper("my_views");
-                $this->load->helper("my_dates");
+	    $this->load->helper(array('form', 'url'));
+	    $this->load->helper("my_views");
+	    $this->load->helper("my_dates");
 		$this->load->library('form_validation');
 		$this->load->library('ciqrcode');
 	}
@@ -57,25 +57,25 @@ class Maintenances extends CI_Controller {
 
 				$kardex_status_data['location_id'] = $_REQUEST['location_id_'.$list_id_kardexes[$i]];
 
-			   $this->model_inventories->kardex_status_add($kardex_status_data);				   
+			   $this->model_kardexes->kardex_status_add($kardex_status_data);				   
 			}
 			
 
 			
 		}
 
-		$view_data['maintenance_register_date'] = $maintenance_register_date = date('d/m/Y', strtotime($this->model_inventories->get_system_time()) );
+		$view_data['maintenance_register_date'] = $maintenance_register_date = date('d/m/Y', strtotime($this->model_kardexes->get_system_time()) );
 
 		$view_data['list_kardexes'] = array();
 
 		if(isset($_REQUEST['location_id']) AND strcasecmp($_REQUEST['location_id'], "")!=0){			
-			$view_data['list_kardexes'] = $this->model_inventories->get_list_kardexes_full($_REQUEST['location_id']);
+			$view_data['list_kardexes'] = $this->model_kardexes->get_list_kardexes_full($_REQUEST['location_id']);
 		}
 		
 
 		//$view_data['list_locations'] = $this->model_maintenances->get_list_locations();
 		$list_locations = array();
-		$this->model_inventories->generate_list_locations_tree($list_locations);
+		$this->model_kardexes->generate_list_locations_tree($list_locations);
 		$view_data['list_locations'] = $list_locations;
 
 

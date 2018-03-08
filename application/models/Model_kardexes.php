@@ -1,5 +1,5 @@
 <?php
-class Model_Inventories extends Model_Template
+class Model_kardexes extends Model_Template
 { 
    function __construct(){
        parent::__construct();       

@@ -10,7 +10,7 @@ header('Access-Control-Allow-Origin: *');
 <script src = "<?php //echo base_url("public/js/jquery-3.2.1.js");?>"></script>
 <script src = "<?php echo base_url("public/js/bootstrap.js");?>"></script>
 	<meta charset="utf-8">
-	<title>Maintenance & Support</title>
+	<title>Support & Maintenance</title>
 	<link rel="stylesheet" href="<?php echo base_url("public/css/bootstrap.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("public/css/ptm.css"); ?>">
 	
@@ -49,41 +49,30 @@ header('Access-Control-Allow-Origin: *');
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kardex <span class="caret"></span></a>
           <ul class="dropdown-menu">          	
-          	<li><a href="<?php echo site_url('/inventories/kardex_add')?>">(2) Registrar Kardex</a></li>            
-            <li><a href="<?php echo site_url('/inventories/inventory_category_add')?>">(1) Registrar Tipo Kardex</a></li>
-            <li><a href="<?php echo site_url('/inventories/report_form')?>">(3) Reporte general de Kardex de equipos</a></li>
-            <li><a href="<?php echo site_url('/inventories/kardex_search')?>">(4) Buscar Kardex</a></li>
-            <li><a href="<?php echo site_url('/inventories/kardex_manager')?>">(5) Administrar Kardex</a></li>
+          	<li><a href="<?php echo site_url('/kardexes/kardex_add')?>">(2) Registrar Kardex</a></li>            
+            <li><a href="<?php echo site_url('/kardexes/inventory_category_add')?>">(1) Registrar Tipo Kardex</a></li>
+            <li><a href="<?php echo site_url('/kardexes/report_form')?>">(3) Reporte general de Kardex de equipos</a></li>
+            <li><a href="<?php echo site_url('/kardexes/kardex_search')?>">(4) Buscar Kardex</a></li>
+            <li><a href="<?php echo site_url('/kardexes/kardex_manager')?>">(5) Administrar Kardex</a></li>
             <li role="separator" class="divider"></li>            
           </ul>
         </li>
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proyectos <span class="caret"></span></a>
-          <ul class="dropdown-menu">          	
-          	<li><a href="<?php echo site_url('/posts/project_add')?>">(1) Crear proyecto</a></li>            
-                <li><a href="<?php echo site_url('/posts/discussion_add')?>">(2) Crear Discusion</a></li>
-                <li><a href="<?php echo site_url('/posts/task_add')?>">(3) Crear Tarea</a></li>            
-                <li><a href="<?php echo site_url('/posts/comment_add')?>">(4) Crear Comentario</a></li>            
-                <li role="separator" class="divider"></li>            
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Localidades<span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+            <li><a href="<?php echo site_url('/locations/location_add')?>">(1) Registrar Localidad</a></li>            
+            <li role="separator" class="divider"></li>            
+            <li><a href="<?php echo site_url('/locations/office_add')?>">(1) Registrar Oficina</a></li>            
           </ul>
         </li>
-
+        
         
 
 
       </ul>
       <ul>  
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Foros<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">(1) Proyectos</a></li>
-            <li><a href="#">(2) Foros</a></li>            
-          </ul>
-        </li>
-        
-      </ul>
+     
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

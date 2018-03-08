@@ -1,4 +1,6 @@
 <?php
+
+######################################################################################################
 function get_display_locations_tree($list_locations_tree, $name="", $item_selected="",$onchange=FALSE)
 {
    ob_start();

@@ -25,4 +25,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
-projecttaskmanager_web/application/config/database.php
+kardexes_web/application/config/database.php
